@@ -1,0 +1,37 @@
+h1 {
+  color: #fff;
+}
+
+p {
+  color: #ccc;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.btn-primary-custom {
+  background-color: #282C35; /* Dark background color */
+  color: #ffffff; /* White text color */
+  border-color: #ffffff; /* White border color */
+}
+
+.btn-primary-custom:hover {
+  background-color: #ffffff; /* White background color on hover */
+  color: #282C35; /* Dark text color on hover */
+}
+
+.btn-primary-custom:hover svg {
+  color: #282C35; /* Dark icon color on hover */
+}
+
+.img-fluid.reduced-size {
+  max-width: 80%; /* Reduce the size to 80% of its container */
+  height: auto;
+  margin-bottom: 40px;
+}
+
+#one {
+  margin-top: 100px;
+}

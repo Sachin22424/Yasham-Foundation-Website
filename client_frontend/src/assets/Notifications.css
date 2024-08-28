@@ -1,0 +1,72 @@
+.notification-box {
+    position: absolute;
+    top: 330px;
+    width: 320px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    z-index: 1000;
+}
+
+.notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    color: #26282b;
+}
+
+.mark-as-read {
+    cursor: pointer;
+    color: blue;
+}
+
+.notification-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.notification-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.notification-item.unread {
+    background-color: white;
+    color: #26282b;
+}
+
+.notification-item.read {
+    background-color: #fff;
+}
+
+.notification-date {
+    font-size: 0.7rem;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.count-circle {
+    background-color: #097969;
+    color: white;
+    border-radius: 50%;
+    padding: 0.05em;
+    display: inline-block;
+    min-width: 1.6em;
+    text-align: center;
+    margin-left: 5px;
+}
+
+.total-unread-count {
+    background-color: #097969;
+    color: white;
+    border-radius: 47%;
+    padding: 0.001em 0.4em;
+    position: absolute;
+    top: -15px;
+    right: -20px; 
+    font-size: 0.6rem;
+}

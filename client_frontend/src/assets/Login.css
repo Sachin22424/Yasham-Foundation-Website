@@ -1,0 +1,106 @@
+/* Container */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 0 15px; /* Add padding to avoid content touching screen edges */
+}
+
+/* Login box */
+.login-box {
+    background-color: #1c1f26;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px; /* Limit width for larger screens */
+    margin: auto;
+}
+
+/* Header container */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Image */
+.login-img {
+    width: 22px;
+    height: 18px;
+    margin-right: 10px; /* Adjust margin for better spacing */
+    margin-bottom: 10px;
+}
+
+/* Title */
+.login-title {
+    margin-bottom: 1px;
+    text-align: center;
+    margin-top: 5px;
+    margin-right: 125px;
+     /* Adjust font size for better visibility */
+}
+
+/* Form control */
+.form-control {
+    font-size: 18px;
+    padding: 10px;
+    background-color: #3a3f47;
+    border: none;
+    color: white;
+}
+
+.form-control::placeholder {
+    color: #b1b1b1;
+}
+
+/* Button */
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    width: 100%; /* Make button full width for smaller screens */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Link */
+.link-primary {
+    color: #007bff;
+}
+
+.link-primary:hover {
+    color: #0056b3;
+}
+
+/* Label */
+.label-large {
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .login-box {
+        padding: 15px;
+        max-width: 100%; /* Ensure it fits smaller screens */
+    }
+
+    .login-title {
+        font-size: 20px; /* Adjust font size for smaller screens */
+    }
+
+    .form-control {
+        font-size: 16px; /* Adjust font size for smaller screens */
+    }
+
+    .btn-primary {
+        font-size: 16px; /* Adjust button font size for smaller screens */
+    }
+
+    .label-large {
+        font-size: 16px; /* Adjust label font size for smaller screens */
+    }
+}
