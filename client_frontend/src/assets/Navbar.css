@@ -1,7 +1,7 @@
 /* If User Not Exists */
 .navbar-not-logged-in .navbar-icon {
-    width: 40px; 
-    height: auto; 
+    width: 110px; 
+    height: 40px; 
 }
 
 .navbar-not-logged-in .navbar-brand {
