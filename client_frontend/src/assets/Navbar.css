@@ -1,144 +1,138 @@
-/* If User Not Exists */
-.navbar-not-logged-in .navbar-icon {
-    width: 110px; 
-    height: 40px; 
+/* Navbar background color */
+.bg-custom {
+    background-color: #282C35;
+    padding: 0; /* Remove padding to make the navbar height smaller */
 }
 
-.navbar-not-logged-in .navbar-brand {
-    margin-left: 3rem;
+/* Logo styling */
+.logo-img {
+    height: 57px; /* Increase height as needed */
+    margin-left: 15px;
+    width: auto;
+    padding: 5px 0; /* Add padding to center the logo vertically */
 }
 
-.navbar-not-logged-in .nav-link {
-    margin-left: 1rem;
-    margin-right: 1rem;
-}
-
-.navbar-not-logged-in .login-btn {
-    margin-right: 3rem;
-    font-weight: bold;
-    border: 1px solid white;
-    color: white;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.navbar-not-logged-in .login-btn:hover {
-    margin-right: 3rem;
-    font-weight: bold;
-    background-color: white;
-    color: black;
-}
-
-.navbar-not-logged-in .navbar-toggler {
-    border-color: white;
-}
-
-.navbar-not-logged-in .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-}
-
-.navbar-not-logged-in .nav-link:hover {
-    text-decoration: underline;
-} 
-
-/* If User Exists */
-
-.navbar-container {
-    height: 100vh;
-    width: 135px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #26282b; 
-    color: #fff;
+/* Center logo and remove padding around navbar links */
+.navbar-brand {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    padding: 20px 0;
-}
-
-.navbar {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.navbar-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.navbar-logo {
-    width: 60px;
-    height: auto;
-    margin-bottom: 20px;
-}
-
-.navbar-profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.navbar-profile .navbar-icon {
-    font-size: 2rem;
-    margin-bottom: 5px;
-}
-
-.navbar-nav {
-    list-style: none;
     padding: 0;
-    margin-top: 10;
-    width: 100%;
+    height: 100%; /* Make the logo fill the navbar height */
 }
 
-.nav-item {
+/* Custom navigation link styles */
+.custom-nav .nav-item {
+    margin-right: 25px; /* Adjust spacing as needed */
+}
+
+/* Remove default caret icon for dropdown */
+.custom-dropdown > a::after {
+    display: none;
+}
+
+/* Display dropdown on hover */
+.custom-dropdown:hover .dropdown-menu,
+.custom-dropdown .dropdown-menu:hover {
+    display: block;
+}
+
+.custom-dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0.5rem;
+}
+
+/* Ensure dropdown displays consistently on hover */
+.navbar-nav .dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+
+/* Link hover effect */
+.navbar .nav-link,
+.navbar .dropdown-item {
+    position: relative;
+    display: inline-block;
+    
     text-decoration: none;
-    margin-top: 10px;
+}
+
+.navbar .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    right: 50%;
+    background: #ffc107;;
+    transition: width 0.4s ease, right 0.4s ease;
+    -webkit-transition: width 0.4s ease, right 0.4s ease;
+}
+
+.navbar .nav-link:hover::after {
     width: 100%;
-    padding: 10px 20px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    right: 0;
+    background: #ffc107;
 }
 
-.nav-item:hover {
-    background-color: #495057;
+
+.navbar .nav-link {
+    color: white; /* Initial color */
+    
 }
 
-.nav-item .navbar-icon {
-    font-size: 1.5rem;
-    margin-right: 10px;
+/* .navbar .nav-link:hover {
+    color: #F9E076; 
+} */
+
+.navbar .dropdown-menu .dropdown-item {
+    color: #333; /* Initial color for dropdown items */
+    transition: color 0.3s ease;
 }
 
-.logout {
-    margin-top: auto;
+.navbar .dropdown-menu .dropdown-item:hover {
+    color: #ffc107; /* Hover color for dropdown items */
 }
 
-.nav-item span {
-    font-size: 1.2rem;
+/* Style for the dropdown menu to make it rounded */
+.custom-dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0.5rem;
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
+    padding: 0.5rem; /* Add padding to make the dropdown content more spacious */
+    background-color: #f8f9fa; /* Background color of the dropdown menu */
 }
 
-.white-color {
-    color: white;
-  }
+/* Ensure dropdown displays consistently on hover */
+.navbar-nav .dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
 
-/* Media Query for Screen Size less than 1280px by 800px */
-@media (max-width: 1280px) and (max-height: 1280px) {
-    .navbar-container {
-        width: 80px;
-    }
+/* Style each dropdown item with rounded edges and padding */
+.navbar .dropdown-menu .dropdown-item {
+    color: #333;
+    border-radius: 8px; /* Rounded corners for each item */
+    padding: 10px 20px; /* Increase padding for a better look */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
 
-    .navbar-header span,
-    .nav-item span {
-        display: none;
-    }
+/* Change background on hover to give a highlighted effect */
+.navbar .dropdown-menu .dropdown-item:hover {
+    background-color: #ededed; /* Hover color */
+    color: #e1ad01; /* Text color on hover */
+    font-weight:500;
+}
 
-    .navbar-logo {
-        width: 40px;
-    }
+/* Optional: Adjust divider styling for a softer look */
+.dropdown-divider {
+    border-top: 1px solid rgba(0, 0, 0, 0.1); /* Lighten divider */
+    margin: 5px 0;
 }

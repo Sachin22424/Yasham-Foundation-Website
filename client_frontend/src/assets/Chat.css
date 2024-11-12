@@ -1,37 +1,78 @@
-h1 {
-  color: #fff;
-}
+.carousel {
+    max-height: 400px; /* Adjust the height as needed */
+    overflow: hidden;
+  }
+  
+  .carousel-image {
+    height: 600px; /* Match the height of the carousel */
+    object-fit: cover; /* Ensure the image covers the area without stretching */
+  }
+  .story-section {
+    background-color: #f8f9fa; /* Light gray background */
+  }
+  
+  .story-section .card {
+    border: none;
+  }
+  
+  .story-section .card i {
+    color: #6c757d; /* Gray icon color */
+  }
+  
+  .story-section .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  .story-section .card-text {
+    font-size: 0.875rem;
+  }
+  
+  .text-warning {
+    color: #ffc107 !important; /* Yellow color */
+  }
+  
+  .events-section{
+    background-color: #DCDCDC; /* Light gray background */
+  }
 
-p {
-  color: #ccc;
-}
+.event-item i {
+    color: black; /* Change the icon color to black */
+    font-size: 2rem; /* Increase the icon size */
+    /* font-weight: bold; */
+  }
+  .event-item-text {
+    font-weight: bold; 
+    font-size: 1.4rem;
+  }
 
-.img-fluid {
-  max-width: 100%;
-  height: auto;
-}
+  .event-divider {
+    border: 1px solid black;
+    margin: 10px 0; /* Adjust the margin as needed */
+  }
+  .cardevent{
+    background-color: #D3D3D3;
+  }
 
-.btn-primary-custom {
-  background-color: #282C35; /* Dark background color */
-  color: #ffffff; /* White text color */
-  border-color: #ffffff; /* White border color */
-}
+  .event-item {
+    cursor: pointer; /* Make the list item clickable */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for background and text color */
+  }
+  
+  .event-item:hover {
+    background-color: #ffc107; /* Change background color to yellow on hover */
+    color: white; /* Change text color to white on hover */
+  }
+  
+  .event-item:hover .event-item-text {
+    color: white; /* Ensure the text inside the span also changes to white */
+  }
+  
+  .event-item:hover i {
+    color: white; /* Ensure the icon also changes to white */
+  }
 
-.btn-primary-custom:hover {
-  background-color: #ffffff; /* White background color on hover */
-  color: #282C35; /* Dark text color on hover */
-}
-
-.btn-primary-custom:hover svg {
-  color: #282C35; /* Dark icon color on hover */
-}
-
-.img-fluid.reduced-size {
-  max-width: 80%; /* Reduce the size to 80% of its container */
-  height: auto;
-  margin-bottom: 40px;
-}
-
-#one {
-  margin-top: 100px;
-}
+  .join {
+    background-color: #ffc107;
+    padding: 20px; /* Increase padding */
+  }
