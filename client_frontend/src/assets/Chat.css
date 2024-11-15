@@ -76,3 +76,12 @@
     background-color: #ffc107;
     padding: 20px; /* Increase padding */
   }
+
+  h5{
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .para{
+    font-size: 1rem;
+  }

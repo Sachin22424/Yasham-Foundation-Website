@@ -13,17 +13,18 @@ function Footer() {
                 <div className="row">
                     <div className="col-md-4">
                         <h4 className="d-flex justify-content-center">Contacts</h4>
-                        <div className="d-flex justify-content-center mb-3">
-                            <a href="tel:+91-9817545817">
-                                <img src={call} alt="phone icon" className="mr-2" />
-                            </a>
-                            <p className="mb-0 mx-1">+91-9820373390</p>
-                        </div>
                         <div className="d-flex justify-content-center">
-                            <a href="mailto:yashamfoundation@gmail.com">
-                                <img src={mail} alt="email icon" className="mr-2" />
+                            <a href="tel:+91-9817545817" className="d-flex align-items-center text-decoration-none" style={{ color: 'white' }}>
+                                <img src={call} alt="phone icon" className="mr-2" />
+                                <p className="mb-0 mx-2">+91 9817545817</p>
                             </a>
-                            <p className="mb-0 mx-2">yashamfoundation@gmail.com</p>
+                        </div>
+                        <div className="d-flex justify-content-center mt-3">
+                            <a href="mailto:yashamfoundation@gmail.com" className="d-flex align-items-center text-decoration-none" style={{ color: 'white' }}>
+                                <img src={mail} alt="email icon" className="mr-2" />
+                                <p className="mb-0 mx-2">yashamfoundation@gmail.com</p>
+                            </a>
+                            
                         </div>
                     </div>
                     <div className="col-md-4 text-center">

@@ -11,19 +11,12 @@ import student from '../assets/student.png';
 import family from '../assets/family.png';
 import volunteer from '../assets/volunteer.png';
 import woman from '../assets/woman.png';
-import { AuthContext } from "../context/AuthContext";
-import { ChatContext } from "../context/ChatContext";
+// import { AuthContext } from "../context/AuthContext";
+// import { ChatContext } from "../context/ChatContext";
 import { useNavigate } from 'react-router-dom';
 import '../assets/Chat.css'; // Import the custom CSS
 
 const Home = () => {
-  const { user } = useContext(AuthContext);
-  const { userChats, isUserChatsLoading, userChatsError, updateCurrentChat, potentialChats, createChat, onlineUsers } = useContext(ChatContext);
-  const navigate = useNavigate();
-
-  const handleTextChatClick = () => {
-    navigate('/login');
-  };
 
   return (
     <>
@@ -38,45 +31,50 @@ const Home = () => {
       <div style={{ backgroundColor: '#f7f8f9', padding: '20px 0' }}>
         <div className="container mx-auto px-6">
           <div className="row justify-content-center align-items-center">
-            <div className="col-md-5">
+            <div className="col-md-6">
               <h1 className="text-3xl font-bold text-gray-800 " style={{ color: 'black', fontWeight: 'bold' }}>
                 Story About<br />
                 <span style={{ color: '#ffc107', fontWeight: 'bold' }}>What We Do</span>
               </h1>
-              <p className="text-gray-600 mt-4" style={{ color: 'black' }}>
-              Yasham works every single day to empower society holistically, through changes big or small. We work predominantly in the field of education to sharpen young minds.
+              <p className="text-gray-600 mt-4" style={{ color: 'black' , fontSize:'1.2rem' }}>
+              Yasham works every single day to empower society holistically, through changes big or small. We work predominantly in the field of education to sharpen young minds and make them a better version of themselves, irrespective of where they come from.
               </p>
               <button type="button" className="btn btn-dark my-2" style={{ fontWeight: 'bold' }}>Know More</button>
             </div>
-            <div className="col-md-7">
-              <div className="row">
-                <div className="col-md-6 mb-4">
+
+            <div className="col-md-1">
+
+            </div>
+
+            <div className="col-md-5">
+              <div className="row ">
+                <div className="col-md-5 mb-4">
                   <div className="text-center">
-                    <img src={student} className="mb-3" alt="Leave a Legacy" style={{ width: '12%', height: 'auto' }} />
+                    <img src={student} className="mb-3" alt="Leave a Legacy" style={{ width: '19%', height: 'auto' }} />
                     <h5 className="font-bold">Students and Youth</h5>
-                    <p>With over 9000+ students and youth impacted, we strive to empower the next generation.</p>
+                    <p className="para">With over 9000+ students and youth impacted</p>
                   </div>
                 </div>
-                <div className="col-md-6 mb-4">
+                <div className="col-md-5 mb-4">
                   <div className="text-center">
-                    <img src={family} className="mb-3" alt="Make Donation" style={{ width: '10%', height: 'auto' }} />
+                    <img src={family} className="mb-3" alt="Make Donation" style={{ width: '16%', height: 'auto' }} />
                     <h5 className="font-bold">Families</h5>
-                    <p>With over 5000+ families assisted, we aim to provide resources and opportunities.</p>
+                    <p className="para">With more than 5000+ families assisted.</p>
                   </div>
                 </div>
-                <div className="col-md-6 mb-4">
+                <div className="col-md-5 mb-4">
                   <div className="text-center">
-                    <img src={volunteer} className="mb-3" alt="Become a Fundraiser" style={{ width: '10%', height: 'auto' }} />
+                    <img src={woman} className="mb-3" alt="Become a Fundraiser" style={{ width: '16%', height: 'auto' }} />
                     <h5 className="font-bold">Become a Fundraiser</h5>
-                    <p>Over 3000 women have associated with us, gaining opportunities for growth and self-reliance.</p>
+                    <p className="para">Over 3000 women have associated with us.</p>
                   </div>
                 </div>
-                <div className="col-md-6 mb-4">
+                <div className="col-md-5 mb-4">
                   <div className="text-center">
-                    <img src={volunteer} className="mb-3" alt="Become a Volunteer" style={{ width: '10%', height: 'auto' }} />
+                    <img src={volunteer} className="mb-3" alt="Become a Volunteer" style={{ width: '16%', height: 'auto' }} />
                     <h5 className="font-bold">Become a Volunteer</h5>
-                    <p>
-                    Volunteer with us and be part of a mission making a real difference in underserved communities.
+                    <p className="para">
+                    Volunteer with us and be part of a mission.
                     </p>
                   </div>
                 </div>
@@ -157,7 +155,7 @@ const Home = () => {
           <div className="col-md-7 my-4">
             <div className="p-4 h-100">
             <h1 className="font-bold text-xl mb-3 text-dark text-center" style={{ color: 'black', fontWeight: 'bold' }}>
-  Educate<span style={{ color: '#ffc107', fontWeight: 'bold' }}> Enlighten</span> Empower.
+  Educate.<span style={{ color: '#ffc107', fontWeight: 'bold' }}> Enlighten.</span> Empower.
 </h1>
               <p className="mb-6 mt-3 text-center" style={{ color: 'black', fontSize: '1.1rem' }}>To be able to guide and assist the many promising minds is one of the most gratifying feelings that motivates us at Yasham.
                 Yasham predominantly works in education to sharpen young minds today so that they might red-pencil the assigned labels.

@@ -1,27 +1,11 @@
 import React, { useContext, useState } from "react";
-import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
-import { FaUser, FaComments, FaInfoCircle, FaQuestionCircle, FaSignOutAlt, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
-import Notifications from "./Notifications";
 import '../assets/Navbar.css';
 import logo from '../assets/logo.png';
 
+
 const Navbar = () => {
-    const { user, setUser } = useContext(AuthContext);
-    const navigate = useNavigate();
-    const [soundEnabled, setSoundEnabled] = useState(true);
 
-    const handleLogout = () => {
-        localStorage.removeItem("User");
-        setUser(null);
-        navigate("/login");
-    };
-
-    const toggleSound = () => {
-        setSoundEnabled(!soundEnabled);
-    };
-
-    if (!user) {
+    // if (!user) {
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-custom">
                 <div className="container-fluid">
@@ -34,20 +18,20 @@ const Navbar = () => {
                     <div className="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                         <ul className="navbar-nav mb-2 mb-lg-0 custom-nav">
                             <li className="nav-item">
-                                <a className="nav-link active " aria-current="page" href="#">Home</a>
+                                <a className="nav-link active " aria-current="page" href="/">Home</a>
                             </li>
                             <li className="nav-item dropdown custom-dropdown">
                                 <a className="nav-link " href="#" role="button">
                                     Our Story
                                 </a>
                                 <ul className="dropdown-menu">
-                                    <li><a className="dropdown-item" href="#">Our Team</a></li>
+                                    <li><a className="dropdown-item" href="/about">About Us</a></li>
                                     <li><hr className="dropdown-divider" /></li>
-                                    <li><a className="dropdown-item" href="#">Our Mission</a></li>
+                                    <li><a className="dropdown-item" href="/mission">Our Mission</a></li>
                                     <li><hr className="dropdown-divider" /></li>
                                     <li><a className="dropdown-item" href="#">Our Initiatives</a></li>
                                     <li><hr className="dropdown-divider" /></li>
-                                    <li><a className="dropdown-item" href="#">About Us</a></li>
+                                    <li><a className="dropdown-item" href="#">Our Team</a></li>
                                 </ul>
                             </li>
                             <li className="nav-item dropdown custom-dropdown">
@@ -75,7 +59,7 @@ const Navbar = () => {
                                     <li><hr className="dropdown-divider" /></li>
                                     <li><a className="dropdown-item" href="#">Mentor Testimonials</a></li>
                                     <li><hr className="dropdown-divider" /></li>
-                                    <li><a className="dropdown-item" href="#">Yasham in News</a></li>
+                                    <li><a className="dropdown-item" href="/news">Yasham in News</a></li>
                                 </ul>
                             </li>
                             <li className="nav-item dropdown custom-dropdown">
@@ -85,7 +69,7 @@ const Navbar = () => {
                                 <ul className="dropdown-menu">
                                     <li><a className="dropdown-item" href="#">Sponsor</a></li>
                                     <li><hr className="dropdown-divider" /></li>
-                                    <li><a className="dropdown-item" href="#">Support Us</a></li>
+                                    <li><a className="dropdown-item" href="/support">Support Us</a></li>
                                     <li><hr className="dropdown-divider" /></li>
                                     <li><a className="dropdown-item" href="#">Teach</a></li>
                                     <li><hr className="dropdown-divider" /></li>
@@ -93,14 +77,14 @@ const Navbar = () => {
                                 </ul>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link active " aria-current="page" href="#">Contact Us</a>
+                                <a className="nav-link active " aria-current="page" href="/contact">Contact Us</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
         );
-    }
+    // }
 
     return null;
 };
