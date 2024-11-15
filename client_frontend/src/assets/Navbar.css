@@ -55,7 +55,6 @@
 .navbar .dropdown-item {
     position: relative;
     display: inline-block;
-    
     text-decoration: none;
 }
 
@@ -67,7 +66,7 @@
     display: block;
     margin-top: 5px;
     right: 50%;
-    background: #ffc107;;
+    background: #ffc107;
     transition: width 0.4s ease, right 0.4s ease;
     -webkit-transition: width 0.4s ease, right 0.4s ease;
 }
@@ -78,15 +77,9 @@
     background: #ffc107;
 }
 
-
 .navbar .nav-link {
     color: white; /* Initial color */
-    
 }
-
-/* .navbar .nav-link:hover {
-    color: #F9E076; 
-} */
 
 .navbar .dropdown-menu .dropdown-item {
     color: #333; /* Initial color for dropdown items */
@@ -128,11 +121,50 @@
 .navbar .dropdown-menu .dropdown-item:hover {
     background-color: #ededed; /* Hover color */
     color: #e1ad01; /* Text color on hover */
-    font-weight:500;
+    font-weight: 500;
 }
 
 /* Optional: Adjust divider styling for a softer look */
 .dropdown-divider {
     border-top: 1px solid rgba(0, 0, 0, 0.1); /* Lighten divider */
     margin: 5px 0;
+}
+
+/* Dropdown styling */
+.custom-dropdown .dropdown-menu .dropdown-item {
+    display: block;
+    padding: 10px 20px;
+    width: 100%;
+}
+
+/* Customize dropdown divider */
+.custom-dropdown .dropdown-menu .dropdown-divider {
+    border-color: #fff;
+}
+
+/* Mobile styling for centered navbar items */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        text-align: center; /* Center the navbar items on small screens */
+    }
+    .navbar-nav .nav-item {
+        border-right: none; /* Remove the separator line on smaller screens */
+    }
+    .navbar-nav {
+        flex-direction: column;
+        align-items: center;
+    }
+    .navbar-nav .nav-item {
+        border-bottom: 1px solid white; /* Add a white line separator */
+        width: 100%; /* Make the items take full width */
+    }
+    .navbar-nav .nav-item:last-child {
+        border-bottom: none; /* Remove the separator line for the last item */
+    }
+    .custom-dropdown .dropdown-menu {
+        position: static; /* Make dropdowns contained within the navbar */
+        float: none;
+        width: 100%; /* Make dropdowns take full width */
+        margin-top: 0;
+    }
 }

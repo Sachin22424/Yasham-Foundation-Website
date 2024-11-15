@@ -18,6 +18,18 @@ import '../assets/Chat.css'; // Import the custom CSS
 
 const Home = () => {
 
+  const navigate = useNavigate();
+
+  const handleKnowMoreClick = () => {
+    // Define the action to be taken when the button is clicked
+    navigate('/about'); // Example: Navigate to the About page
+  };
+
+  const handleJoinClick = () => {
+    // Define the action to be taken when the button is clicked
+    navigate('/support'); // Example: Navigate to the Mission page
+  }
+
   return (
     <>
       <div id="carouselExample" className="carousel slide" data-bs-ride="carousel">
@@ -39,7 +51,9 @@ const Home = () => {
               <p className="text-gray-600 mt-4" style={{ color: 'black' , fontSize:'1.2rem' }}>
               Yasham works every single day to empower society holistically, through changes big or small. We work predominantly in the field of education to sharpen young minds and make them a better version of themselves, irrespective of where they come from.
               </p>
-              <button type="button" className="btn btn-dark my-2" style={{ fontWeight: 'bold' }}>Know More</button>
+              <button type="button" className="btn btn-dark my-2" style={{ fontWeight: 'bold' }} onClick={handleKnowMoreClick}>
+        Know More
+      </button>
             </div>
 
             <div className="col-md-1">
@@ -143,7 +157,7 @@ const Home = () => {
       <div className="text-center my-5 join">
         <h1 className="text-4xl font-bold mb-2" style={{ color: 'black', fontWeight: 'bold' }}>Become a Volunteer</h1>
         <p className="text-xl mb-8" style={{ color: 'black', fontSize: '1.2rem' }}>Join us for a better life and beautiful future</p>
-        <button type="button" className="btn btn-light mt-1" style={{ fontWeight: 'bold' }}>Join Us Now</button>
+        <button type="button" className="btn btn-light mt-1" style={{ fontWeight: 'bold' }} onClick={handleJoinClick}>Join Us Now</button>
       </div>
 
       <section className="bg-white video-section py-3 mb-4">
