@@ -1,4 +1,8 @@
 /* Container */
+body.login-background {
+    background-color: #f0f2f5; /* Green background color */
+}
+
 .login-container {
     display: flex;
     justify-content: center;
@@ -9,7 +13,7 @@
 
 /* Login box */
 .login-box {
-    background-color: #1c1f26;
+    background-color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -28,9 +32,9 @@
 /* Image */
 .login-img {
     width: 22px;
-    height: 18px;
+    height: 22px;
     margin-right: 10px; /* Adjust margin for better spacing */
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 /* Title */
@@ -40,19 +44,6 @@
     margin-top: 5px;
     margin-right: 125px;
      /* Adjust font size for better visibility */
-}
-
-/* Form control */
-.form-control {
-    font-size: 18px;
-    padding: 10px;
-    background-color: #3a3f47;
-    border: none;
-    color: white;
-}
-
-.form-control::placeholder {
-    color: #b1b1b1;
 }
 
 /* Button */
