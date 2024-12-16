@@ -18,29 +18,33 @@ const ContentHome = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(''); // Error state for validation
 
+  const fetchHomeContent = async (url) => {
+    try {
+      setLoading(true);
+      const response = await axios.get(url);
+      const fetchedData = response.data;
+
+      // Ensure `newSliderImage` is initialized if missing
+      if (!fetchedData.newSliderImage) {
+        fetchedData.newSliderImage = { image: '' };
+      }
+
+      setFormData(fetchedData);
+      setId(fetchedData._id); // Save the fetched document's ID
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setLoading(false);
+    }
+  };
+
   // Fetch existing data
   useEffect(() => {
-    const fetchHomeContent = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get('http://localhost:5000/api/home');
-        const fetchedData = response.data;
+    const localUrl = 'http://localhost:5000/api/home';
+    const deployedUrl = 'https://yasham-foundation-website.onrender.com/api/home';
 
-        // Ensure `newSliderImage` is initialized if missing
-        if (!fetchedData.newSliderImage) {
-          fetchedData.newSliderImage = { image: '' };
-        }
-
-        setFormData(fetchedData);
-        setId(fetchedData._id); // Save the fetched document's ID
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setLoading(false);
-      }
-    };
-
-    fetchHomeContent();
+    // Try fetching from the deployed URL first, then fallback to local URL
+    fetchHomeContent(deployedUrl).catch(() => fetchHomeContent(localUrl));
   }, []);
 
   useEffect(() => {
@@ -95,7 +99,8 @@ const ContentHome = () => {
 
     try {
       setLoading(true);
-      await axios.put(`http://localhost:5000/api/home/${id}`, formData);
+      const url = `https://yasham-foundation-website.onrender.com/api/home/${id}` || `http://localhost:5000/api/home/${id}`;
+      await axios.put(url, formData);
       alert('Content updated successfully!');
       setLoading(false);
       setError(''); // Clear error message on successful submission
