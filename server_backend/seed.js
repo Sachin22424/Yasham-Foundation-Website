@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Home = require('./Models/homeModel');
+const Contact = require('./Models/contactModel'); // Import the Contact model
 require('dotenv').config();
 
 const seedData = async () => {
@@ -11,7 +12,8 @@ const seedData = async () => {
             useUnifiedTopology: true,
         });
 
-        const initialData = {
+        // Seed home data
+        const initialHomeData = {
             sliderImages: ["slider1.jpg", "slider2.jpg", "slider3.jpg"],
             story: {
                 title: "Story About What We Do",
@@ -29,8 +31,21 @@ const seedData = async () => {
             },
         };
 
-        await Home.create(initialData);
-        console.log("Initial data seeded successfully!");
+        await Home.create(initialHomeData);
+        console.log("Initial home data seeded successfully!");
+
+        // Seed contact data
+        const initialContactData = {
+            mail: 'yashamfoundation@gmail.com',
+            number: '+91 9817545817',
+            linkedin: 'https://www.linkedin.com/company/yasham-foundation/',
+            facebook: 'https://www.facebook.com/100069949045484/posts/104813755189149/',
+            instagram: 'https://www.instagram.com/yasham_foundation/'
+        };
+
+        await Contact.create(initialContactData);
+        console.log("Initial contact data seeded successfully!");
+
         mongoose.disconnect();
     } catch (error) {
         console.error("Error seeding data:", error);

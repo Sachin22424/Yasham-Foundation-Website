@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/ContentHome.css'; // Import custom CSS
+import { Modal, Button } from 'react-bootstrap'; // Import Bootstrap Modal
 
 const ContentHome = () => {
   const [formData, setFormData] = useState({
@@ -17,6 +18,7 @@ const ContentHome = () => {
   const [id, setId] = useState(''); // ID for updating
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(''); // Error state for validation
+  const [showModal, setShowModal] = useState(false); // State for modal visibility
 
   const fetchHomeContent = async (url) => {
     try {
@@ -94,6 +96,7 @@ const ContentHome = () => {
       !formData.video.description
     ) {
       setError('All fields are required.');
+      setShowModal(true); // Show the modal
       return;
     }
 
@@ -112,7 +115,7 @@ const ContentHome = () => {
 
   return (
     <div className="containercontent mt-5">
-      <h1 className="headcontent mb-5 text-center">Manage Home Content</h1>
+      <h1 className="headcontent mb-5 text-center">Home Content</h1>
       {loading && <p>Loading...</p>}
       {error && <div className="alert alert-danger">{error}</div>}
       <form onSubmit={handleSubmit}>
@@ -245,6 +248,19 @@ const ContentHome = () => {
           {loading ? 'Updating...' : 'Update'}
         </button>
       </form>
+
+      {/* Modal for error message */}
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Error</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>All fields are required.</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
