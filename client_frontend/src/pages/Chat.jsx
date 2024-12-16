@@ -1,151 +1,3 @@
-// import React, { useEffect, useState } from "react";
-// import axios from "axios";
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import "font-awesome/css/font-awesome.min.css";
-// import storyImage from '../assets/storyImage.jpg';
-// import eventImage1 from '../assets/eventImage1.jpg';
-// import eventImage3 from '../assets/eventImage3.jpg';
-// import student from '../assets/student.png';
-// import family from '../assets/family.png';
-// import volunteer from '../assets/volunteer.png';
-// import woman from '../assets/woman.png';
-// import '../assets/Chat.css'; // Import the custom CSS
-
-// const Home = () => {
-//     const [homeData, setHomeData] = useState(null);
-
-//     useEffect(() => {
-//         const fetchHomeData = async () => {
-//             try {
-//                 const response = await axios.get('http://localhost:5000/api/home'); // Adjust URL as needed
-//                 setHomeData(response.data);
-//             } catch (error) {
-//                 console.error("Error fetching home data", error);
-//             }
-//         };
-
-//         fetchHomeData();
-//     }, []);
-
-//     const handleKnowMoreClick = () => {
-//         // Define what happens when the "Know More" button is clicked
-//         alert("Know More button clicked!");
-//     };
-
-//     if (!homeData) return <p>Loading...</p>;
-
-//     return (
-//         <>
-//             <div id="carouselExample" className="carousel slide" data-bs-ride="carousel">
-//                 <div className="carousel-inner">
-//                     {homeData.sliderImages.map((image, index) => (
-//                         <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
-//                             <img 
-//                                 src={image}
-//                                 className="d-block w-100 carousel-image" 
-//                                 alt={`Slide ${index + 1}`} 
-//                             />
-//                         </div>
-//                     ))}
-//                 </div>
-//             </div>
-
-//             <div style={{ backgroundColor: '#f7f8f9', padding: '20px 0' }}>
-//                 <div className="container mx-auto px-6">
-//                     <div className="row justify-content-center align-items-center">
-//                         <div className="col-md-6">
-//                             <h1 className="text-3xl font-bold text-gray-800 " style={{ color: 'black', fontWeight: 'bold' }}>
-//                                 Story About<br />
-//                                 <span style={{ color: '#ffc107', fontWeight: 'bold' }}>What We Do</span>
-//                             </h1>
-//                             <p className="text-gray-600 mt-4" style={{ color: 'black', fontSize: '1.2rem' }}>
-//                                 {homeData.story.description}
-//                             </p>
-//                             <button type="button" className="btn btn-dark my-2" style={{ fontWeight: 'bold' }} onClick={handleKnowMoreClick}>
-//                                 Know More
-//                             </button>
-//                         </div>
-
-//                         <div className="col-md-1"></div>
-
-//                         <div className="col-md-5">
-//                             <div className="row">
-//                                 <div className="col-md-5 mb-4">
-//                                     <div className="text-center">
-//                                         <img src={student} className="mb-3" alt="Leave a Legacy" style={{ width: '19%', height: 'auto' }} />
-//                                         <h5 className="font-bold">Students and Youth</h5>
-//                                         <p className="para">With over 9000+ students and youth impacted</p>
-//                                     </div>
-//                                 </div>
-//                                 <div className="col-md-5 mb-4">
-//                                     <div className="text-center">
-//                                         <img src={family} className="mb-3" alt="Make Donation" style={{ width: '16%', height: 'auto' }} />
-//                                         <h5 className="font-bold">Families</h5>
-//                                         <p className="para">With more than 5000+ families assisted.</p>
-//                                     </div>
-//                                 </div>
-//                                 <div className="col-md-5 mb-4">
-//                                     <div className="text-center">
-//                                         <img src={woman} className="mb-3" alt="Become a Fundraiser" style={{ width: '16%', height: 'auto' }} />
-//                                         <h5 className="font-bold">Become a Fundraiser</h5>
-//                                         <p className="para">Over 3000 women have associated with us.</p>
-//                                     </div>
-//                                 </div>
-//                                 <div className="col-md-5 mb-4">
-//                                     <div className="text-center">
-//                                         <img src={volunteer} className="mb-3" alt="Become a Volunteer" style={{ width: '16%', height: 'auto' }} />
-//                                         <h5 className="font-bold">Become a Volunteer</h5>
-//                                         <p className="para">
-//                                             Volunteer with us and be part of a mission.
-//                                         </p>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-//             <section className="events-section pt-4">
-//                 <div className="container">
-//                     <div className="row">
-//                         {homeData.events.map((event, idx) => (
-//                             <div className="col-md-4 mb-4" key={idx}>
-//                                 <div className="p-4 h-100">
-//                                     <h3 className="font-bold text-xl mb-3 text-dark">{event.name}</h3>
-//                                     <p>{event.description}</p>
-//                                 </div>
-//                             </div>
-//                         ))}
-//                     </div>
-//                 </div>
-//             </section>
-
-//             <section className="bg-white video-section py-3 mb-4">
-//                 <div className="row mx-5">
-//                     <div className="col-md-5 mb-6">
-//                         <iframe src={homeData.video.url} title={homeData.video.title} frameBorder="0"
-//                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-//                             allowFullScreen className="w-100 h-100"></iframe>
-//                     </div>
-//                     <div className="col-md-7 my-4">
-//                         <div className="p-4 h-100">
-//                             <h1 className="font-bold text-xl mb-3 text-dark text-center">
-//                                 {homeData.video.title}
-//                             </h1>
-//                             <p className="mb-6 mt-3 text-center">{homeData.video.description}</p>
-//                         </div>
-//                     </div>
-//                 </div>
-//             </section>
-//         </>
-//     );
-// };
-
-// export default Home;
-
-
-
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -162,16 +14,20 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchHomeData = async () => {
+    const fetchHomeData = async (url) => {
       try {
-        const response = await axios.get('http://localhost:5000/api/home'); // Adjust URL as needed
+        const response = await axios.get(url);
         setHomeData(response.data);
       } catch (error) {
         console.error("Error fetching home data", error);
       }
     };
 
-    fetchHomeData();
+    const localUrl = 'http://localhost:5000/api/home';
+    const deployedUrl = 'https://yasham-foundation-website.onrender.com/api/home';
+
+    // Try fetching from the deployed URL first, then fallback to local URL
+    fetchHomeData(deployedUrl).catch(() => fetchHomeData(localUrl));
   }, []);
 
   const handleKnowMoreClick = () => {
@@ -306,22 +162,22 @@ const Home = () => {
       </div>
 
       <section className="bg-white video-section py-3 mb-4">
-                <div className="row mx-5">
-                    <div className="col-md-5 mb-6">
-                        <iframe src={homeData.video.url} title={homeData.video.title} frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen className="w-100 h-100"></iframe>
-                    </div>
-                    <div className="col-md-7 my-4">
-                        <div className="p-4 h-100">
-                        <h1 className="font-bold text-xl mb-3 text-dark text-center" style={{ color: 'black', fontWeight: 'bold' }}>
-  Educate.<span style={{ color: '#ffc107', fontWeight: 'bold' }}> Enlighten.</span> Empower.
-</h1>
-                            <p className="mb-6 mt-3 text-center">{homeData.video.description}</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <div className="row mx-5">
+          <div className="col-md-5 mb-6">
+            <iframe src={homeData.video.url} title={homeData.video.title} frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen className="w-100 h-100"></iframe>
+          </div>
+          <div className="col-md-7 my-4">
+            <div className="p-4 h-100">
+              <h1 className="font-bold text-xl mb-3 text-dark text-center" style={{ color: 'black', fontWeight: 'bold' }}>
+                Educate.<span style={{ color: '#ffc107', fontWeight: 'bold' }}> Enlighten.</span> Empower.
+              </h1>
+              <p className="mb-6 mt-3 text-center">{homeData.video.description}</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 };
