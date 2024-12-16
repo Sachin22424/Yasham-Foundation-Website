@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const homeRoute = require('./Routes/homeRoute');
 
 const app = express();
 require('dotenv').config();
@@ -8,10 +9,7 @@ require('dotenv').config();
 app.use(express.json());
 app.use(cors());
 
-
-const homeRoute = require('./Routes/homeRoute');
 app.use('/api/home', homeRoute);
-
 
 app.get('/' , (req, res) => {
     res.send('!dfx!Hello World');
