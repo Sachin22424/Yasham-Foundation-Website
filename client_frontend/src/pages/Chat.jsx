@@ -38,6 +38,14 @@ const Home = () => {
     navigate('/support'); // Example: Navigate to the Mission page
   };
 
+  const getEmbeddedUrl = (url) => {
+    if (url.includes('embed')) {
+      return url;
+    }
+    const videoId = url.split('v=')[1];
+    return `https://www.youtube.com/embed/${videoId}`;
+  };
+
   if (!homeData) return <p>Loading...</p>;
 
   return (
@@ -164,7 +172,7 @@ const Home = () => {
       <section className="bg-white video-section py-3 mb-4">
         <div className="row mx-5">
           <div className="col-md-5 mb-6">
-            <iframe src={homeData.video.url} title={homeData.video.title} frameBorder="0"
+            <iframe src={getEmbeddedUrl(homeData.video.url)} title={homeData.video.title} frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen className="w-100 h-100"></iframe>
           </div>

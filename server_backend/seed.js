@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
-const Home = require('./Models/homeModel');
-const Contact = require('./Models/contactModel'); // Import the Contact model
+const About = require('./Models/aboutModel'); // Import the About model
 require('dotenv').config();
 
-const seedData = async () => {
+const seedMissionData = async () => {
     const uri = process.env.ATLAS_URI;
 
     try {
@@ -12,45 +11,21 @@ const seedData = async () => {
             useUnifiedTopology: true,
         });
 
-        // Seed home data
-        const initialHomeData = {
-            sliderImages: ["slider1.jpg", "slider2.jpg", "slider3.jpg"],
-            story: {
-                title: "Story About What We Do",
-                description: "Yasham works every single day to empower society holistically, through changes big or small. We work predominantly in the field of education to sharpen young minds and make them a better version of themselves, irrespective of where they come from.",
-            },
-            events: [
-                { name: "Saathi Haath Badhana", description: "Details of event 1..." },
-                { name: "Hum Honge Kaamyab", description: "Details of event 2..." },
-                { name: "Swacch English Mission", description: "Details of event 3..." },
-            ],
-            video: {
-                url: "https://www.youtube.com/embed/mg9JoVv4w8E",
-                title: "Educate. Enlighten. Empower.",
-                description: "To be able to guide and assist...",
-            },
+        // Seed mission data
+        const missionData = {
+            missiondescription1: "We aim to educate, enlighten, and empower society. Our mission is to reach young minds, sharpen their skills, and uplift the community through education and support, so they can thrive and inspire future generations.",
+            missiondescription2: "Yasham Foundation works tirelessly every day to foster growth, compassion, and resilience. Our goal is to support children from all walks of life, nurturing them to become the best version of themselves, and empowering families across the country to achieve a better tomorrow.",
+            missionurl: "https://www.youtube.com/watch?v=Xnr5AVAnAw0"
         };
 
-        await Home.create(initialHomeData);
-        console.log("Initial home data seeded successfully!");
-
-        // Seed contact data
-        const initialContactData = {
-            mail: 'yashamfoundation@gmail.com',
-            number: '+91 9817545817',
-            linkedin: 'https://www.linkedin.com/company/yasham-foundation/',
-            facebook: 'https://www.facebook.com/100069949045484/posts/104813755189149/',
-            instagram: 'https://www.instagram.com/yasham_foundation/'
-        };
-
-        await Contact.create(initialContactData);
-        console.log("Initial contact data seeded successfully!");
+        await About.updateOne({}, { mission: missionData }, { upsert: true });
+        console.log("Mission data seeded successfully!");
 
         mongoose.disconnect();
     } catch (error) {
-        console.error("Error seeding data:", error);
+        console.error("Error seeding mission data:", error);
         mongoose.disconnect();
     }
 };
 
-seedData();
+seedMissionData();

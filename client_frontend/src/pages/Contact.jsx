@@ -90,7 +90,33 @@ const Contact = () => {
                 </Col>
                 <Col md={6}>
                     <Form className="contact-form p-4" style={{ backgroundColor: '#f8f9fa' }} noValidate validated={validated} onSubmit={handleMailTo}>
-                        <h1 className='mb-3' style={{ fontWeight: '700' }}>Feedback</h1>
+                        <h1 className='mb-3' style={{ fontWeight: '700' }}>Contact Us</h1>
+                        <Form.Group controlId="formName" className="mt-3">
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter your name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                required
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                Please enter your name.
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group controlId="formPhone" className="mt-3">
+                            <Form.Label>Phone</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter your phone number"
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                                required
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                Please enter your phone number.
+                            </Form.Control.Feedback>
+                        </Form.Group>
                         <Form.Group controlId="formSubject" className="mt-3">
                             <Form.Label>Subject</Form.Label>
                             <Form.Control
@@ -118,7 +144,14 @@ const Contact = () => {
                                 Please enter a message.
                             </Form.Control.Feedback>
                         </Form.Group>
-                        <Button variant="warning" className="text-white mt-4" style={{ fontWeight: 'bold' }} type="submit">
+                        <Button
+                            variant="warning"
+                            className="text-white mt-4"
+                            style={{ fontWeight: 'bold' }}
+                            type="submit"
+                            disabled={!contactInfo.mail} // Disable if no email is fetched
+                            title={!contactInfo.mail ? 'Email address is not available' : 'Send your feedback'}
+                        >
                             Send Mail
                         </Button>
                     </Form>

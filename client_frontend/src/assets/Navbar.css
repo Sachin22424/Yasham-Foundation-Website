@@ -142,6 +142,28 @@
     border-color: #fff;
 }
 
+/* Logout button styles */
+.logout-btn {
+    color: white; /* Default text color */
+    border-color: white; /* Default border color */
+    transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+}
+
+/* Hover effect for Logout button */
+.logout-btn:hover {
+    background-color: white; /* Change background to white on hover */
+    color: #ffc107; /* Change text color to yellow (#ffc107) on hover */
+    border-color: #ffc107; /* Match the border color to yellow */
+}
+
+/* Optional: Add more padding or margin if needed for alignment */
+.logout-btn {
+    margin-left: auto; /* Push button to the right */
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+
+
 /* Mobile styling for centered navbar items */
 @media (max-width: 991px) {
     .navbar-collapse {

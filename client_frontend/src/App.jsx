@@ -6,6 +6,9 @@ import Contact from "./pages/Contact"; // Import Contact component
 import Login from "./pages/Login"; // Import Login component
 import ContentHome from "./pages/ContentHome"; // Import ContentHome component
 import ContentContact from "./pages/ContentContact"; // Import ContentContact component
+import ContentAbout from "./pages/ContentAbout"; // Import ContentAbout component
+import ContentSupport from "./pages/ContentSupport"; // Import ContentSupport component
+import ContentMission from "./pages/ContentMission"; // Import ContentMission component
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Navbar from "./components/Navbar";
@@ -20,11 +23,14 @@ function App() {
   const isLoginPage = location.pathname === "/login";
   const isContentHome = location.pathname === "/contenthome";
   const isContentContact = location.pathname === "/contentcontact";
+  const isContentAbout = location.pathname === "/contentabout";
+  const isContentSupport = location.pathname === "/contentsupport";
+  const isContentMission = location.pathname === "/contentmission";
 
   return (
     <>
-      {!isLoginPage && !isContentHome && !isContentContact && <Navbar />}
-      {(isContentHome || isContentContact) && <NavbarContent />}
+      {!isLoginPage && !isContentHome && !isContentContact && !isContentAbout && !isContentSupport && !isContentMission && <Navbar />}
+      {(isContentHome || isContentContact || isContentAbout || isContentSupport || isContentMission) && <NavbarContent />}
       <Routes>
         <Route path="/" element={<Chat />} />
         <Route path="/about" element={<About />} /> {/* Add About route */}
@@ -35,9 +41,12 @@ function App() {
         <Route path="/login" element={<Login />} /> {/* Add Login route */}
         <Route path="/contenthome" element={<ContentHome />} /> {/* Add ContentHome route */}
         <Route path="/contentcontact" element={<ContentContact />} /> {/* Add ContentContact route */}
+        <Route path="/contentabout" element={<ContentAbout />} /> {/* Add ContentAbout route */}
+        <Route path="/contentsupport" element={<ContentSupport />} /> {/* Add ContentSupport route */}
+        <Route path="/contentmission" element={<ContentMission />} /> {/* Add ContentMission route */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-      {!isLoginPage && !isContentHome && !isContentContact && <Footer />}
+      {!isLoginPage && !isContentHome && !isContentContact && !isContentAbout && !isContentSupport && !isContentMission && <Footer />}
     </>
   );
 }
