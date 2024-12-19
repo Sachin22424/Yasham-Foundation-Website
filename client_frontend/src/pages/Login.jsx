@@ -12,9 +12,6 @@ const Login = () => {
     const navigate = useNavigate();
     const { login } = useAuth();
 
-    const validEmail = "yashamfoundation@gmail.com";
-    const validPassword = "yashamcontent@8170";
-
     useEffect(() => {
         document.body.classList.add('login-background');
         return () => {
@@ -22,7 +19,7 @@ const Login = () => {
         };
     }, []);
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -32,15 +29,30 @@ const Login = () => {
             return;
         }
 
-        if (email === validEmail && password === validPassword) {
-            setError("");
-            setSuccess("Login successful!");
-            login(); // Update authentication state
-            setTimeout(() => {
-                navigate("/contenthome");
-            }, 2000);
-        } else {
-            setError("Invalid email or password.");
+        try {
+            const response = await fetch('/api/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                setError("");
+                setSuccess("Login successful!");
+                login(data.token); // Update authentication state with JWT token
+                setTimeout(() => {
+                    navigate("/contenthome");
+                }, 2000);
+            } else {
+                setError(data.message || "Invalid email or password.");
+                setSuccess("");
+            }
+        } catch (error) {
+            setError("An error occurred. Please try again.");
             setSuccess("");
         }
     };

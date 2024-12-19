@@ -42,40 +42,35 @@ function Footer() {
             <div className="container">
                 <div className="row">
                     <div className="col-md-4">
-                        <h4 className="d-flex justify-content-center">Contacts</h4>
-                        <div className="d-flex justify-content-center">
-                            <a href={`tel:${contactInfo.number}`} className="d-flex align-items-center text-decoration-none" style={{ color: 'white' }}>
-                                <img src={call} alt="phone icon" className="mr-2" />
-                                <p className="mb-0 mx-2">{contactInfo.number}</p>
-                            </a>
-                        </div>
+
                         <div className="d-flex justify-content-center mt-3">
-                            <a href={`mailto:${contactInfo.mail}`} className="d-flex align-items-center text-decoration-none" style={{ color: 'white' }}>
-                                <img src={mail} alt="email icon" className="mr-2" />
-                                <p className="mb-0 mx-2">{contactInfo.mail}</p>
-                            </a>
+
                         </div>
                     </div>
                     <div className="col-md-4 text-center">
-                        <h4>Social Media</h4>
+
                         <div className="d-flex justify-content-center">
-                            <a href={contactInfo.instagram} target="_blank" className="mr-3 mx-2">
-                                <img src={insta} alt="instagram icon" className="footer-icon" />
+                            <a href={contactInfo.instagram} target="_blank" className="mr-3 mx-4">
+                                <div className="icon-circle">
+                                    <img src={mail} alt="email icon" className="mr-2" />
+                                </div>
                             </a>
-                            <a href={contactInfo.facebook} target="_blank" className="mr-3 mx-2">
-                                <img src={fb} alt="facebook icon" className="footer-icon" />
+                            <a href={contactInfo.instagram} target="_blank" className="mr-3 mx-4">
+                                <div className="icon-circle">
+                                    <img src={insta} alt="instagram icon" className="footer-icon" />
+                                </div>
                             </a>
-                            <a href={contactInfo.linkedin} target="_blank" className="mr-3 mx-3">
-                                <img src={linkedin} alt="linkedin icon" className="footer-icon" />
+                            <a href={contactInfo.facebook} target="_blank" className="mr-3 mx-4">
+                                <div className="icon-circle">
+                                    <img src={fb} alt="facebook icon" className="footer-icon" />
+                                </div>
+                            </a>
+                            <a href={contactInfo.linkedin} target="_blank" className="mr-3 mx-4">
+                                <div className="icon-circle">
+                                    <img src={linkedin} alt="linkedin icon" className="footer-icon" />
+                                </div>
                             </a>
                         </div>
-                    </div>
-                    <div className="col-md-4">
-                        <h4>Navigation Links</h4>
-                        <ul className="list-unstyled">
-                            <li><a href="/" className="nav-link">Home</a></li>
-                            <li><a href="/contact" className="nav-link">Contact Us</a></li>
-                        </ul>
                     </div>
                 </div>
             </div>

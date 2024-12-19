@@ -6,7 +6,7 @@
 
 /* Logo styling */
 .logo-img {
-    height: 57px; /* Increase height as needed */
+    height: 64px; /* Increase height as needed */
     margin-left: 15px;
     width: auto;
     padding: 5px 0; /* Add padding to center the logo vertically */
@@ -163,7 +163,6 @@
     border-radius: 5px;
 }
 
-
 /* Mobile styling for centered navbar items */
 @media (max-width: 991px) {
     .navbar-collapse {
@@ -188,5 +187,12 @@
         float: none;
         width: 100%; /* Make dropdowns take full width */
         margin-top: 0;
+    }
+    /* Center dropdown content when navbar is collapsed */
+    .custom-dropdown .dropdown-menu {
+        text-align: center; /* Center the dropdown content */
+    }
+    .custom-dropdown .dropdown-menu .dropdown-item {
+        text-align: center; /* Center each dropdown item */
     }
 }

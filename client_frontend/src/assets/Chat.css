@@ -73,7 +73,7 @@
   }
 
   .join {
-    background-color: #ffc107;
+    /* background-color: #ffc107; */
     padding: 20px; /* Increase padding */
   }
 
@@ -85,3 +85,73 @@
   .para{
     font-size: 1rem;
   }
+
+  .icon-circlesh {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    background-color: white;
+    margin: 0 auto 10px; 
+}
+
+.icon-circle img {
+    width: 50%;
+    height: auto;
+}
+.card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.card-img-top {
+  width: 30%; /* Adjust the width as needed */
+  height: auto;
+  margin-right: 20px; /* Add some space between the image and the text */
+}
+
+.card-body {
+  flex: 1;
+}
+.reduced-size {
+  width: 55%; /* Increase the width as needed */
+  height: auto;
+  /* margin-right: 20px; */
+}
+.testimonials-section {
+  background-color: #f7f8f9;
+  padding: 20px 0;
+}
+
+.card-text {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #333;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #333; /* Darker arrow icons for better visibility */
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.testimonial-card {
+  max-width: 300px; /* Adjust the width as needed */
+  padding: 20px;
+  margin: 0 auto; /* Center the card */
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-header {
+  margin-bottom: 15px;
+}
+
+.testimonial-text {
+  font-size: 0.9rem; /* Adjust the font size as needed */
+}
