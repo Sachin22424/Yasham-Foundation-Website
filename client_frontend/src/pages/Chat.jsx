@@ -139,7 +139,7 @@ const Home = () => {
           <div className="row">
             <div className="col-md-4 mb-4 cardevent">
               <div className="p-4 h-100">
-                <h1 className="font-bold text-xl mb-4 text-dark" style={{ fontWeight: 'bold' }}>Events:</h1>
+                <h1 className="font-bold text-xl mb-4 text-dark" style={{ fontWeight: 'bold' }}>Our Initiatives:</h1>
                 <ul className="list-unstyled text-dark">
                   {homeData.events.map((event, index) => (
                     <li className="mb-4 event-item" key={index}>
