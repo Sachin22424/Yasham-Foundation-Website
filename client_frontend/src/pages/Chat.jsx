@@ -120,7 +120,7 @@ const Home = () => {
                     <p className="para">With more than 5000+ families assisted.</p>
                   </div>
                 </div>
-                <div className="col-md-5 mb-1">
+                <div className="col-md-5">
                   <div className="text-center">
                     <div className="icon-circlesh">
                       <img src={woman} className="mb-0" alt="Become a Fundraiser" style={{ width: '50%', height: 'auto' }} />
@@ -129,7 +129,7 @@ const Home = () => {
                     <p className="para">Over 3000 women have associated with us.</p>
                   </div>
                 </div>
-                <div className="col-md-5 mb-1">
+                <div className="col-md-5">
                   <div className="text-center">
                     <div className="icon-circlesh">
                       <img src={volunteer} className="mb-0" alt="Become a Volunteer" style={{ width: '50%', height: 'auto' }} />
@@ -145,87 +145,68 @@ const Home = () => {
           </div>
         </div>
       </div>
-
-      {/* <section className="demo-section py-4">
+      <section className="demo-section py-4">
         <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-md-4 mb-3 demoevent">
-              <img src={homeData.mainevent.image} className="img-fluid" alt="Main Event" />
-            </div>
-
-            <div className="col-md-6 mb-3 mt-3">
-              <div className="p-4 h-100">
-                <h1 className="font-bold text-xl mb-3 text-dark" style={{ color: 'black', fontWeight: 'bold' }}>{homeData.mainevent.name}</h1>
-                <p className="mb-6 mt-3" style={{ color: 'black', fontSize: '1.2rem' }}>{homeData.mainevent.description}</p>
-                <button className="btn btn-warning text-white mt-3" style={{ fontWeight: 'bold' }}>Learn More</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
-
-<section className="demo-section py-4">
-  <div className="container">
-    <div className="row">
-      <div className="col-md-6 mb-4">
-        <div className="card h-100 border-0 d-flex flex-row align-items-center">
-          <img src={mainevent} className="card-img-top img-fluid reduced-size" alt="Volunteer" />
-          <div className="card-body">
-            <h4 className="font-bold">An Important Event</h4>
-            <h4 className="text-warning">For Volunteer</h4>
-            <p className="card-text">
-              Industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className="col-md-6 mb-4">
-        <div id="testimonialCarousel" className="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-          <div className="carousel-inner">
-            {testimonials.map((testimonial, index) => (
-              <div
-                className={`carousel-item ${index === 0 ? "active" : ""}`}
-                key={index}
-              >
-                <div className="testimonial-card text-center p-4 mx-auto">
-                  <div className="testimonial-header mb-3">
-                    <img src={testimonial.image} className="rounded-circle mb-3" alt={testimonial.name} style={{ width: '80px', height: '80px' }} />
-                    <span className="icon-quote text-warning">“</span>
-                    <h5 className="mb-1">{testimonial.name}</h5>
-                    <span className="text-muted">{testimonial.role}</span>
-                  </div>
-                  <p className="testimonial-text">{testimonial.quote}</p>
+          <div className="row">
+            <div className="col-md-6 mb-2">
+              <div className="card h-100 border-0 d-flex flex-row align-items-center">
+                <img src={mainevent} className="card-img-top img-fluid reduced-size" alt="Volunteer" />
+                <div className="card-body">
+                  <h4 className="font-bold">An Important Event</h4>
+                  <h4 className="text-warning">For Volunteer</h4>
+                  <p className="card-text">
+                    Industry. Lorem Ipsum has been the industry's standard dummy text
+                    ever since the 1500s, when an unknown.
+                  </p>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
 
-          {/* Controls */}
-          <button
-            className="carousel-control-prev"
-            type="button"
-            data-bs-target="#testimonialCarousel"
-            data-bs-slide="prev"
-          >
-            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span className="visually-hidden">Previous</span>
-          </button>
-          <button
-            className="carousel-control-next"
-            type="button"
-            data-bs-target="#testimonialCarousel"
-            data-bs-slide="next"
-          >
-            <span className="carousel-control-next-icon" aria-hidden="true"></span>
-            <span className="visually-hidden">Next</span>
-          </button>
+            <div className="col-md-6 mb-2">
+              <div id="testimonialCarousel" className="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+                <div className="carousel-inner">
+                  {testimonials.map((testimonial, index) => (
+                    <div
+                      className={`carousel-item ${index === 0 ? "active" : ""}`}
+                      key={index}
+                    >
+                      <div className="testimonial-card text-center p-4 mx-auto">
+                        <div className="testimonial-header mb-3">
+                          <img src={testimonial.image} className="rounded-circle mb-3" alt={testimonial.name} style={{ width: '80px', height: '80px' }} />
+                          <span className="icon-quote text-warning">“</span>
+                          <h5 className="mb-1">{testimonial.name}</h5>
+                          <span className="text-muted">{testimonial.role}</span>
+                        </div>
+                        <p className="testimonial-text">{testimonial.quote}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Controls */}
+                <button
+                  className="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#testimonialCarousel"
+                  data-bs-slide="prev"
+                >
+                  <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span className="visually-hidden">Previous</span>
+                </button>
+                <button
+                  className="carousel-control-next"
+                  type="button"
+                  data-bs-target="#testimonialCarousel"
+                  data-bs-slide="next"
+                >
+                  <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span className="visually-hidden">Next</span>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
       <section className="events-section pt-4">
         <div className="container">
@@ -248,7 +229,6 @@ const Home = () => {
             <div className="col-md-7 mb-4">
               <div className="p-4 h-100">
                 <h2 className="font-bold text-xl mb-4 text-dark" style={{ color: 'black', fontWeight: 'bold' }}>{homeData.upcomingEvent.name}</h2>
-                {/* <p className="mb-6 mt-3" style={{ color: 'black', fontSize: '1.2rem' }}>{homeData.upcomingEvent.description}</p> */}
                 <iframe
                   src={getEmbeddedUrl(homeData.video.url)}
                   title={homeData.video.title}
@@ -257,7 +237,7 @@ const Home = () => {
                   allowFullScreen
                   style={{ width: '75%', height: '250px' }} // Adjust the height as needed
                 ></iframe>
-                {/* <button className="btn btn-warning text-white mt-3" style={{ fontWeight: 'bold' }}>Learn More</button> */}
+                
               </div>
             </div>
           </div>

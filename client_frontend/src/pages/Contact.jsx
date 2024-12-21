@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Form, Button, Modal } from 'react-bootstrap';
 import axios from 'axios';
 import '../assets/Contact.css'; // Custom styling for Contact component
 import mail from '../assets/email_b.png';
@@ -17,10 +17,11 @@ const Contact = () => {
         instagram: ''
     });
     const [name, setName] = useState('');
-    const [phone, setPhone] = useState('');
+    const [email, setEmail] = useState('');
     const [subject, setSubject] = useState('');
     const [message, setMessage] = useState('');
-    const [validated, setValidated] = useState(false);
+    const [showThankYou, setShowThankYou] = useState(false);
+    const [error, setError] = useState('');
 
     useEffect(() => {
         const fetchContactInfo = async () => {
@@ -32,7 +33,7 @@ const Contact = () => {
             } catch (error) {
                 console.error('Error fetching contact info from deployed URL, trying local URL:', error);
                 try {
-                    const response = await axios.get('http://localhost:5000/api/contact');
+                    const response = await axios.get(localUrl);
                     setContactInfo(response.data);
                 } catch (localError) {
                     console.error('Error fetching contact info from local URL:', localError);
@@ -43,18 +44,30 @@ const Contact = () => {
         fetchContactInfo();
     }, []);
 
-    const handleMailTo = (e) => {
-        const form = e.currentTarget;
+    const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent form submission
-        if (form.checkValidity() === false) {
-            setValidated(true); // Set validated to true so feedback messages appear
-            return;
-        }
 
-        // If validation is successful, prepare mailto link
-        const mailtoLink = `mailto:${contactInfo.mail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}%0D%0A%0D%0AName: ${encodeURIComponent(name)}%0D%0APhone: ${encodeURIComponent(phone)}`;
-        window.location.href = mailtoLink;
+        try {
+            const deployedFeedbackUrl = 'http://localhost:5000/api/feedback';
+            const response = await axios.post(deployedFeedbackUrl, {
+                name,
+                email,
+                subject,
+                message
+            });
+            if (response.status === 201) {
+                setShowThankYou(true);
+                setName('');
+                setEmail('');
+                setSubject('');
+                setMessage('');
+            }
+        } catch (error) {
+            setError('Failed to submit feedback. Please try again later.');
+        }
     };
+
+    const handleClose = () => setShowThankYou(false);
 
     return (
         <Container className="contact-page py-5">
@@ -63,7 +76,7 @@ const Contact = () => {
                     <Card className="contact-info-card p-4" style={{ backgroundColor: '#fafafa', border: 'none' }}>
                         <Card.Body>
                             <h1 style={{ fontWeight: '700' }}>
-                                Contact <span style={{ fontWeight: '700' }}>Information</span>
+                                Contact Information
                             </h1>
                             <a href={`mailto:${contactInfo.mail}`} className="d-flex align-items-center text-decoration-none mt-4">
                                 <img src={mail} alt="email icon" className='icon' />
@@ -73,24 +86,13 @@ const Contact = () => {
                                 <img src={call} alt="phone icon" className='icon' />
                                 <p className="mb-0 mx-2 txt">{contactInfo.number}</p>
                             </a>
-                            <h3 className='my-3' style={{ fontWeight: '700', color: '#ffc107' }}>
-                                Social Media
-                            </h3>
-                            <a href={contactInfo.instagram} target="_blank" className="mr-3 mx-2">
-                                <img src={insta} alt="instagram icon" className="footer-icon" />
-                            </a>
-                            <a href={contactInfo.facebook} target="_blank" className="mr-3 mx-2">
-                                <img src={fb} alt="facebook icon" className="footer-icon" />
-                            </a>
-                            <a href={contactInfo.linkedin} target="_blank" className="mr-3 mx-3">
-                                <img src={linkedin} alt="linkedin icon" className="footer-icon" />
-                            </a>
                         </Card.Body>
                     </Card>
                 </Col>
                 <Col md={6}>
-                    <Form className="contact-form p-4" style={{ backgroundColor: '#f8f9fa' }} noValidate validated={validated} onSubmit={handleMailTo}>
-                        <h1 className='mb-3' style={{ fontWeight: '700' }}>Contact Us</h1>
+                    <Form className="contact-form p-4" style={{ backgroundColor: '#f8f9fa' }} noValidate onSubmit={handleSubmit}>
+                        <h1 className='mb-3' style={{ fontWeight: '700' }}>Feedback</h1>
+                        {error && <div className="alert alert-danger">{error}</div>}
                         <Form.Group controlId="formName" className="mt-3">
                             <Form.Label>Name</Form.Label>
                             <Form.Control
@@ -98,24 +100,16 @@ const Contact = () => {
                                 placeholder="Enter your name"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
-                                required
                             />
-                            <Form.Control.Feedback type="invalid">
-                                Please enter your name.
-                            </Form.Control.Feedback>
                         </Form.Group>
-                        <Form.Group controlId="formPhone" className="mt-3">
-                            <Form.Label>Phone</Form.Label>
+                        <Form.Group controlId="formEmail" className="mt-3">
+                            <Form.Label>Email</Form.Label>
                             <Form.Control
-                                type="text"
-                                placeholder="Enter your phone number"
-                                value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
-                                required
+                                type="email"
+                                placeholder="Enter your email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
-                            <Form.Control.Feedback type="invalid">
-                                Please enter your phone number.
-                            </Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group controlId="formSubject" className="mt-3">
                             <Form.Label>Subject</Form.Label>
@@ -124,11 +118,7 @@ const Contact = () => {
                                 placeholder="Enter the subject"
                                 value={subject}
                                 onChange={(e) => setSubject(e.target.value)}
-                                required
                             />
-                            <Form.Control.Feedback type="invalid">
-                                Please enter a subject.
-                            </Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group controlId="formMessage" className="mt-3">
                             <Form.Label>Message</Form.Label>
@@ -138,25 +128,32 @@ const Contact = () => {
                                 placeholder="Enter your message"
                                 value={message}
                                 onChange={(e) => setMessage(e.target.value)}
-                                required
                             />
-                            <Form.Control.Feedback type="invalid">
-                                Please enter a message.
-                            </Form.Control.Feedback>
                         </Form.Group>
                         <Button
                             variant="warning"
                             className="text-white mt-4"
                             style={{ fontWeight: 'bold' }}
                             type="submit"
-                            disabled={!contactInfo.mail} // Disable if no email is fetched
-                            title={!contactInfo.mail ? 'Email address is not available' : 'Send your feedback'}
+                            title="Send your feedback"
                         >
-                            Send Mail
+                            Submit
                         </Button>
                     </Form>
                 </Col>
             </Row>
+
+            <Modal show={showThankYou} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Thank You!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>We will reach out to you soon.</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </Container>
     );
 };
