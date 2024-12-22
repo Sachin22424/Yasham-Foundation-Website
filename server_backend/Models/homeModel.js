@@ -5,6 +5,8 @@ const homeSchema = new mongoose.Schema({
     story: {
         title: String,
         description: String,
+        button: String,
+
     },
     events: [
         {

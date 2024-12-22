@@ -7,7 +7,7 @@ import { Modal, Button } from 'react-bootstrap'; // Import Bootstrap Modal
 const ContentHome = () => {
   const [formData, setFormData] = useState({
     sliderImages: [],
-    story: { title: '', description: '' },
+    story: { title: '', description: '' , button:''},
     events: [{ name: '', description: '' }],
     video: { url: '', title: '', description: '' },
     mainevent: { image: '', name: '', description: '' },
@@ -68,8 +68,8 @@ const ContentHome = () => {
         ...prev,
         [key]: Array.isArray(prev[key])
           ? prev[key].map((item, i) =>
-              i === index ? { ...item, [name]: value } : item
-            )
+            i === index ? { ...item, [name]: value } : item
+          )
           : { ...prev[key], [name]: value },
       }));
     } else {
@@ -85,6 +85,8 @@ const ContentHome = () => {
     // Validation logic
     if (
       !formData.newSliderImage.image ||
+      !formData.story.button ||
+      !formData.story.title ||
       !formData.story.description ||
       !formData.mainevent.image ||
       !formData.mainevent.name ||
@@ -120,6 +122,7 @@ const ContentHome = () => {
       {error && <div className="alert alert-danger">{error}</div>}
       <form onSubmit={handleSubmit}>
         <h2>Slider Image Url (1920x1080)</h2>
+        
         <div className="form-group">
           <input
             type="text"
@@ -129,10 +132,26 @@ const ContentHome = () => {
             onChange={(e) => handleChange(e, 'newSliderImage')}
             placeholder="New Slider Image URL"
           />
+          <Button
+            variant="dark"
+            onClick={() => window.open('https://www.imghippo.com/', '_blank')}
+          >
+            Get Image Url
+          </Button>
+        </div>
+        
+        <h2>Heading</h2>
+
+        <div className="form-group">
+        <input
+            className="form-control"
+            name="title"
+            value={formData.story.title}
+            onChange={(e) => handleChange(e, 'story')}
+            placeholder="Story Title"
+          />
         </div>
 
-        <h2>Story What We Do</h2>
-       
         <div className="form-group">
           <textarea
             className="form-control"
@@ -140,6 +159,16 @@ const ContentHome = () => {
             value={formData.story.description}
             onChange={(e) => handleChange(e, 'story')}
             placeholder="Story Description"
+          />
+        </div>
+
+        <div className="form-group">
+        <input
+            className="form-control"
+            name="button"
+            value={formData.story.button}
+            onChange={(e) => handleChange(e, 'story')}
+            placeholder="Story Button"
           />
         </div>
 
@@ -222,7 +251,7 @@ const ContentHome = () => {
             placeholder="Video URL"
           />
         </div>
-        
+
         <div className="form-group">
           <textarea
             className="form-control"

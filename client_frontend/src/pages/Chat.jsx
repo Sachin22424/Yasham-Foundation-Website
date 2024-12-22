@@ -85,14 +85,13 @@ const Home = () => {
           <div className="row justify-content-center align-items-center">
             <div className="col-md-6">
               <h1 className="text-3xl font-bold text-gray-800 " style={{ color: 'black', fontWeight: 'bold' }}>
-                Educate. <span style={{ color: '#ffc107', fontWeight: 'bold' }}>Enlighten. </span>
-                Empower.
+                {homeData.story.title}
               </h1>
               <p className="text-gray-600 mt-3" style={{ color: 'black', fontSize: '1.2rem' }}>
                 {homeData.story.description}
               </p>
               <button type="button" className="btn btn-dark mt-3" style={{ fontWeight: 'bold' }} onClick={handleKnowMoreClick}>
-                Learn More
+                {homeData.story.button}
               </button>
             </div>
 
