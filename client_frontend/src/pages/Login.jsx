@@ -62,7 +62,7 @@ const Login = () => {
             <div className="login-box">
                 <div className="header-container">
                     <a href="/"><img src={cross} alt="Logo" className="login-img" /></a>
-                    <h1 className="login-title">Login</h1>
+                    <h1 className="login-title">Admin Login</h1>
                 </div>
                 {error && <div className="alert alert-danger">{error}</div>}
                 {success && <div className="alert alert-success">{success}</div>}

@@ -14,7 +14,9 @@ const Contact = () => {
         number: '',
         linkedin: '',
         facebook: '',
-        instagram: ''
+        instagram: '',
+        feedbacktitle: '',
+        feedbackmessage: ''
     });
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -145,9 +147,9 @@ const Contact = () => {
 
             <Modal show={showThankYou} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Thank You!</Modal.Title>
+                    <Modal.Title>{contactInfo.feedbacktitle}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>We will reach out to you soon.</Modal.Body>
+                <Modal.Body>{contactInfo.feedbackmessage}</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close

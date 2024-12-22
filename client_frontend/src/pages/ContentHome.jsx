@@ -119,7 +119,7 @@ const ContentHome = () => {
       {loading && <p>Loading...</p>}
       {error && <div className="alert alert-danger">{error}</div>}
       <form onSubmit={handleSubmit}>
-        <h2>Slider Image Url</h2>
+        <h2>Slider Image Url (1920x1080)</h2>
         <div className="form-group">
           <input
             type="text"

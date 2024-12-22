@@ -1,0 +1,27 @@
+.contentfeedback-wrapper {
+    background-color: #E6E6FA;; /* Change this to the desired background color */
+    padding: 20px; /* Optional: to add some padding */
+}
+
+.headcontent {
+    color: #662d91;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.containercontent {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+textarea.form-control {
+    height: 100px;
+}

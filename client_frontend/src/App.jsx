@@ -9,6 +9,7 @@ import ContentContact from "./pages/ContentContact"; // Import ContentContact co
 import ContentAbout from "./pages/ContentAbout"; // Import ContentAbout component
 import ContentSupport from "./pages/ContentSupport"; // Import ContentSupport component
 import ContentMission from "./pages/ContentMission"; // Import ContentMission component
+import ContentFeedback from "./pages/ContentFeedback"; // Import ContentFeedback component
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Navbar from "./components/Navbar";
@@ -26,11 +27,12 @@ function App() {
   const isContentAbout = location.pathname === "/contentabout";
   const isContentSupport = location.pathname === "/contentsupport";
   const isContentMission = location.pathname === "/contentmission";
+  const isContentFeedback = location.pathname === "/contentfeedback";
 
   return (
     <>
-      {!isLoginPage && !isContentHome && !isContentContact && !isContentAbout && !isContentSupport && !isContentMission && <Navbar />}
-      {(isContentHome || isContentContact || isContentAbout || isContentSupport || isContentMission) && <NavbarContent />}
+      {!isLoginPage && !isContentHome && !isContentContact && !isContentAbout && !isContentSupport && !isContentMission && !isContentFeedback && <Navbar />}
+      {(isContentHome || isContentContact || isContentAbout || isContentSupport || isContentMission || isContentFeedback) && <NavbarContent />}
       <Routes>
         <Route path="/" element={<Chat />} />
         <Route path="/about" element={<About />} /> {/* Add About route */}
@@ -44,9 +46,10 @@ function App() {
         <Route path="/contentabout" element={<ContentAbout />} /> {/* Add ContentAbout route */}
         <Route path="/contentsupport" element={<ContentSupport />} /> {/* Add ContentSupport route */}
         <Route path="/contentmission" element={<ContentMission />} /> {/* Add ContentMission route */}
+        <Route path="/contentfeedback" element={<ContentFeedback />} /> {/* Add ContentFeedback route */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-      {!isLoginPage && !isContentHome && !isContentContact && !isContentAbout && !isContentSupport && !isContentMission && <Footer />}
+      {!isLoginPage && !isContentHome && !isContentContact && !isContentAbout && !isContentSupport && !isContentMission && !isContentFeedback && <Footer />}
     </>
   );
 }

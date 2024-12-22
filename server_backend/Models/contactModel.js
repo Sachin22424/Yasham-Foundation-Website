@@ -20,6 +20,14 @@ const contactSchema = new mongoose.Schema({
     instagram: {
         type: String,
         required: true
+    },
+    feedbacktitle:{
+        type: String,
+        required: true
+    },
+    feedbackmessage:{
+        type: String,
+        required: true
     }
 });
 

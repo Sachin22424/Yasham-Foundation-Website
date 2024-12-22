@@ -74,11 +74,9 @@ const Home = () => {
     <>
       <div id="carouselExample" className="carousel slide" data-bs-ride="carousel">
         <div className="carousel-inner">
-          {homeData.sliderImages.map((image, index) => (
-            <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
-              <img src={image} className="d-block w-100 carousel-image" alt={`Slide ${index + 1}`} />
-            </div>
-          ))}
+          <div className="carousel-item active">
+            <img src={homeData.newSliderImage.image} className="d-block w-100 carousel-image" alt="Slide" />
+          </div>
         </div>
       </div>
 

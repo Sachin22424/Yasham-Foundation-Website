@@ -45,7 +45,6 @@ const NavbarContent = () => {
                                 <li><hr className="dropdown-divider" /></li>
                                 <li><a className="dropdown-item" href="/contentmission">Our Mission</a></li>
                                 <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="#">Our Initiatives</a></li>
                                 <li><hr className="dropdown-divider" /></li>
                                 <li><a className="dropdown-item" href="#">Our Team</a></li>
                             </ul>
@@ -87,7 +86,10 @@ const NavbarContent = () => {
                             </ul>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="/contentcontact">Contact Us</a>
+                            <a className="nav-link active" aria-current="page" href="/contentcontact">Contact Url</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link active" aria-current="page" href="/contentfeedback">Feedback Message</a>
                         </li>
                     </ul>
                 </div>

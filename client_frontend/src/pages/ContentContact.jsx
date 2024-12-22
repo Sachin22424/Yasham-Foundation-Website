@@ -17,6 +17,7 @@ const ContentContact = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(''); // Error state for validation
   const [showModal, setShowModal] = useState(false); // State for modal visibility
+  const [feedbacks, setFeedbacks] = useState([]); // State to store feedbacks
 
   const fetchContactContent = async () => {
     try {
@@ -45,9 +46,12 @@ const ContentContact = () => {
     }
   };
 
+  
+
   // Fetch existing data
   useEffect(() => {
     fetchContactContent();
+   
   }, []);
 
   useEffect(() => {
