@@ -1,0 +1,16 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "yashamwebsite/server_backend/indexjs",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/yashamwebsite/server_backend/indexjs"
+      }
+    ]
+  }
+  
