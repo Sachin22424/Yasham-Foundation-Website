@@ -50,7 +50,7 @@ const Contact = () => {
         e.preventDefault(); // Prevent form submission
 
         try {
-            const deployedFeedbackUrl = 'http://localhost:5000/api/feedback';
+            const deployedFeedbackUrl = 'https://yasham-foundation-website.onrender.com/api/feedback';
             const response = await axios.post(deployedFeedbackUrl, {
                 name,
                 email,
