@@ -97,10 +97,6 @@
     margin: 0 auto 10px; 
 }
 
-.icon-circle img {
-    width: 50%;
-    height: auto;
-}
 .card {
   display: flex;
   flex-direction: row;

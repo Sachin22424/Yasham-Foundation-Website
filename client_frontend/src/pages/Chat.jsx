@@ -2,34 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css"; // Import Font Awesome
-import student from '../assets/student.png';
-import family from '../assets/family.png';
-import volunteer from '../assets/volunteer.png';
-import woman from '../assets/woman.png';
-import mainevent from '../assets/eventImage3.jpg'
 import { useNavigate } from 'react-router-dom';
 import '../assets/Chat.css'; // Import the custom CSS
-
-const testimonials = [
-  {
-    name: "John Doe",
-    role: "Supporter",
-    quote:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Error nemo vel reprehenderit id. Ullam pariatur enim beatae, eveniet aliquid ratione!. Error nemo vel reprehenderit id. Ullam pariatur enim beatae, eveniet aliquid ratione!",
-  },
-  {
-    name: "Jane Smith",
-    role: "Volunteer",
-    quote:
-      "Sed quas quasi iste unde culpa impedit necessitatibus! Fugiat dignissimos quas quidem?",
-  },
-  {
-    name: "Mike Johnson",
-    role: "Donor",
-    quote:
-      "Ullam pariatur enim beatae, eveniet aliquid ratione! Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  },
-];
 
 const Home = () => {
   const [homeData, setHomeData] = useState(null);
@@ -75,7 +49,7 @@ const Home = () => {
       <div id="carouselExample" className="carousel slide" data-bs-ride="carousel">
         <div className="carousel-inner">
           <div className="carousel-item active">
-            <img src={homeData.newSliderImage.image} className="d-block w-100 carousel-image" alt="Slide" />
+            <img src={homeData.newSliderImage?.image} className="d-block w-100 carousel-image" alt="Slide" />
           </div>
         </div>
       </div>
@@ -85,13 +59,13 @@ const Home = () => {
           <div className="row justify-content-center align-items-center">
             <div className="col-md-6">
               <h1 className="text-3xl font-bold text-gray-800 " style={{ color: 'black', fontWeight: 'bold' }}>
-                {homeData.story.title}
+                {homeData.story?.title}
               </h1>
               <p className="text-gray-600 mt-3" style={{ color: 'black', fontSize: '1.2rem' }}>
-                {homeData.story.description}
+                {homeData.story?.description}
               </p>
               <button type="button" className="btn btn-dark mt-3" style={{ fontWeight: 'bold' }} onClick={handleKnowMoreClick}>
-                {homeData.story.button}
+                {homeData.story?.button}
               </button>
             </div>
 
@@ -102,43 +76,44 @@ const Home = () => {
                 <div className="col-md-5 mb-2">
                   <div className="text-center">
                     <div className="icon-circlesh">
-                      <img src={student} className="mb-0" alt="Leave a Legacy" style={{ width: '50%', height: 'auto' }} />
+                      <img src={homeData.story?.pointer1image?.url} className="mb-0" alt="Leave a Legacy" style={{ width: homeData.story?.pointer1image?.width, height: homeData.story?.pointer1image?.height }} />
                     </div>
-                    <h5 className="font-bold">Students and Youth</h5>
-                    <p className="para">With over 9000+ students and youth impacted</p>
+                    <h5 className="font-bold">{homeData.story?.pointer1title}</h5>
+                    <p className="para">{homeData.story?.pointer1description}</p>
                   </div>
                 </div>
                 <div className="col-md-5 mb-2">
                   <div className="text-center">
                     <div className="icon-circlesh">
-                      <img src={family} className="mb-0" alt="Make Donation" style={{ width: '50%', height: 'auto' }} />
+                      <img src={homeData.story?.pointer2image?.url} className="mb-0" alt="Make Donation" style={{ width: homeData.story?.pointer2image?.width, height: homeData.story?.pointer2image?.height }} />
                     </div>
-                    <h5 className="font-bold">Families</h5>
-                    <p className="para">With more than 5000+ families assisted.</p>
+                    <h5 className="font-bold">{homeData.story?.pointer2title}</h5>
+                    <p className="para">{homeData.story?.pointer2description}</p>
                   </div>
                 </div>
                 <div className="col-md-5">
                   <div className="text-center">
                     <div className="icon-circlesh">
-                      <img src={woman} className="mb-0" alt="Become a Fundraiser" style={{ width: '50%', height: 'auto' }} />
+                      <img src={homeData.story?.pointer3image?.url} className="mb-0" alt="Become a Fundraiser" style={{ width: homeData.story?.pointer3image?.width, height: homeData.story?.pointer3image?.height }} />
                     </div>
-                    <h5 className="font-bold">Become a Fundraiser</h5>
-                    <p className="para">Over 3000 women have associated with us.</p>
+                    <h5 className="font-bold">{homeData.story?.pointer3title}</h5>
+                    <p className="para">{homeData.story?.pointer3description}</p>
                   </div>
                 </div>
                 <div className="col-md-5">
                   <div className="text-center">
                     <div className="icon-circlesh">
-                      <img src={volunteer} className="mb-0" alt="Become a Volunteer" style={{ width: '50%', height: 'auto' }} />
+                      <img src={homeData.story?.pointer4image?.url} className="mb-0" alt="Become a Volunteer" style={{ width: homeData.story?.pointer4image?.width, height: homeData.story?.pointer4image?.height }} />
                     </div>
-                    <h5 className="font-bold">Become a Volunteer</h5>
+                    <h5 className="font-bold">{homeData.story?.pointer4title}</h5>
                     <p className="para">
-                      Volunteer with us and be part of a mission.
+                      {homeData.story?.pointer4description}
                     </p>
                   </div>
                 </div>
               </div>
             </div>
+            
           </div>
         </div>
       </div>
@@ -147,13 +122,12 @@ const Home = () => {
           <div className="row">
             <div className="col-md-6 mb-2">
               <div className="card h-100 border-0 d-flex flex-row align-items-center">
-                <img src={mainevent} className="card-img-top img-fluid reduced-size" alt="Volunteer" />
+                <img src={homeData.mainevent?.image} className="mb-0" alt="Leave a Legacy" style={{ width: homeData.mainevent?.width, height: homeData.mainevent?.height }} />
                 <div className="card-body">
-                  <h4 className="font-bold">An Important Event</h4>
-                  <h4 className="text-warning">For Volunteer</h4>
-                  <p className="card-text">
-                    Industry. Lorem Ipsum has been the industry's standard dummy text
-                    ever since the 1500s, when an unknown.
+                  <h4 className="font-bold">{homeData.mainevent?.name}</h4>
+                  <h4 className="text-warning">{homeData.mainevent?.form}</h4>
+                  <p className="para">
+                    {homeData.mainevent?.description}
                   </p>
                 </div>
               </div>
@@ -162,14 +136,13 @@ const Home = () => {
             <div className="col-md-6 mb-2">
               <div id="testimonialCarousel" className="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
                 <div className="carousel-inner">
-                  {testimonials.map((testimonial, index) => (
+                  {homeData.testimonials?.map((testimonial, index) => (
                     <div
                       className={`carousel-item ${index === 0 ? "active" : ""}`}
                       key={index}
                     >
                       <div className="testimonial-card text-center p-4 mx-auto">
                         <div className="testimonial-header mb-3">
-                          <img src={testimonial.image} className="rounded-circle mb-3" alt={testimonial.name} style={{ width: '80px', height: '80px' }} />
                           <span className="icon-quote text-warning">“</span>
                           <h5 className="mb-1">{testimonial.name}</h5>
                           <span className="text-muted">{testimonial.role}</span>
@@ -212,7 +185,7 @@ const Home = () => {
               <div className="p-4 h-100">
                 <h2 className="font-bold text-xl mb-4 text-dark" style={{ fontWeight: 'bold' }}>Our Initiatives:</h2>
                 <ul className="list-unstyled text-dark">
-                  {homeData.events.map((event, index) => (
+                  {homeData.events?.map((event, index) => (
                     <li className="mb-4 event-item" key={index}>
                       <i className="fa fa-calendar mr-2"></i>
                       <span className="event-item-text mx-4">{event.name}</span>
@@ -225,10 +198,11 @@ const Home = () => {
 
             <div className="col-md-7 mb-4">
               <div className="p-4 h-100">
-                <h2 className="font-bold text-xl mb-4 text-dark" style={{ color: 'black', fontWeight: 'bold' }}>{homeData.upcomingEvent.name}</h2>
+                <h2 className="font-bold text-xl mb-4 text-dark" style={{ color: 'black', fontWeight: 'bold' }}>{homeData.upcomingEvent?.name}</h2>
                 <iframe
-                  src={getEmbeddedUrl(homeData.video.url)}
-                  title={homeData.video.title}
+                  src={getEmbeddedUrl(homeData.video?.url)}
+                  title={homeData.video?.title}
+                  
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen

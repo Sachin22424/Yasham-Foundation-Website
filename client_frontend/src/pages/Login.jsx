@@ -5,8 +5,8 @@ import "../assets/Login.css";
 import cross from "../assets/cross.png";
 
 const Login = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("yashamfoundation@gmail.com");
+    const [password, setPassword] = useState("yashamcontent@8170");
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
     const navigate = useNavigate();
@@ -26,6 +26,17 @@ const Login = () => {
         if (!emailRegex.test(email)) {
             setError("Invalid email format.");
             setSuccess("");
+            return;
+        }
+
+        // Hardcoded credentials check
+        if (email === "yashamfoundation@gmail.com" && password === "yashamcontent@8170") {
+            setError("");
+            setSuccess("Login successful!");
+            login("hardcoded-token"); // Update authentication state with a dummy token
+            setTimeout(() => {
+                navigate("/contenthome");
+            }, 2000);
             return;
         }
 
