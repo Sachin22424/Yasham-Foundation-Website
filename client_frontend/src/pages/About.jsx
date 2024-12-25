@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import axios from 'axios';
+import aboutImage from '../assets/about2.jpg'; // Ensure you have an image in the specified path
 
 const About = () => {
     const [aboutData, setAboutData] = useState({
@@ -44,36 +45,28 @@ const About = () => {
 
     return (
         <Container className="my-5">
-            <Row className="text-center mb-4">
-                <Col>
-                    <h1 style={{ fontWeight: '700' }}>About Yasham</h1>
+            <Row className="">
+                <Col md={4} className="">
+                    <img src={aboutImage} alt="About Yasham" style={{ width: '100%', borderRadius: '10px' }} />
                 </Col>
-            </Row>
-            <Row className="justify-content-center">
-                <Col md={9}>
+                <Col md={8}>
                     <Card className="p-3 mb-4" style={{ border: 'none', backgroundColor: '#f9f9f9' }}>
+                        
                         <Card.Body>
+                            <Card.Text className="text-center" style={{ color: "#333333", fontSize: "1.2em", lineHeight: "1.6" }}>
+                                <h1 style={{ fontWeight: '700' }}>About Yasham</h1>
+                            </Card.Text>
                             <Card.Text style={{ color: "#333333", fontSize: "1.2em", lineHeight: "1.6" }}>
                                 {aboutData.description1}
                             </Card.Text>
-                            <Card.Text style={{ color: "#333333", fontSize: "1.2em", lineHeight: "1.6" }}>
-                                {aboutData.description2}
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
-            <Row className="text-center mb-4">
-                <Col>
-                    <h2 style={{ color: "#ffc107", fontWeight: '700' }}>Our Story</h2>
-                </Col>
-            </Row>
-            <Row className="justify-content-center">
-                <Col md={10}>
-                    <Card className="p-3" style={{ border: 'none', backgroundColor: '#f9f9f9' }}>
-                        <Card.Body>
+                            
+
+                            <Card.Text className="text-center" style={{ color: "#333333", fontSize: "1.2em", lineHeight: "1.6" }}>
+                                <h2 style={{ color: "#ffc107", fontWeight: '700', marginBottom: '10px', marginTop:'15px' }}>Our Story</h2></Card.Text>
+
                             <Card.Text style={{ color: "#333333", fontSize: "1.2em", lineHeight: "1.6" }}>
                                 {aboutData.story}
+
                             </Card.Text>
                         </Card.Body>
                     </Card>

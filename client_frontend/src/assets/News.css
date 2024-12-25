@@ -1,5 +1,5 @@
 .news-page {
-    /* background-color: #f8f9fa; */
+    background-color: #f8f9fa;
 }
 
 .news-card {
@@ -12,7 +12,7 @@
 .news-image {
     width: 100%;
     height: auto;
-    border-radius: 10px;
+    border-radius: 10px 10px 0 0;
 }
 
 .news-title {

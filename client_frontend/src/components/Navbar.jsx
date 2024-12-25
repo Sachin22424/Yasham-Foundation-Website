@@ -24,11 +24,11 @@ const Navbar = () => {
                             <ul className="dropdown-menu full-width-dropdown">
                                 <li><a className="dropdown-item" href="/about">About Us</a></li>
                                 <li><hr className="dropdown-divider" /></li>
+                                <li><a className="dropdown-item" href="/team">Our Team</a></li>
+                                <li><hr className="dropdown-divider" /></li>
                                 <li><a className="dropdown-item" href="/mission">Our Mission</a></li>
                                 <li><hr className="dropdown-divider" /></li>
                                 
-                                <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="#">Our Team</a></li>
                             </ul>
                         </li>
                         <li className="nav-item dropdown custom-dropdown">
@@ -52,7 +52,7 @@ const Navbar = () => {
                                 Our Impact
                             </a>
                             <ul className="dropdown-menu full-width-dropdown">
-                                <li><a className="dropdown-item" href="#">Student Testimonials</a></li>
+                                <li><a className="dropdown-item" href="/studentTestimonial">Student Testimonials</a></li>
                                 <li><hr className="dropdown-divider" /></li>
                                 <li><a className="dropdown-item" href="#">Mentor Testimonials</a></li>
                                 <li><hr className="dropdown-divider" /></li>

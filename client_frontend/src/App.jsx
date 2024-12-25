@@ -18,6 +18,8 @@ import Footer from "./components/Footer";
 import Mission from './pages/mission';
 import Support from './pages/support';
 import News from './pages/news';
+import Team from './pages/Team'; // Import Team component
+import StudentTestimonial from './pages/studentTestimonials'; // Import StudentTestimonial component
 
 function App() {
   const location = useLocation();
@@ -47,6 +49,8 @@ function App() {
         <Route path="/contentsupport" element={<ContentSupport />} /> {/* Add ContentSupport route */}
         <Route path="/contentmission" element={<ContentMission />} /> {/* Add ContentMission route */}
         <Route path="/contentfeedback" element={<ContentFeedback />} /> {/* Add ContentFeedback route */}
+        <Route path="/team" element={<Team />} /> {/* Add Team route */}
+        <Route path="/studentTestimonial" element={<StudentTestimonial />} /> {/* Add StudentTestimonial route */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       {!isLoginPage && !isContentHome && !isContentContact && !isContentAbout && !isContentSupport && !isContentMission && !isContentFeedback && <Footer />}

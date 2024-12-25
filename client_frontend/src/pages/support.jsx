@@ -59,7 +59,7 @@ const Support = () => {
     return (
         <Container className="support-page py-5">
             <h1 className="text-center mb-4" style={{ fontWeight: '700' }}>Support Us</h1>
-            <p className="text-center mb-5" style={{ fontSize: '1.4rem' }}>{volunteerData.point4}</p>
+            {/* <p className="text-center mb-5" style={{ fontSize: '1.4rem' }}>{volunteerData.point4}</p> */}
             <Row>
                 <Col md={6}>
                     <Card className="support-card p-4" style={{ backgroundColor: '#f8f9fa', border: 'none' }}>

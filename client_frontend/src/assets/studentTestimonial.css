@@ -1,0 +1,31 @@
+.testimonial-card {
+    background: var(--color-gradient);
+    border-right: 10px solid #ffc107; /* Border only on the right side */
+    border-radius: 7%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease-in-out;
+    width: 90%; /* Increase the width of the card */
+    margin: 0 auto; /* Center the card */
+}
+
+.testimonial-card:hover {
+    transform: translateY(-10px);
+}
+
+.testimonial-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+.card-subtitle {
+    font-size: 0.875rem;
+    margin-top: 5px;
+}
