@@ -1,10 +1,30 @@
 const Feedback = require('../Models/feedbackModel.js');
 const nodemailer = require('nodemailer');
 const xlsx = require('xlsx');
-const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
+// Get all feedbacks
+const getFeedbacks = async (req, res) => {
+    try {
+        const feedbacks = await Feedback.find();
+        res.json(feedbacks);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+// Delete all feedbacks
+const deleteAllFeedbacks = async (req, res) => {
+    try {
+        await Feedback.deleteMany();
+        res.status(200).json({ message: 'All feedbacks deleted successfully!' });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+// Create new feedback
 // Create new feedback
 const createFeedback = async (req, res) => {
     try {
@@ -82,5 +102,7 @@ const createFeedback = async (req, res) => {
 };
 
 module.exports = {
-    createFeedback
+    createFeedback,
+    getFeedbacks,
+    deleteAllFeedbacks
 };
