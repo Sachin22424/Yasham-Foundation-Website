@@ -54,7 +54,7 @@ const Navbar = () => {
                             <ul className="dropdown-menu full-width-dropdown">
                                 <li><a className="dropdown-item" href="/studentTestimonial">Student Testimonials</a></li>
                                 <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="#">Mentor Testimonials</a></li>
+                                <li><a className="dropdown-item" href="/mentorTestimonial">Mentor Testimonials</a></li>
                                 <li><hr className="dropdown-divider" /></li>
                                 <li><a className="dropdown-item" href="/news">Yasham in News</a></li>
                             </ul>

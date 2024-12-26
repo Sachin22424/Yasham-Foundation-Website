@@ -48,7 +48,12 @@ const Contact = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent form submission
-
+    
+        if (!name || !email || !subject || !message) {
+            setError('All fields are required.');
+            return;
+        }
+    
         try {
             const deployedFeedbackUrl = 'https://yasham-foundation-website.onrender.com/api/feedback';
             const response = await axios.post(deployedFeedbackUrl, {
@@ -63,11 +68,13 @@ const Contact = () => {
                 setEmail('');
                 setSubject('');
                 setMessage('');
+                setError(''); // Clear any existing errors
             }
         } catch (error) {
             setError('Failed to submit feedback. Please try again later.');
         }
     };
+    
 
     const handleClose = () => setShowThankYou(false);
 
@@ -114,15 +121,17 @@ const Contact = () => {
                                 placeholder="Enter your name"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
+                                required
                             />
                         </Form.Group>
                         <Form.Group controlId="formEmail" className="mt-3">
-                            <Form.Label>Email</Form.Label>
+                            <Form.Label>Email/Phone No.</Form.Label>
                             <Form.Control
                                 type="email"
-                                placeholder="Enter your email"
+                                placeholder="Enter your email/phone no."
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                required
                             />
                         </Form.Group>
                         <Form.Group controlId="formSubject" className="mt-3">
@@ -132,6 +141,7 @@ const Contact = () => {
                                 placeholder="Enter the subject"
                                 value={subject}
                                 onChange={(e) => setSubject(e.target.value)}
+                                required
                             />
                         </Form.Group>
                         <Form.Group controlId="formMessage" className="mt-3">
@@ -142,6 +152,7 @@ const Contact = () => {
                                 placeholder="Enter your message"
                                 value={message}
                                 onChange={(e) => setMessage(e.target.value)}
+                                required
                             />
                         </Form.Group>
                         <Button
