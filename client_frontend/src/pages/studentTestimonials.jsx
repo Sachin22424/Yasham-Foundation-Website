@@ -25,7 +25,7 @@ const testimonials = [
     },
     {
         name: "Bhakti Palve",
-        position: "JEE Student",
+        position: "JEE Aspirant",
         image: student4,
         feedback: "Currently, I'm studying in Mindsetters. I'm preparing for JEE competitive exam. Getting into this coaching was only possible because of YASHAM FOUNDATION. Because of Yasham, I got into mind setters with a full scholarship. Both Sunita Ma'am and Shubha Ma'am have guided us a lot from studies to personality development. It's been 4 years since I'm with Yasham, like a family. I chose the path, but Yasham gave me wings to fly on that path."
     },
@@ -37,7 +37,7 @@ const testimonials = [
     },
     {
         name: "Ankush Mahto",
-        position: "JEE Student",
+        position: "JEE Aspirant",
         image: student5,
         feedback: "I am studying in 12th standard. Few years ago when I was in 11th standard I wanted to give jee exam but I need an institute to study well but when I got to know the Institute fees I could not afford it . I could not believe that I can even study in such a big Institute. I am thankful to Sunita ma'am and our Yasham Foundation to get an opportunity to introduce myself."
     }

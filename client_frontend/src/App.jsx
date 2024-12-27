@@ -21,6 +21,11 @@ import News from './pages/news';
 import Team from './pages/Team'; // Import Team component
 import StudentTestimonial from './pages/studentTestimonials'; // Import StudentTestimonial component
 import MentorTestimonial from './pages/mentorTestimonials'; // Import MentorTestimonial component
+import YCM from './pages/YCM'; // Import YCM component
+import SZ from './pages/SZ'; // Import SZ component
+import SHB from './pages/SHB'; // Import SHB component
+import SEM from './pages/SEM'; // Import SEM component
+import HHK from './pages/HHK'; // Import HHK component
 
 function App() {
   const location = useLocation();
@@ -53,6 +58,11 @@ function App() {
         <Route path="/team" element={<Team />} /> {/* Add Team route */}
         <Route path="/studentTestimonial" element={<StudentTestimonial />} /> {/* Add StudentTestimonial route */}
         <Route path="/mentorTestimonial" element={<MentorTestimonial />} /> {/* Add MentorTestimonial route */}
+        <Route path="/ycm" element={<YCM />} /> {/* Add YCM route */}
+        <Route path="/sz" element={<SZ />} /> {/* Add SZ route */}
+        <Route path="/shb" element={<SHB />} /> {/* Add SHB route */}
+        <Route path="/sem" element={<SEM />} /> {/* Add SEM route */}
+        <Route path="/hhk" element={<HHK />} /> {/* Add HHK route */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       {!isLoginPage && !isContentHome && !isContentContact && !isContentAbout && !isContentSupport && !isContentMission && !isContentFeedback && <Footer />}

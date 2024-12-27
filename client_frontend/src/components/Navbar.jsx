@@ -36,15 +36,15 @@ const Navbar = () => {
                                 Our Work
                             </a>
                             <ul className="dropdown-menu full-width-dropdown">
-                                <li><a className="dropdown-item" href="#">Yasham Centre Model</a></li>
+                                <li><a className="dropdown-item" href="/ycm">Yasham Centre Model</a></li>
                                 <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="#">Saathi Haath Badhana</a></li>
+                                <li><a className="dropdown-item" href="/shb">Saathi Haath Badhana</a></li>
                                 <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="#">Sunn Zara</a></li>
+                                <li><a className="dropdown-item" href="/sz">Sunn Zara</a></li>
                                 <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="#">Hum Honge Kaamyab</a></li>
+                                <li><a className="dropdown-item" href="/hhk">Hum Honge Kaamyab</a></li>
                                 <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="#">Swacch English Mission</a></li>
+                                <li><a className="dropdown-item" href="/sem">Swacch English Mission</a></li>
                             </ul>
                         </li>
                         <li className="nav-item dropdown custom-dropdown">

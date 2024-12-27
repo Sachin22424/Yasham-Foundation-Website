@@ -4,9 +4,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css"; // Import Font Awesome
 import { useNavigate } from 'react-router-dom';
 import '../assets/Chat.css'; // Import the custom CSS
+import newsImage from '../assets/news.png';
+import { Carousel } from 'react-bootstrap';
+import sliderImage1 from '../assets/SI1.jpg';
+import sliderImage2 from '../assets/SI4.jpg';
+import sliderImage4 from '../assets/SI3.jpg';
 
 const Home = () => {
   const [homeData, setHomeData] = useState(null);
+  const [selectedInitiative, setSelectedInitiative] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,17 +48,37 @@ const Home = () => {
     return `https://www.youtube.com/embed/${videoId}`;
   };
 
+  const handleInitiativeClick = (initiative) => {
+    setSelectedInitiative(initiative);
+  };
+
   if (!homeData) return <p>Loading...</p>;
 
   return (
     <>
-      <div id="carouselExample" className="carousel slide" data-bs-ride="carousel">
-        <div className="carousel-inner">
-          <div className="carousel-item active">
-            <img src={homeData.newSliderImage?.image} className="d-block w-100 carousel-image" alt="Slide" />
-          </div>
-        </div>
-      </div>
+      <Carousel>
+        <Carousel.Item interval={3000}>
+          <img
+            className="d-block w-100 carousel-img"
+            src={sliderImage1}
+            alt="First slide"
+          />
+        </Carousel.Item>
+        <Carousel.Item interval={3000}>
+          <img
+            className="d-block w-100 carousel-img"
+            src={sliderImage2}
+            alt="Second slide"
+          />
+        </Carousel.Item>
+        <Carousel.Item interval={3000}>
+          <img
+            className="d-block w-100 carousel-img"
+            src={sliderImage4}
+            alt="Fourth slide"
+          />
+        </Carousel.Item>
+      </Carousel>
 
       <div style={{ backgroundColor: '#f7f8f9', padding: '20px 0' }}>
         <div className="container mx-auto px-6">
@@ -113,27 +139,35 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            
+
           </div>
         </div>
       </div>
+
       <section className="demo-section py-4">
         <div className="container">
           <div className="row">
-            <div className="col-md-6 mb-2">
-              <div className="card h-100 border-0 d-flex flex-row align-items-center">
-                <img src={homeData.mainevent?.image} className="mb-0" alt="Leave a Legacy" style={{ width: homeData.mainevent?.width, height: homeData.mainevent?.height }} />
+            <div className="col-md-7 mb-2" >
+              <div className="card h-100 border-0 d-flex flex-row align-items-center" >
+              <img
+                  src={newsImage}
+                  className="mb-0"
+                  alt="Leave a Legacy"
+                  style={{ width: homeData.mainevent?.width, height: homeData.mainevent?.height, cursor: 'pointer' }}
+                  onClick={() => navigate('/news')}
+                />
                 <div className="card-body">
-                  <h4 className="font-bold">{homeData.mainevent?.name}</h4>
-                  <h4 className="text-warning">{homeData.mainevent?.form}</h4>
-                  <p className="para">
-                    {homeData.mainevent?.description}
+                  <h3 className="font-bold" style = {{fontWeight: '700'}}>Our Impact</h3>
+                  <h3 className="text-warning">For Students</h3>
+                  <p className="para" style={{ fontSize: '1.1rem' }}>
+                  The pandemic has made it hard for many students to continue their education, especially those preparing for JEE and NEET exams. However, numerous NGOs and initiatives have risen to help these students by providing them with study materials, mentorship, and financial support to keep their dreams alive.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="col-md-6 mb-2">
+            <div className="col-md-5">
+            <h4 className="font-bold mb-4" style={{ marginLeft: '180px',  fontWeight: '700'  }}>Testimonials</h4>
               <div id="testimonialCarousel" className="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
                 <div className="carousel-inner">
                   {homeData.testimonials?.map((testimonial, index) => (
@@ -141,7 +175,11 @@ const Home = () => {
                       className={`carousel-item ${index === 0 ? "active" : ""}`}
                       key={index}
                     >
-                      <div className="testimonial-card text-center p-4 mx-auto">
+                      <div
+                        className="testimonial-card text-center p-4 mx-auto"
+                        onClick={() => navigate('/studentTestimonial')}
+                        style={{ cursor: 'pointer' }}
+                      >
                         <div className="testimonial-header mb-3">
                           <span className="icon-quote text-warning">“</span>
                           <h5 className="mb-1">{testimonial.name}</h5>
@@ -186,7 +224,7 @@ const Home = () => {
                 <h2 className="font-bold text-xl mb-4 text-dark" style={{ fontWeight: 'bold' }}>Our Initiatives:</h2>
                 <ul className="list-unstyled text-dark">
                   {homeData.events?.map((event, index) => (
-                    <li className="mb-4 event-item" key={index}>
+                    <li className="mb-4 event-item" key={index} onClick={() => handleInitiativeClick(event)}>
                       <i className="fa fa-calendar mr-2"></i>
                       <span className="event-item-text mx-4">{event.name}</span>
                       <hr className="event-divider" />
@@ -198,28 +236,55 @@ const Home = () => {
 
             <div className="col-md-7 mb-4">
               <div className="p-4 h-100">
-                <h2 className="font-bold text-xl mb-4 text-dark" style={{ color: 'black', fontWeight: 'bold' }}>{homeData.upcomingEvent?.name}</h2>
-                <iframe
-                  src={getEmbeddedUrl(homeData.video?.url)}
-                  title={homeData.video?.title}
-                  
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  style={{ width: '75%', height: '250px' }} // Adjust the height as needed
-                ></iframe>
-                
+                {selectedInitiative ? (
+                  <>
+                    <h2 className="font-bold text-xl mb-4 text-dark" style={{ color: 'black', fontWeight: 'bold' }}>{selectedInitiative.name}</h2>
+                    <p className="para">{selectedInitiative.description}</p>
+                  </>
+                ) : (
+                  <>
+                    <h2 className="font-bold text-xl mb-4 text-dark" style={{ color: 'black', fontWeight: 'bold' }}>{homeData.upcomingEvent?.name}</h2>
+                    <iframe
+                      src={getEmbeddedUrl(homeData.video?.url)}
+                      title={homeData.video?.title}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      style={{ width: '75%', height: '250px' }} // Adjust the height as needed
+                    ></iframe>
+                  </>
+                )}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <div className="text-center my-1 join">
+      {/* <div className="text-center my-1 join">
         <h2 className="text-4xl font-bold" style={{ color: 'black', fontWeight: 'bold' }}>Become a Volunteer</h2>
         <p className="text-xl mb-9" style={{ color: 'black', fontSize: '1.2rem' }}>Join us for a better life and beautiful future</p>
         <button type="button" className="btn btn-dark mt-1" style={{ fontWeight: 'bold' }} onClick={handleJoinClick}>Join Us Now</button>
-      </div>
+      </div> */}
+      
+      <div className="col-md-6 mt-2 mb-2" style = {{marginLeft:'300px'}}>
+              <div className="card h-100 border-0 d-flex flex-row align-items-center" >
+              <img
+                  src={homeData.mainevent?.image}
+                  className="mb-0"
+                  alt="Leave a Legacy"
+                  style={{ width: homeData.mainevent?.width, height: homeData.mainevent?.height, cursor: 'pointer' }}
+                 
+                />
+                <div className="card-body">
+                  <h3 className="font-bold" style = {{fontWeight: '700'}}>{homeData.mainevent?.name}</h3>
+                  <h3 className="text-warning">For Students</h3>
+                  <p className="para" style={{ fontSize: '1.1rem' }}>
+                  {homeData.mainevent?.description}
+                  </p>
+                </div>
+              </div>
+            </div>
+
     </>
   );
 };
