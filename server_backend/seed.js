@@ -1,23 +1,19 @@
 const mongoose = require('mongoose');
-const YCM = require('./Models/ycmModel');
+const SEM = require('./Models/semModel');
 require('dotenv').config();
 
-const initialYCMData = [
+const initialSEMData = [
     {
-        title: "Centre Model - Cuffe Parade123",
-        description: "The centre model is an after-school program which supports the underprivileged children of the nearby communities. Trained teachers, adult volunteers, and students from privileged schools conduct English, Mathematics and Science classes. Value systems, Character formation, Personality development, and the importance of hygiene and cleanliness are also taught to them. The final goal is to create a strong foundation so that every child is groomed holistically to channel into the mainstream. Our main centre is at G.D Somani (IGSC) and B D Somani(I. B) Colaba, Mumbai. Other centres in Worli, Tardeo, Grant Road, Marine Lines, Forgetee Street, and Sion areas of Mumbai.",
+        title: "Swachh English Mission",
+        description: "Yasham addresses limited speaking and writing skills by providing coaching through trained volunteers. This initiative benefits students in preparing for the highly competitive professional world, whether in mainstream high-profile professions or blue-collar jobs, which are the backbone of any country.",
         images: [
             {
-                url: "path/to/YCM1.jpg",
+                url: "path/to/SEM1.jpg",
                 caption: "First slide label"
             },
             {
-                url: "path/to/YCM2.jpg",
+                url: "path/to/SEM2.jpg",
                 caption: "Second slide label"
-            },
-            {
-                url: "path/to/YCM3.jpg",
-                caption: "Third slide label"
             }
         ]
     }
@@ -32,10 +28,10 @@ const seedDB = async () => {
             useUnifiedTopology: true
         });
 
-        await YCM.deleteMany({});
-        await YCM.insertMany(initialYCMData);
+        await SEM.deleteMany({});
+        await SEM.insertMany(initialSEMData);
 
-        console.log('YCM data seeded successfully');
+        console.log('SEM data seeded successfully');
         mongoose.connection.close();
     } catch (error) {
         console.error('Error seeding data:', error);

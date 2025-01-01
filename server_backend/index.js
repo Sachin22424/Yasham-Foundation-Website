@@ -7,7 +7,11 @@ const aboutRoute = require('./Routes/aboutRoute');
 const userRoute = require('./Routes/userRoute');
 const feedbackRoute = require('./Routes/feedbackRoute');
 const teamRoute = require('./Routes/teamRoute');
-const ycmRoute = require('./Routes/ycmRoute'); // Add this line
+const ycmRoute = require('./Routes/ycmRoute');
+const shbRoute = require('./Routes/shbRoute');
+const szRoute = require('./Routes/szRoute');
+const hhkRoute = require('./Routes/hhkRoute');
+const semRoute = require('./Routes/semRoute'); // Add this line
 const app = express();
 require('dotenv').config();
 
@@ -20,7 +24,11 @@ app.use('/api/about', aboutRoute);
 app.use('/api/users', userRoute);
 app.use('/api/feedback', feedbackRoute);
 app.use('/api/team', teamRoute);
-app.use('/api/ycm', ycmRoute); // Add this line for YCM routes
+app.use('/api/ycm', ycmRoute);
+app.use('/api/shb', shbRoute);
+app.use('/api/sz', szRoute);
+app.use('/api/hhk', hhkRoute);
+app.use('/api/sem', semRoute); // Add this line for SEM routes
 
 app.get('/', (req, res) => {
     res.send('Hello World');
