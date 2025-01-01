@@ -151,3 +151,21 @@
 .testimonial-text {
   font-size: 0.9rem; /* Adjust the font size as needed */
 }
+
+@media (max-width: 768px) {
+  /* Stack images and text vertically for small devices */
+  .card.h-100 {
+    flex-direction: column !important;
+    text-align: center;
+  }
+
+  .card img {
+    margin-bottom: 15px;
+    max-width: 100%;
+    height: auto; /* Ensure the image scales proportionally */
+  }
+
+  .card .card-body {
+    padding-top: 10px;
+  }
+}
