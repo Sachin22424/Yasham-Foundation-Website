@@ -1,15 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
-import newsImage from '../assets/news.png'; // Replace with the appropriate path to your news image
+import '../assets/YCM.css';
 
 const News = () => {
+    const [newsData, setNewsData] = useState(null);
+
+    useEffect(() => {
+        const fetchNewsData = async () => {
+            try {
+                const response = await axios.get('https://yasham-foundation-website.onrender.com/api/news');
+                setNewsData(response.data[0]); // Assuming the API returns an array and we need the first item
+            } catch (error) {
+                console.error('Error fetching news data:', error);
+            }
+        };
+
+        fetchNewsData();
+    }, []);
+
+    if (!newsData) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <Container className="my-5">
             <Row>
                 {/* Image Section */}
                 <Col md={4}>
                     <img
-                        src={newsImage}
+                        src={newsData.image.url}
                         alt="Latest News"
                         style={{ width: '100%', borderRadius: '10px' }}
                     />
@@ -21,26 +41,24 @@ const News = () => {
                         <Card.Body>
                             {/* Title Section */}
                             <Card.Text className="text-center" style={{ color: "#333333", fontSize: "1.2em", lineHeight: "1.6" }}>
-                                <h1 style={{ fontWeight: '700' }}>Latest News</h1>
+                                <h1 style={{ fontWeight: '700' }}>{newsData.heading}</h1>
                             </Card.Text>
                             
                             {/* News Content */}
                             <Card.Text style={{ color: "#333333", fontSize: "1.2em", lineHeight: "1.6" }}>
-                                The pandemic has made it hard for many students to continue their education, especially those preparing for JEE and NEET exams. However, numerous NGOs and initiatives have risen to help these students by providing them with study materials, mentorship, and financial support to keep their dreams alive.
-                                <br /><br />
-                                The drive to ensure that students can continue their education without facing a financial burden has helped thousands of students. Various NGOs are actively engaging with government and private sectors to provide resources, including free coaching classes, online study materials, and even helping with exam fees.
+                                {newsData.description}
                             </Card.Text>
                             
                             {/* Button Section */}
                             <div className="text-center">
-                            <Button
-    href="https://mumbaimirror.indiatimes.com/mumbai/other/keeping-their-jee-neet-dreams-alive/articleshow/78962390.cms"
-    target="_blank"
-    variant="warning"
-    style={{ fontWeight: 'bold', color: 'white' }}
->
-    Read Full Article
-</Button>
+                                <Button
+                                    href={newsData.articleUrl}
+                                    target="_blank"
+                                    variant="warning"
+                                    style={{ fontWeight: 'bold', color: 'white' }}
+                                >
+                                    {newsData.buttonText}
+                                </Button>
                             </div>
                         </Card.Body>
                     </Card>

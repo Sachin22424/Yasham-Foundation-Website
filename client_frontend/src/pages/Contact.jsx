@@ -84,13 +84,13 @@ const Contact = () => {
                                 <img src={mail} alt="email icon" className='icon' />
                                 <p className="mb-0 mx-2 txt">{contactInfo.mail}</p>
                             </a>
-                            <a href={`tel:${contactInfo.number}`} className="d-flex align-items-center text-decoration-none mt-3">
+                            <a href={`tel:${contactInfo.number}`} className="d-flex align-items-center text-decoration-none mt-3 mb-4">
                                 <img src={call} alt="phone icon" className='icon' />
                                 <p className="mb-0 mx-2 txt">{contactInfo.number}</p>
                             </a>
-                            <h3 className='my-3' style={{ fontWeight: '700', color: '#ffc107' }}>
+                            {/* <h3 className='my-3' style={{ fontWeight: '700', color: '#ffc107' }}>
                                 Social Media
-                            </h3>
+                            </h3> */}
                             <a href={contactInfo.instagram} target="_blank" className="mr-3 mx-2">
                                 <img src={insta} alt="instagram icon" className="footer-icon" />
                             </a>

@@ -13,7 +13,8 @@ const szRoute = require('./Routes/szRoute');
 const hhkRoute = require('./Routes/hhkRoute');
 const semRoute = require('./Routes/semRoute');
 const studentTestimonialRoute = require('./Routes/studentTestimonialRoute');
-const mentorTestimonialRoute = require('./Routes/mentorTestimonialRoute'); // Add this line
+const mentorTestimonialRoute = require('./Routes/mentorTestimonialRoute');
+const newsRoute = require('./Routes/newsRoute'); // Add this line
 const app = express();
 require('dotenv').config();
 
@@ -32,7 +33,8 @@ app.use('/api/sz', szRoute);
 app.use('/api/hhk', hhkRoute);
 app.use('/api/sem', semRoute);
 app.use('/api/student-testimonials', studentTestimonialRoute);
-app.use('/api/mentor-testimonials', mentorTestimonialRoute); // Add this line for mentor testimonials routes
+app.use('/api/mentor-testimonials', mentorTestimonialRoute);
+app.use('/api/news', newsRoute); // Add this line for news routes
 
 app.get('/', (req, res) => {
     res.send('Hello World');
