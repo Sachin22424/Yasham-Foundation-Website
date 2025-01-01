@@ -1,21 +1,43 @@
 const mongoose = require('mongoose');
-const SEM = require('./Models/semModel');
+const MentorTestimonial = require('./Models/mentorTestimonialModel');
 require('dotenv').config();
 
-const initialSEMData = [
+const initialMentorTestimonialData = [
     {
-        title: "Swachh English Mission",
-        description: "Yasham addresses limited speaking and writing skills by providing coaching through trained volunteers. This initiative benefits students in preparing for the highly competitive professional world, whether in mainstream high-profile professions or blue-collar jobs, which are the backbone of any country.",
-        images: [
-            {
-                url: "path/to/SEM1.jpg",
-                caption: "First slide label"
-            },
-            {
-                url: "path/to/SEM2.jpg",
-                caption: "Second slide label"
-            }
-        ]
+        name: "Jessica Doe",
+        position: "Manager, Company",
+        image: "path/to/jessica-image.jpg",
+        feedback: "Praesent volutpat diam lacus, fringilla orci vitae, hendrerit odio. Aenean venenatis, mauris et suscipit venenatis, augue lectus gravida dui, eget commodo mauris ex non risus."
+    },
+    {
+        name: "John Doe",
+        position: "Manager, Company",
+        image: "path/to/john-image.jpg",
+        feedback: "Praesent volutpat diam lacus, fringilla orci vitae, hendrerit odio. Aenean venenatis, mauris et suscipit venenatis, augue lectus gravida dui, eget commodo mauris ex non risus."
+    },
+    {
+        name: "David Doe",
+        position: "Manager, Company",
+        image: "path/to/david-image.jpg",
+        feedback: "Praesent volutpat diam lacus, fringilla orci vitae, hendrerit odio. Aenean venenatis, mauris et suscipit venenatis, augue lectus gravida dui, eget commodo mauris ex non risus."
+    },
+    {
+        name: "Lana Steiner",
+        position: "Manager, Company",
+        image: "path/to/lana-image.jpg",
+        feedback: "Praesent volutpat diam lacus, fringilla orci vitae, hendrerit odio. Aenean venenatis, mauris et suscipit venenatis, augue lectus gravida dui, eget commodo mauris ex non risus."
+    },
+    {
+        name: "Emily Donnavan",
+        position: "Manager, Company",
+        image: "path/to/emily-image.jpg",
+        feedback: "Praesent volutpat diam lacus, fringilla orci vitae, hendrerit odio. Aenean venenatis, mauris et suscipit venenatis, augue lectus gravida dui, eget commodo mauris ex non risus."
+    },
+    {
+        name: "Sasha Kindred",
+        position: "Manager, Company",
+        image: "path/to/sasha-image.jpg",
+        feedback: "Praesent volutpat diam lacus, fringilla orci vitae, hendrerit odio. Aenean venenatis, mauris et suscipit venenatis, augue lectus gravida dui, eget commodo mauris ex non risus."
     }
 ];
 
@@ -28,10 +50,10 @@ const seedDB = async () => {
             useUnifiedTopology: true
         });
 
-        await SEM.deleteMany({});
-        await SEM.insertMany(initialSEMData);
+        await MentorTestimonial.deleteMany({});
+        await MentorTestimonial.insertMany(initialMentorTestimonialData);
 
-        console.log('SEM data seeded successfully');
+        console.log('Mentor testimonials data seeded successfully');
         mongoose.connection.close();
     } catch (error) {
         console.error('Error seeding data:', error);
