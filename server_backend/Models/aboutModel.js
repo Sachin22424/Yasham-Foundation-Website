@@ -1,6 +1,14 @@
 const mongoose = require('mongoose');
 
 const aboutSchema = new mongoose.Schema({
+    title1: {
+        type: String,
+        required: true
+    },
+    title2: {
+        type: String,
+        required: true
+    },
     description1: {
         type: String,
         required: true
@@ -67,6 +75,20 @@ const aboutSchema = new mongoose.Schema({
             required: true
         },
         missionurl: {
+            type: String,
+            required: true
+        }
+    },
+    image: {
+        url: {
+            type: String,
+            required: true
+        },
+        width: {
+            type: String,
+            required: true
+        },
+        height: {
             type: String,
             required: true
         }
