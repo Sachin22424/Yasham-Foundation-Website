@@ -18,3 +18,17 @@ exports.createMember = async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 };
+
+exports.updateAllMembers = async (req, res) => {
+    try {
+        // Delete all existing members
+        await Team.deleteMany({});
+
+        // Insert new members
+        const updatedMembers = await Team.insertMany(req.body);
+
+        res.json(updatedMembers);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};

@@ -6,7 +6,8 @@ const contactRoute = require('./Routes/contactRoute');
 const aboutRoute = require('./Routes/aboutRoute');
 const userRoute = require('./Routes/userRoute');
 const feedbackRoute = require('./Routes/feedbackRoute');
-const teamRoute = require('./Routes/teamRoute'); // Add this line
+const teamRoute = require('./Routes/teamRoute');
+const ycmRoute = require('./Routes/ycmRoute'); // Add this line
 const app = express();
 require('dotenv').config();
 
@@ -18,7 +19,8 @@ app.use('/api/contact', contactRoute);
 app.use('/api/about', aboutRoute);
 app.use('/api/users', userRoute);
 app.use('/api/feedback', feedbackRoute);
-app.use('/api/team', teamRoute); // Add this line for team routes
+app.use('/api/team', teamRoute);
+app.use('/api/ycm', ycmRoute); // Add this line for YCM routes
 
 app.get('/', (req, res) => {
     res.send('Hello World');
