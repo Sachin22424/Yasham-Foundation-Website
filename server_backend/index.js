@@ -11,7 +11,7 @@ const ycmRoute = require('./Routes/ycmRoute');
 const shbRoute = require('./Routes/shbRoute');
 const szRoute = require('./Routes/szRoute');
 const hhkRoute = require('./Routes/hhkRoute');
-const semRoute = require('./Routes/semRoute'); // Add this line
+const semRoute = require('./Routes/semRoute'); // 
 const app = express();
 require('dotenv').config();
 
