@@ -16,7 +16,7 @@ const ContentFeedback = () => {
         const fetchFeedbacks = async () => {
             try {
                 const response = await axios.get('https://yasham-foundation-website.onrender.com/api/feedback');
-                setFeedbacks(response.data);
+                setFeedbacks(response.data.slice(0, 5)); // Show only the top 5 newest feedbacks
             } catch (error) {
                 console.error('Error fetching feedbacks:', error);
             }
@@ -58,6 +58,22 @@ const ContentFeedback = () => {
         } catch (error) {
             setError('Failed to update feedback title and message. Please try again later.');
             setSuccess('');
+        }
+    };
+
+    const handleExport = async () => {
+        try {
+            const response = await axios.get('https://yasham-foundation-website.onrender.com/api/feedback/export', {
+                responseType: 'blob'
+            });
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'feedbacks.xlsx');
+            document.body.appendChild(link);
+            link.click();
+        } catch (error) {
+            console.error('Error exporting feedbacks:', error);
         }
     };
 
@@ -106,28 +122,43 @@ const ContentFeedback = () => {
                 </form>
                 <h1 className="headcontent mb-5 text-center">Feedbacks</h1>
                 {feedbacks.length > 0 ? (
-                    <table className="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col">S.no.</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Subject</th>
-                                <th scope="col">Message</th>
-                                <th scope="col">Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {feedbacks.map((feedback, index) => (
-                                <tr key={feedback._id}>
-                                    <th scope="row">{index + 1}</th>
-                                    <td>{feedback.name || 'Anonymous'}</td>
-                                    <td>{feedback.subject}</td>
-                                    <td>{feedback.message}</td>
-                                    <td>{new Date(feedback.createdAt).toLocaleString()}</td>
+                    <div>
+                        <button
+                            onClick={handleExport}
+                            className="btn btn-secondary btn-sm mb-5"
+                            style={{
+                                backgroundColor: '#662d91',
+                                borderColor: '#662d91',
+                                width: '15%',
+                                padding: '10px',
+                                fontSize: '16px'
+                            }}
+                        >
+                            Excel Export
+                        </button>
+                        <table className="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">S.no.</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Subject</th>
+                                    <th scope="col">Message</th>
+                                    <th scope="col">Date</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {feedbacks.map((feedback, index) => (
+                                    <tr key={feedback._id}>
+                                        <th scope="row">{index + 1}</th>
+                                        <td>{feedback.name || 'Anonymous'}</td>
+                                        <td>{feedback.subject}</td>
+                                        <td>{feedback.message}</td>
+                                        <td>{new Date(feedback.createdAt).toLocaleString()}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 ) : (
                     <p>No feedbacks available.</p>
                 )}

@@ -61,6 +61,22 @@ const ContentMentorForm = () => {
         }
     };
 
+    const handleExport = async () => {
+        try {
+            const response = await axios.get('https://yasham-foundation-website.onrender.com/api/mentors/export', {
+                responseType: 'blob'
+            });
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'mentors.xlsx');
+            document.body.appendChild(link);
+            link.click();
+        } catch (error) {
+            console.error('Error exporting mentors:', error);
+        }
+    };
+
     return (
         <div className="contentfeedback-wrapper">
             <div className="containercontent mt-5">
@@ -104,34 +120,49 @@ const ContentMentorForm = () => {
                         Update
                     </button>
                 </form>
-                <h1 className="headcontent mb-5 text-center">Recent Mentor Applications</h1>
+                <h1 className="headcontent mb-5 text-center">Mentor Applications</h1>
                 {mentors.length > 0 ? (
-                    <table className="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col">S.no.</th>
-                                <th scope="col">Full Name</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Phone</th>
-                                <th scope="col">Location</th>
-                                <th scope="col">Subjects</th>
-                                <th scope="col">Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {mentors.map((mentor, index) => (
-                                <tr key={mentor._id}>
-                                    <th scope="row">{index + 1}</th>
-                                    <td>{mentor.fullName}</td>
-                                    <td>{mentor.email}</td>
-                                    <td>{mentor.phone}</td>
-                                    <td>{mentor.location}</td>
-                                    <td>{mentor.subjects}</td>
-                                    <td>{new Date(mentor.createdAt).toLocaleString()}</td>
+                    <div>
+                        <button
+                            onClick={handleExport}
+                            className="btn btn-secondary btn-sm mb-5"
+                            style={{
+                                backgroundColor: '#662d91',
+                                borderColor: '#662d91',
+                                width: '15%',
+                                padding: '10px',
+                                fontSize: '16px'
+                            }}
+                        >
+                            Excel Export
+                        </button>
+                        <table className="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">S.no.</th>
+                                    <th scope="col">Full Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Phone</th>
+                                    <th scope="col">Location</th>
+                                    <th scope="col">Subjects</th>
+                                    <th scope="col">Date</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {mentors.map((mentor, index) => (
+                                    <tr key={mentor._id}>
+                                        <th scope="row">{index + 1}</th>
+                                        <td>{mentor.fullName}</td>
+                                        <td>{mentor.email}</td>
+                                        <td>{mentor.phone}</td>
+                                        <td>{mentor.location}</td>
+                                        <td>{mentor.subjects}</td>
+                                        <td>{new Date(mentor.createdAt).toLocaleString()}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 ) : (
                     <p>No mentor applications available.</p>
                 )}

@@ -1,8 +1,6 @@
 const Mentor = require('../Models/mentorModel.js');
 const nodemailer = require('nodemailer');
-const xlsx = require('xlsx');
-const fs = require('fs');
-const path = require('path');
+const exceljs = require('exceljs');
 
 // Get all mentor applications
 const getMentors = async (req, res) => {
@@ -58,37 +56,79 @@ const createMentor = async (req, res) => {
             }
         });
 
-        // Path to the Excel file
-        const filePath = path.join(__dirname, '../mentors.xlsx');
+        res.status(201).json({ message: 'Mentor application submitted successfully!', mentor });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
 
-        // Check if the Excel file already exists
-        let workbook;
-        if (fs.existsSync(filePath)) {
-            workbook = xlsx.readFile(filePath);
-        } else {
-            workbook = xlsx.utils.book_new();
-            const worksheet = xlsx.utils.json_to_sheet([]);
-            xlsx.utils.book_append_sheet(workbook, worksheet, 'Mentors');
-        }
+// Export mentor applications to Excel
+const exportMentorsToExcel = async (req, res) => {
+    try {
+        const mentors = await Mentor.find();
 
-        // Add the new mentor application to the Excel sheet
-        const worksheet = workbook.Sheets['Mentors'];
-        const mentorDataArray = xlsx.utils.sheet_to_json(worksheet);
-        mentorDataArray.push({
-            ...mentorData,
-            Date: new Date().toLocaleString()
+        const workbook = new exceljs.Workbook();
+        const worksheet = workbook.addWorksheet('Mentors');
+
+        worksheet.columns = [
+            { header: 'Full Name', key: 'fullName', width: 30 },
+            { header: 'Email', key: 'email', width: 30 },
+            { header: 'Phone', key: 'phone', width: 20 },
+            { header: 'Age', key: 'age', width: 10 },
+            { header: 'Location', key: 'location', width: 20 },
+            { header: 'Occupation', key: 'occupation', width: 20 },
+            { header: 'Organization', key: 'organization', width: 20 },
+            { header: 'Education', key: 'education', width: 20 },
+            { header: 'Experience', key: 'experience', width: 30 },
+            { header: 'Subjects', key: 'subjects', width: 20 },
+            { header: 'Age Group', key: 'ageGroup', width: 20 },
+            { header: 'Certifications', key: 'certifications', width: 30 },
+            { header: 'Days Available', key: 'daysAvailable', width: 30 },
+            { header: 'Time Slots', key: 'timeSlots', width: 20 },
+            { header: 'Hours Per Week', key: 'hoursPerWeek', width: 20 },
+            { header: 'Motivation', key: 'motivation', width: 30 },
+            { header: 'Impact', key: 'impact', width: 30 },
+            { header: 'Other NGOs', key: 'otherNGOs', width: 30 },
+            { header: 'Laptop Access', key: 'laptopAccess', width: 20 },
+            { header: 'Preferences', key: 'preferences', width: 30 },
+            { header: 'Background Check', key: 'backgroundCheck', width: 20 },
+            { header: 'Acknowledgment', key: 'acknowledgment', width: 20 },
+            { header: 'Date', key: 'createdAt', width: 20 }
+        ];
+
+        mentors.forEach(mentor => {
+            worksheet.addRow({
+                fullName: mentor.fullName,
+                email: mentor.email,
+                phone: mentor.phone,
+                age: mentor.age,
+                location: mentor.location,
+                occupation: mentor.occupation,
+                organization: mentor.organization,
+                education: mentor.education,
+                experience: mentor.experience,
+                subjects: mentor.subjects,
+                ageGroup: mentor.ageGroup,
+                certifications: mentor.certifications,
+                daysAvailable: mentor.daysAvailable.join(', '),
+                timeSlots: mentor.timeSlots,
+                hoursPerWeek: mentor.hoursPerWeek,
+                motivation: mentor.motivation,
+                impact: mentor.impact,
+                otherNGOs: mentor.otherNGOs,
+                laptopAccess: mentor.laptopAccess,
+                preferences: mentor.preferences,
+                backgroundCheck: mentor.backgroundCheck,
+                acknowledgment: mentor.acknowledgment,
+                createdAt: mentor.createdAt.toLocaleString()
+            });
         });
 
-        // Convert JSON data to worksheet
-        const newWorksheet = xlsx.utils.json_to_sheet(mentorDataArray);
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        res.setHeader('Content-Disposition', 'attachment; filename=mentors.xlsx');
 
-        // Replace the old worksheet with the new one
-        workbook.Sheets['Mentors'] = newWorksheet;
-
-        // Write the updated workbook to the Excel file
-        xlsx.writeFile(workbook, filePath);
-
-        res.status(201).json({ message: 'Mentor application submitted successfully!', mentor });
+        await workbook.xlsx.write(res);
+        res.end();
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -97,5 +137,6 @@ const createMentor = async (req, res) => {
 module.exports = {
     createMentor,
     getMentors,
-    deleteAllMentors
+    deleteAllMentors,
+    exportMentorsToExcel
 };

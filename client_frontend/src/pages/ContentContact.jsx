@@ -178,7 +178,7 @@ const ContentContact = () => {
           />
         </div>
 
-        <h2>Heading 2</h2>
+        <h2>Heading</h2>
         <div className="form-group">
           <input
             type="text"

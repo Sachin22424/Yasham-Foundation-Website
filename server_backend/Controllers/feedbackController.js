@@ -1,8 +1,6 @@
 const Feedback = require('../Models/feedbackModel.js');
 const nodemailer = require('nodemailer');
-const xlsx = require('xlsx');
-const fs = require('fs');
-const path = require('path');
+const exceljs = require('exceljs');
 
 // Get all feedbacks
 const getFeedbacks = async (req, res) => {
@@ -64,40 +62,43 @@ const createFeedback = async (req, res) => {
             }
         });
 
-        // Path to the Excel file
-        const filePath = path.join(__dirname, '../feedbacks1.xlsx');
+        res.status(201).json({ message: 'Feedback submitted successfully!', feedback });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
 
-        // Check if the Excel file already exists
-        let workbook;
-        if (fs.existsSync(filePath)) {
-            workbook = xlsx.readFile(filePath);
-        } else {
-            workbook = xlsx.utils.book_new();
-            const worksheet = xlsx.utils.json_to_sheet([]);
-            xlsx.utils.book_append_sheet(workbook, worksheet, 'Feedbacks');
-        }
+// Export feedbacks to Excel
+const exportFeedbacksToExcel = async (req, res) => {
+    try {
+        const feedbacks = await Feedback.find();
 
-        // Add the new feedback to the Excel sheet
-        const worksheet = workbook.Sheets['Feedbacks'];
-        const feedbackData = xlsx.utils.sheet_to_json(worksheet);
-        feedbackData.push({
-            Name: name,
-            Email: email,
-            Subject: subject,
-            Message: message,
-            Date: new Date().toLocaleString()
+        const workbook = new exceljs.Workbook();
+        const worksheet = workbook.addWorksheet('Feedbacks');
+
+        worksheet.columns = [
+            { header: 'Name', key: 'name', width: 30 },
+            { header: 'Email', key: 'email', width: 30 },
+            { header: 'Subject', key: 'subject', width: 30 },
+            { header: 'Message', key: 'message', width: 50 },
+            { header: 'Date', key: 'createdAt', width: 20 }
+        ];
+
+        feedbacks.forEach(feedback => {
+            worksheet.addRow({
+                name: feedback.name,
+                email: feedback.email,
+                subject: feedback.subject,
+                message: feedback.message,
+                createdAt: feedback.createdAt.toLocaleString()
+            });
         });
 
-        // Convert JSON data to worksheet
-        const newWorksheet = xlsx.utils.json_to_sheet(feedbackData);
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        res.setHeader('Content-Disposition', 'attachment; filename=feedbacks.xlsx');
 
-        // Replace the old worksheet with the new one
-        workbook.Sheets['Feedbacks'] = newWorksheet;
-
-        // Write the updated workbook to the Excel file
-        xlsx.writeFile(workbook, filePath);
-
-        res.status(201).json({ message: 'Feedback submitted successfully!', feedback });
+        await workbook.xlsx.write(res);
+        res.end();
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -106,5 +107,6 @@ const createFeedback = async (req, res) => {
 module.exports = {
     createFeedback,
     getFeedbacks,
-    deleteAllFeedbacks
+    deleteAllFeedbacks,
+    exportFeedbacksToExcel
 };
