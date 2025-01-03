@@ -26,6 +26,7 @@ import SZ from './pages/SZ'; // Import SZ component
 import SHB from './pages/SHB'; // Import SHB component
 import SEM from './pages/SEM'; // Import SEM component
 import HHK from './pages/HHK'; // Import HHK component
+import MentorForm from './pages/MentorForm'; // Import MentorForm component
 
 function App() {
   const location = useLocation();
@@ -63,6 +64,7 @@ function App() {
         <Route path="/shb" element={<SHB />} /> {/* Add SHB route */}
         <Route path="/sem" element={<SEM />} /> {/* Add SEM route */}
         <Route path="/hhk" element={<HHK />} /> {/* Add HHK route */}
+        <Route path="/mentorform" element={<MentorForm />} /> {/* Add MentorForm route */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       {!isLoginPage && !isContentHome && !isContentContact && !isContentAbout && !isContentSupport && !isContentMission && !isContentFeedback && <Footer />}

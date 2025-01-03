@@ -1,8 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import '../assets/Navbar.css';
 import logo from '../assets/logo.png';
+import axios from 'axios';
 
 const Navbar = () => {
+    const [navInfo, setNavInfo] = useState({
+        heading: '',
+        dropdowns: []
+    });
+
+    useEffect(() => {
+        const fetchNavInfo = async () => {
+            try {
+                const response = await axios.get('https://yasham-foundation-website.onrender.com/api/nav');
+                setNavInfo(response.data);
+            } catch (error) {
+                console.error('Error fetching nav info:', error);
+            }
+        };
+
+        fetchNavInfo();
+    }, []);
+
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-custom">
             <div className="container-fluid">
@@ -17,62 +36,21 @@ const Navbar = () => {
                         <li className="nav-item">
                             <a className="nav-link active" aria-current="page" href="/">Home</a>
                         </li>
-                        <li className="nav-item dropdown custom-dropdown">
-                            <a className="nav-link" href="#" role="button">
-                                Our Story
-                            </a>
-                            <ul className="dropdown-menu full-width-dropdown">
-                                <li><a className="dropdown-item" href="/about">About Us</a></li>
-                                <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="/team">Our Team</a></li>
-                                <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="/mission">Our Mission</a></li>
-                                <li><hr className="dropdown-divider" /></li>
-                                
-                            </ul>
-                        </li>
-                        <li className="nav-item dropdown custom-dropdown">
-                            <a className="nav-link" href="#" role="button">
-                                Our Work
-                            </a>
-                            <ul className="dropdown-menu full-width-dropdown">
-                                <li><a className="dropdown-item" href="/ycm">Yasham Centre Model</a></li>
-                                <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="/shb">Saathi Haath Badhana</a></li>
-                                <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="/sz">Sunn Zara</a></li>
-                                <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="/hhk">Hum Honge Kaamyab</a></li>
-                                <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="/sem">Swacch English Mission</a></li>
-                            </ul>
-                        </li>
-                        <li className="nav-item dropdown custom-dropdown">
-                            <a className="nav-link" href="#" role="button">
-                                Our Impact
-                            </a>
-                            <ul className="dropdown-menu full-width-dropdown">
-                                <li><a className="dropdown-item" href="/studentTestimonial">Student Testimonials</a></li>
-                                <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="/mentorTestimonial">Mentor Testimonials</a></li>
-                                <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="/news">Yasham in News</a></li>
-                            </ul>
-                        </li>
-                        <li className="nav-item dropdown custom-dropdown">
-                            <a className="nav-link" href="#" role="button">
-                                Get Involved
-                            </a>
-                            <ul className="dropdown-menu full-width-dropdown">
-                                <li><a className="dropdown-item" href="#">Sponsor</a></li>
-                                <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="/support">Support Us</a></li>
-                                <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="#">Teach</a></li>
-                                <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="#">Mentor</a></li>
-                            </ul>
-                        </li>
+                        {navInfo.dropdowns.map((dropdown, index) => (
+                            <li key={index} className="nav-item dropdown custom-dropdown">
+                                <a className="nav-link" href="#" role="button">
+                                    {dropdown.title}
+                                </a>
+                                <ul className="dropdown-menu full-width-dropdown">
+                                    {dropdown.links.map((link, linkIndex) => (
+                                        <React.Fragment key={linkIndex}>
+                                            <li><a className="dropdown-item" href={link.url}>{link.name}</a></li>
+                                            {linkIndex < dropdown.links.length - 1 && <li><hr className="dropdown-divider" /></li>}
+                                        </React.Fragment>
+                                    ))}
+                                </ul>
+                            </li>
+                        ))}
                         <li className="nav-item">
                             <a className="nav-link active" aria-current="page" href="/contact">Contact Us</a>
                         </li>

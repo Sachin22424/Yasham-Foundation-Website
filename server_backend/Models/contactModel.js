@@ -21,11 +21,19 @@ const contactSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    feedbacktitle:{
+    feedbacktitle: {
         type: String,
         required: true
     },
-    feedbackmessage:{
+    feedbackmessage: {
+        type: String,
+        required: true
+    },
+    getInTouchHeading: {
+        type: String,
+        required: true
+    },
+    followUsHeading: {
         type: String,
         required: true
     }

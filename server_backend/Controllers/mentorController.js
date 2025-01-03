@@ -1,45 +1,39 @@
-const Feedback = require('../Models/feedbackModel.js');
+const Mentor = require('../Models/mentorModel.js');
 const nodemailer = require('nodemailer');
 const xlsx = require('xlsx');
 const fs = require('fs');
 const path = require('path');
 
-// Get all feedbacks
-const getFeedbacks = async (req, res) => {
+// Get all mentor applications
+const getMentors = async (req, res) => {
     try {
-        const feedbacks = await Feedback.find();
-        res.json(feedbacks);
+        const mentors = await Mentor.find();
+        res.json(mentors);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 };
 
-// Delete all feedbacks
-const deleteAllFeedbacks = async (req, res) => {
+// Delete all mentor applications
+const deleteAllMentors = async (req, res) => {
     try {
-        await Feedback.deleteMany();
-        res.status(200).json({ message: 'All feedbacks deleted successfully!' });
+        await Mentor.deleteMany();
+        res.status(200).json({ message: 'All mentor applications deleted successfully!' });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 };
 
-// Create new feedback
-const createFeedback = async (req, res) => {
+// Create new mentor application
+const createMentor = async (req, res) => {
     try {
-        const { name, email, subject, message } = req.body;
+        const mentorData = req.body;
 
-        // Create and save the new feedback
-        const feedback = new Feedback({
-            name,
-            email,
-            subject,
-            message
-        });
+        // Create and save the new mentor application
+        const mentor = new Mentor(mentorData);
+        await mentor.save();
 
-        await feedback.save();
-
-        // Send an email with the feedback details
+        // Send an email with the mentor application details
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -51,8 +45,8 @@ const createFeedback = async (req, res) => {
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: process.env.EMAIL_USER, // Send to yourself
-            subject: 'New Feedback Submitted',
-            text: `You have received new feedback:\n\nName: ${name}\nEmail: ${email}\nSubject: ${subject}\nMessage: ${message}`
+            subject: 'New Mentor Application Submitted',
+            text: `You have received a new mentor application:\n\n${JSON.stringify(mentorData, null, 2)}`
         };
 
         transporter.sendMail(mailOptions, (error, info) => {
@@ -65,7 +59,7 @@ const createFeedback = async (req, res) => {
         });
 
         // Path to the Excel file
-        const filePath = path.join(__dirname, '../feedbacks2.xlsx');
+        const filePath = path.join(__dirname, '../mentors.xlsx');
 
         // Check if the Excel file already exists
         let workbook;
@@ -74,37 +68,34 @@ const createFeedback = async (req, res) => {
         } else {
             workbook = xlsx.utils.book_new();
             const worksheet = xlsx.utils.json_to_sheet([]);
-            xlsx.utils.book_append_sheet(workbook, worksheet, 'Feedbacks');
+            xlsx.utils.book_append_sheet(workbook, worksheet, 'Mentors');
         }
 
-        // Add the new feedback to the Excel sheet
-        const worksheet = workbook.Sheets['Feedbacks'];
-        const feedbackData = xlsx.utils.sheet_to_json(worksheet);
-        feedbackData.push({
-            Name: name,
-            Email: email,
-            Subject: subject,
-            Message: message,
+        // Add the new mentor application to the Excel sheet
+        const worksheet = workbook.Sheets['Mentors'];
+        const mentorDataArray = xlsx.utils.sheet_to_json(worksheet);
+        mentorDataArray.push({
+            ...mentorData,
             Date: new Date().toLocaleString()
         });
 
         // Convert JSON data to worksheet
-        const newWorksheet = xlsx.utils.json_to_sheet(feedbackData);
+        const newWorksheet = xlsx.utils.json_to_sheet(mentorDataArray);
 
         // Replace the old worksheet with the new one
-        workbook.Sheets['Feedbacks'] = newWorksheet;
+        workbook.Sheets['Mentors'] = newWorksheet;
 
         // Write the updated workbook to the Excel file
         xlsx.writeFile(workbook, filePath);
 
-        res.status(201).json({ message: 'Feedback submitted successfully!', feedback });
+        res.status(201).json({ message: 'Mentor application submitted successfully!', mentor });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 };
 
 module.exports = {
-    createFeedback,
-    getFeedbacks,
-    deleteAllFeedbacks
+    createMentor,
+    getMentors,
+    deleteAllMentors
 };

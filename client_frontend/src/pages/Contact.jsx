@@ -16,10 +16,12 @@ const Contact = () => {
         facebook: '',
         instagram: '',
         feedbacktitle: '',
-        feedbackmessage: ''
+        feedbackmessage: '',
+        getInTouchHeading: '',
+        followUsHeading: ''
     });
     const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+    const [emailOrPhone, setEmailOrPhone] = useState('');
     const [subject, setSubject] = useState('');
     const [message, setMessage] = useState('');
     const [showThankYou, setShowThankYou] = useState(false);
@@ -29,7 +31,6 @@ const Contact = () => {
         const fetchContactInfo = async () => {
             try {
                 const deployedUrl = 'https://yasham-foundation-website.onrender.com/api/contact';
-                const localUrl = 'http://localhost:5000/api/contact';
                 const response = await axios.get(deployedUrl);
                 setContactInfo(response.data);
             } catch (error) {
@@ -46,23 +47,36 @@ const Contact = () => {
         fetchContactInfo();
     }, []);
 
+    const validateEmailOrPhone = (input) => {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phonePattern = /^\d{10}$/;
+        return emailPattern.test(input) || phonePattern.test(input);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent form submission
+
+        // Validate email or phone
+        if (!validateEmailOrPhone(emailOrPhone)) {
+            setError('Please enter a valid email address or a 10-digit phone number.');
+            return;
+        }
 
         try {
             const deployedFeedbackUrl = 'https://yasham-foundation-website.onrender.com/api/feedback';
             const response = await axios.post(deployedFeedbackUrl, {
                 name,
-                email,
+                emailOrPhone,
                 subject,
                 message
             });
             if (response.status === 201) {
                 setShowThankYou(true);
                 setName('');
-                setEmail('');
+                setEmailOrPhone('');
                 setSubject('');
                 setMessage('');
+                setError(''); // Clear any previous error
             }
         } catch (error) {
             setError('Failed to submit feedback. Please try again later.');
@@ -78,19 +92,19 @@ const Contact = () => {
                     <Card className="contact-info-card p-4" style={{ backgroundColor: '#fafafa', border: 'none' }}>
                         <Card.Body>
                             <h1 style={{ fontWeight: '700' }}>
-                                Contact Information
+                                {contactInfo.getInTouchHeading}
                             </h1>
                             <a href={`mailto:${contactInfo.mail}`} className="d-flex align-items-center text-decoration-none mt-4">
                                 <img src={mail} alt="email icon" className='icon' />
                                 <p className="mb-0 mx-2 txt">{contactInfo.mail}</p>
                             </a>
-                            <a href={`tel:${contactInfo.number}`} className="d-flex align-items-center text-decoration-none mt-3 mb-4">
+                            <a href={`tel:${contactInfo.number}`} className="d-flex align-items-center text-decoration-none mt-3">
                                 <img src={call} alt="phone icon" className='icon' />
                                 <p className="mb-0 mx-2 txt">{contactInfo.number}</p>
                             </a>
-                            {/* <h3 className='my-3' style={{ fontWeight: '700', color: '#ffc107' }}>
-                                Social Media
-                            </h3> */}
+                            <h3 className='my-3' style={{ fontWeight: '700', color: '#ffc107' }}>
+                                {contactInfo.followUsHeading}
+                            </h3>
                             <a href={contactInfo.instagram} target="_blank" className="mr-3 mx-2">
                                 <img src={insta} alt="instagram icon" className="footer-icon" />
                             </a>
@@ -116,13 +130,13 @@ const Contact = () => {
                                 onChange={(e) => setName(e.target.value)}
                             />
                         </Form.Group>
-                        <Form.Group controlId="formEmail" className="mt-3">
-                            <Form.Label>Email</Form.Label>
+                        <Form.Group controlId="formEmailOrPhone" className="mt-3">
+                            <Form.Label>Email or Phone</Form.Label>
                             <Form.Control
-                                type="email"
-                                placeholder="Enter your email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                type="text"
+                                placeholder="Enter your email or phone number"
+                                value={emailOrPhone}
+                                onChange={(e) => setEmailOrPhone(e.target.value)}
                             />
                         </Form.Group>
                         <Form.Group controlId="formSubject" className="mt-3">
