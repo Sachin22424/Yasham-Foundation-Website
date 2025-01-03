@@ -65,3 +65,12 @@ exports.getAllUsers = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 };
+
+exports.deleteAllUsers = async (req, res) => {
+    try {
+        await User.deleteMany();  // Delete all users from the database
+        res.json({ message: 'All users deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+};
