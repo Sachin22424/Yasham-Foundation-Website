@@ -36,6 +36,14 @@ const contactSchema = new mongoose.Schema({
     followUsHeading: {
         type: String,
         required: true
+    },
+    mentorFormModalTitle: {
+        type: String,
+        required: true
+    },
+    mentorFormModalBody: {
+        type: String,
+        required: true
     }
 });
 

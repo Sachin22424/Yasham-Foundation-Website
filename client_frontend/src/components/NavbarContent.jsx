@@ -49,39 +49,36 @@ const NavbarContent = () => {
                             </ul>
                         </li>
                         <li className="nav-item dropdown custom-dropdown">
-                            <a className="nav-link" href="#" role="button">Our Work</a>
+                            <a className="nav-link" href="#" role="button">Work</a>
                             <ul className="dropdown-menu full-width-dropdown">
-                                <li><a className="dropdown-item" href="/contentycm">Yasham Centre Model</a></li>
+                                <li><a className="dropdown-item" href="/contentycm">Work Page 1</a></li>
                                 <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="#">Saathi Haath Badhana</a></li>
+                                <li><a className="dropdown-item" href="/contentShb">Work Page 2</a></li>
                                 <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="#">Sunn Zara</a></li>
+                                <li><a className="dropdown-item" href="/contentSz">Work Page 3</a></li>
                                 <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="#">Hum Honge Kaamyab</a></li>
+                                <li><a className="dropdown-item" href="/contentHhk">Work Page 4</a></li>
                                 <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="#">Swacch English Mission</a></li>
+                                <li><a className="dropdown-item" href="/contentSem">Work Page 5</a></li>
                             </ul>
                         </li>
                         <li className="nav-item dropdown custom-dropdown">
-                            <a className="nav-link" href="#" role="button">Our Impact</a>
+                            <a className="nav-link" href="#" role="button">Impact</a>
                             <ul className="dropdown-menu full-width-dropdown">
-                                <li><a className="dropdown-item" href="#">Student Testimonials</a></li>
+                                <li><a className="dropdown-item" href="/contentstudenttestimonial">Student Testimonials</a></li>
                                 <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="#">Mentor Testimonials</a></li>
+                                <li><a className="dropdown-item" href="/contentmentortestimonial">Mentor Testimonials</a></li>
                                 <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="/news">Yasham in News</a></li>
+                                <li><a className="dropdown-item" href="/contentnews">News</a></li>
                             </ul>
                         </li>
                         <li className="nav-item dropdown custom-dropdown">
-                            <a className="nav-link" href="#" role="button">Get Involved</a>
+                            <a className="nav-link" href="#" role="button">Involved</a>
                             <ul className="dropdown-menu full-width-dropdown">
                                 <li><a className="dropdown-item" href="#">Sponsor</a></li>
                                 <li><hr className="dropdown-divider" /></li>
                                 <li><a className="dropdown-item" href="/contentsupport">Support Us</a></li>
-                                <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="#">Teach</a></li>
-                                <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="#">Mentor</a></li>
+                               
                             </ul>
                         </li>
                         <li className="nav-item">
@@ -89,6 +86,9 @@ const NavbarContent = () => {
                         </li>
                         <li className="nav-item">
                             <a className="nav-link active" aria-current="page" href="/contentfeedback">Feedback</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link active" aria-current="page" href="/contentmentorform">Mentor/Teach Feedback</a>
                         </li>
                     </ul>
                 </div>

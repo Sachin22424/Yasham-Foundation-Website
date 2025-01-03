@@ -10,7 +10,7 @@ const getNews = async (req, res) => {
     }
 };
 
-// Create or update news
+// Update news by ID
 const updateNews = async (req, res) => {
     try {
         const { id } = req.params;

@@ -171,7 +171,7 @@ const ContentSupport = () => {
             {error && <div className="alert alert-danger">{error}</div>}
             <form onSubmit={handleSubmit}>
 
-            <h2>Support Title</h2>
+            <h2>Support Page Title</h2>
             <div className="form-group">
     <input
         type="text"
@@ -183,7 +183,7 @@ const ContentSupport = () => {
     />
 </div>
 
-                <h2>Donate Title</h2>
+                <h3>Donate Title</h3>
                 <div className="form-group">
                     <input
                         type="text"
@@ -195,7 +195,7 @@ const ContentSupport = () => {
                     />
                 </div>
 
-                <h2>Donate Point 1</h2>
+                <h4>Donate Point 1</h4>
                 <div className="form-group">
                     <input
                         type="text"
@@ -207,7 +207,7 @@ const ContentSupport = () => {
                     />
                 </div>
 
-                <h2>Donate Point 2</h2>
+                <h4>Donate Point 2</h4>
                 <div className="form-group">
                     <input
                         type="text"
@@ -219,7 +219,7 @@ const ContentSupport = () => {
                     />
                 </div>
 
-                <h2>Donate Point 3</h2>
+                <h4>Donate Point 3</h4>
                 <div className="form-group">
                     <input
                         type="text"
@@ -231,7 +231,7 @@ const ContentSupport = () => {
                     />
                 </div>
 
-                <h2>Volunteer Title</h2>
+                <h3>Volunteer Title</h3>
                 <div className="form-group">
                     <input
                         type="text"
@@ -243,7 +243,7 @@ const ContentSupport = () => {
                     />
                 </div>
 
-                <h2>Volunteer Point 1</h2>
+                <h4>Volunteer Point 1</h4>
                 <div className="form-group">
                     <input
                         type="text"
@@ -255,7 +255,7 @@ const ContentSupport = () => {
                     />
                 </div>
 
-                <h2>Volunteer Point 2</h2>
+                <h4>Volunteer Point 2</h4>
                 <div className="form-group">
                     <input
                         type="text"
@@ -267,7 +267,7 @@ const ContentSupport = () => {
                     />
                 </div>
 
-                <h2>Volunteer Point 3</h2>
+                <h4>Volunteer Point 3</h4>
                 <div className="form-group">
                     <input
                         type="text"

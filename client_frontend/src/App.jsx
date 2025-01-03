@@ -13,6 +13,13 @@ import ContentFeedback from "./pages/ContentFeedback"; // Import ContentFeedback
 import ContentTeam from "./pages/ContentTeam"; // Import ContentTeam component
 import ContentYcm from "./pages/contentYcm"; // Import ContentYcm component
 import ContentShb from "./pages/contentShb"; // Import ContentShb component
+import ContentSz from "./pages/contentSz"; // Import ContentSz component
+import ContentHhk from "./pages/contentHhk"; // Import ContentHhk component
+import ContentSem from "./pages/contentSem"; // Import ContentSem component
+import ContentStudentTestimonial from "./pages/ContentStudentTestimonial"; // Import ContentStudentTestimonial component
+import ContentMentorTestimonial from "./pages/ContentMentorTestimonial"; // Import ContentMentorTestimonial component
+import ContentNews from "./pages/ContentNews"; // Import ContentNews component
+import ContentMentorForm from "./pages/ContentMentorForm"; // Import ContentMentorForm component
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Navbar from "./components/Navbar";
@@ -34,20 +41,12 @@ import MentorForm from './pages/MentorForm'; // Import MentorForm component
 function App() {
   const location = useLocation();
   const isLoginPage = location.pathname === "/login";
-  const isContentHome = location.pathname === "/contenthome";
-  const isContentContact = location.pathname === "/contentcontact";
-  const isContentAbout = location.pathname === "/contentabout";
-  const isContentSupport = location.pathname === "/contentsupport";
-  const isContentMission = location.pathname === "/contentmission";
-  const isContentFeedback = location.pathname === "/contentfeedback";
-  const isContentTeam = location.pathname === "/contentteam";
-  const isContentYcm = location.pathname === "/contentycm";
-  const isContentShb = location.pathname === "/contentshb";
+  const isContentPage = location.pathname.startsWith("/content");
 
   return (
     <>
-      {!isLoginPage && !isContentHome && !isContentContact && !isContentAbout && !isContentSupport && !isContentMission && !isContentFeedback && !isContentTeam && !isContentYcm && !isContentShb && <Navbar />}
-      {(isContentHome || isContentContact || isContentAbout || isContentSupport || isContentMission || isContentFeedback || isContentTeam || isContentYcm || isContentShb) && <NavbarContent />}
+      {!isLoginPage && !isContentPage && <Navbar />}
+      {isContentPage && <NavbarContent />}
       <Routes>
         <Route path="/" element={<Chat />} />
         <Route path="/about" element={<About />} /> {/* Add About route */}
@@ -65,6 +64,13 @@ function App() {
         <Route path="/contentteam" element={<ContentTeam />} /> {/* Add ContentTeam route */}
         <Route path="/contentycm" element={<ContentYcm />} /> {/* Add ContentYcm route */}
         <Route path="/contentshb" element={<ContentShb />} /> {/* Add ContentShb route */}
+        <Route path="/contentsz" element={<ContentSz />} /> {/* Add ContentSz route */}
+        <Route path="/contenthhk" element={<ContentHhk />} /> {/* Add ContentHhk route */}
+        <Route path="/contentsem" element={<ContentSem />} /> {/* Add ContentSem route */}
+        <Route path="/contentstudenttestimonial" element={<ContentStudentTestimonial />} /> {/* Add ContentStudentTestimonial route */}
+        <Route path="/contentmentortestimonial" element={<ContentMentorTestimonial />} /> {/* Add ContentMentorTestimonial route */}
+        <Route path="/contentnews" element={<ContentNews />} /> {/* Add ContentNews route */}
+        <Route path="/contentmentorform" element={<ContentMentorForm />} /> {/* Add ContentMentorForm route */}
         <Route path="/team" element={<Team />} /> {/* Add Team route */}
         <Route path="/studentTestimonial" element={<StudentTestimonial />} /> {/* Add StudentTestimonial route */}
         <Route path="/mentorTestimonial" element={<MentorTestimonial />} /> {/* Add MentorTestimonial route */}
@@ -76,7 +82,7 @@ function App() {
         <Route path="/mentorform" element={<MentorForm />} /> {/* Add MentorForm route */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-      {!isLoginPage && !isContentHome && !isContentContact && !isContentAbout && !isContentSupport && !isContentMission && !isContentFeedback && !isContentTeam && !isContentYcm && !isContentShb && <Footer />}
+      {!isLoginPage && !isContentPage && <Footer />}
     </>
   );
 }

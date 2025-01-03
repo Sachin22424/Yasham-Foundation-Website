@@ -10,14 +10,15 @@ const ContentContact = () => {
     number: '',
     linkedin: '',
     facebook: '',
-    instagram: ''
+    instagram: '',
+    getInTouchHeading: '',
+    followUsHeading: ''
   });
 
   const [id, setId] = useState(''); // ID for updating
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(''); // Error state for validation
   const [showModal, setShowModal] = useState(false); // State for modal visibility
-  const [feedbacks, setFeedbacks] = useState([]); // State to store feedbacks
 
   const fetchContactContent = async () => {
     try {
@@ -46,12 +47,9 @@ const ContentContact = () => {
     }
   };
 
-  
-
   // Fetch existing data
   useEffect(() => {
     fetchContactContent();
-   
   }, []);
 
   useEffect(() => {
@@ -80,7 +78,9 @@ const ContentContact = () => {
       !formData.number ||
       !formData.linkedin ||
       !formData.facebook ||
-      !formData.instagram
+      !formData.instagram ||
+      !formData.getInTouchHeading ||
+      !formData.followUsHeading
     ) {
       setError('All fields are required.');
       setShowModal(true); // Show the modal
@@ -163,6 +163,30 @@ const ContentContact = () => {
             value={formData.instagram}
             onChange={handleChange}
             placeholder="Instagram URL"
+          />
+        </div>
+
+        <h2>Heading 1</h2>
+        <div className="form-group">
+          <input
+            type="text"
+            className="form-control"
+            name="getInTouchHeading"
+            value={formData.getInTouchHeading}
+            onChange={handleChange}
+            placeholder="Get In Touch Heading"
+          />
+        </div>
+
+        <h2>Heading 2</h2>
+        <div className="form-group">
+          <input
+            type="text"
+            className="form-control"
+            name="followUsHeading"
+            value={formData.followUsHeading}
+            onChange={handleChange}
+            placeholder="Follow Us Heading"
           />
         </div>
 

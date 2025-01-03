@@ -24,7 +24,7 @@ const MentorTestimonials = () => {
     return (
         <div className="team-section">
             <div className="team-section" style={{ textAlign: 'center' }}>
-                <h1 style={{ fontWeight: '700' }}>Mentor Testimonials</h1>
+                <h1 style={{ fontWeight: '700' }}>Mentor Testimonials </h1>
             </div>
             <Card className="p-3 mb-4" style={{ border: 'none', backgroundColor: '#f9f9f9' }}>
                 <div className="mt-4 row justify-content-center text-center testimonials-container">

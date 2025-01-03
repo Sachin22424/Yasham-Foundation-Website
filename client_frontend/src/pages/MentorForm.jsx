@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Modal } from 'react-bootstrap';
 import axios from 'axios';
 import '../assets/Contact.css'; // Custom styling for Contact component
@@ -30,6 +30,23 @@ const MentorForm = () => {
     });
     const [showThankYou, setShowThankYou] = useState(false);
     const [error, setError] = useState('');
+    const [modalTitle, setModalTitle] = useState('');
+    const [modalBody, setModalBody] = useState('');
+
+    useEffect(() => {
+        const fetchContactInfo = async () => {
+            try {
+                const response = await axios.get('https://yasham-foundation-website.onrender.com/api/contact');
+                const contactInfo = response.data;
+                setModalTitle(contactInfo.mentorFormModalTitle);
+                setModalBody(contactInfo.mentorFormModalBody);
+            } catch (error) {
+                console.error('Error fetching contact info:', error);
+            }
+        };
+
+        fetchContactInfo();
+    }, []);
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -388,9 +405,9 @@ const MentorForm = () => {
 
             <Modal show={showThankYou} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Thank You</Modal.Title>
+                    <Modal.Title>{modalTitle}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Thank you for your interest in mentoring. Our team will review your application and get back to you shortly.</Modal.Body>
+                <Modal.Body>{modalBody}</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
