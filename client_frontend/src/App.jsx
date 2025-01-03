@@ -1,5 +1,7 @@
 import React from 'react';
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import PrivateRoute from "./components/PrivateRoute";
 import Chat from "./pages/Chat";
 import About from "./pages/About"; // Import About component
 import Contact from "./pages/Contact"; // Import Contact component
@@ -44,7 +46,7 @@ function App() {
   const isContentPage = location.pathname.startsWith("/content");
 
   return (
-    <>
+    <AuthProvider>
       {!isLoginPage && !isContentPage && <Navbar />}
       {isContentPage && <NavbarContent />}
       <Routes>
@@ -55,22 +57,22 @@ function App() {
         <Route path="/support" element={<Support />} /> {/* Add Support route */}
         <Route path="/news" element={<News />} /> {/* Add News route */}
         <Route path="/login" element={<Login />} /> {/* Add Login route */}
-        <Route path="/contenthome" element={<ContentHome />} /> {/* Add ContentHome route */}
-        <Route path="/contentcontact" element={<ContentContact />} /> {/* Add ContentContact route */}
-        <Route path="/contentabout" element={<ContentAbout />} /> {/* Add ContentAbout route */}
-        <Route path="/contentsupport" element={<ContentSupport />} /> {/* Add ContentSupport route */}
-        <Route path="/contentmission" element={<ContentMission />} /> {/* Add ContentMission route */}
-        <Route path="/contentfeedback" element={<ContentFeedback />} /> {/* Add ContentFeedback route */}
-        <Route path="/contentteam" element={<ContentTeam />} /> {/* Add ContentTeam route */}
-        <Route path="/contentycm" element={<ContentYcm />} /> {/* Add ContentYcm route */}
-        <Route path="/contentshb" element={<ContentShb />} /> {/* Add ContentShb route */}
-        <Route path="/contentsz" element={<ContentSz />} /> {/* Add ContentSz route */}
-        <Route path="/contenthhk" element={<ContentHhk />} /> {/* Add ContentHhk route */}
-        <Route path="/contentsem" element={<ContentSem />} /> {/* Add ContentSem route */}
-        <Route path="/contentstudenttestimonial" element={<ContentStudentTestimonial />} /> {/* Add ContentStudentTestimonial route */}
-        <Route path="/contentmentortestimonial" element={<ContentMentorTestimonial />} /> {/* Add ContentMentorTestimonial route */}
-        <Route path="/contentnews" element={<ContentNews />} /> {/* Add ContentNews route */}
-        <Route path="/contentmentorform" element={<ContentMentorForm />} /> {/* Add ContentMentorForm route */}
+        <Route path="/contenthome" element={<PrivateRoute><ContentHome /></PrivateRoute>} /> {/* Add ContentHome route */}
+        <Route path="/contentcontact" element={<PrivateRoute><ContentContact /></PrivateRoute>} /> {/* Add ContentContact route */}
+        <Route path="/contentabout" element={<PrivateRoute><ContentAbout /></PrivateRoute>} /> {/* Add ContentAbout route */}
+        <Route path="/contentsupport" element={<PrivateRoute><ContentSupport /></PrivateRoute>} /> {/* Add ContentSupport route */}
+        <Route path="/contentmission" element={<PrivateRoute><ContentMission /></PrivateRoute>} /> {/* Add ContentMission route */}
+        <Route path="/contentfeedback" element={<PrivateRoute><ContentFeedback /></PrivateRoute>} /> {/* Add ContentFeedback route */}
+        <Route path="/contentteam" element={<PrivateRoute><ContentTeam /></PrivateRoute>} /> {/* Add ContentTeam route */}
+        <Route path="/contentycm" element={<PrivateRoute><ContentYcm /></PrivateRoute>} /> {/* Add ContentYcm route */}
+        <Route path="/contentshb" element={<PrivateRoute><ContentShb /></PrivateRoute>} /> {/* Add ContentShb route */}
+        <Route path="/contentsz" element={<PrivateRoute><ContentSz /></PrivateRoute>} /> {/* Add ContentSz route */}
+        <Route path="/contenthhk" element={<PrivateRoute><ContentHhk /></PrivateRoute>} /> {/* Add ContentHhk route */}
+        <Route path="/contentsem" element={<PrivateRoute><ContentSem /></PrivateRoute>} /> {/* Add ContentSem route */}
+        <Route path="/contentstudenttestimonial" element={<PrivateRoute><ContentStudentTestimonial /></PrivateRoute>} /> {/* Add ContentStudentTestimonial route */}
+        <Route path="/contentmentortestimonial" element={<PrivateRoute><ContentMentorTestimonial /></PrivateRoute>} /> {/* Add ContentMentorTestimonial route */}
+        <Route path="/contentnews" element={<PrivateRoute><ContentNews /></PrivateRoute>} /> {/* Add ContentNews route */}
+        <Route path="/contentmentorform" element={<PrivateRoute><ContentMentorForm /></PrivateRoute>} /> {/* Add ContentMentorForm route */}
         <Route path="/team" element={<Team />} /> {/* Add Team route */}
         <Route path="/studentTestimonial" element={<StudentTestimonial />} /> {/* Add StudentTestimonial route */}
         <Route path="/mentorTestimonial" element={<MentorTestimonial />} /> {/* Add MentorTestimonial route */}
@@ -83,7 +85,7 @@ function App() {
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       {!isLoginPage && !isContentPage && <Footer />}
-    </>
+    </AuthProvider>
   );
 }
 

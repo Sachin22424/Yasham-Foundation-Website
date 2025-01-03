@@ -39,10 +39,9 @@ exports.authUser = async (req, res) => {
             token: generateToken(user._id)
         });
     } else {
-        res.status(401).json({ message: 'Invalid email or password...' });
+        res.status(401).json({ message: 'Invalid email or password' });
     }
 };
-
 
 exports.updatePassword = async (req, res) => {
     const { email, newPassword } = req.body;

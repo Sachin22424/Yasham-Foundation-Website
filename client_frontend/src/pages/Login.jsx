@@ -29,17 +29,6 @@ const Login = () => {
             return;
         }
 
-        // Hardcoded credentials check
-        if (email === "yashamfoundation@gmail.com" && password === "yashamcontent@8170") {
-            setError("");
-            setSuccess("Login successful!");
-            login("hardcoded-token"); // Update authentication state with a dummy token
-            setTimeout(() => {
-                navigate("/contenthome");
-            }, 2000);
-            return;
-        }
-
         try {
             const response = await fetch('/api/users/login', {
                 method: 'POST',
