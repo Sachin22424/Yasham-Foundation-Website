@@ -11,7 +11,7 @@ import ContentSupport from "./pages/ContentSupport"; // Import ContentSupport co
 import ContentMission from "./pages/ContentMission"; // Import ContentMission component
 import ContentFeedback from "./pages/ContentFeedback"; // Import ContentFeedback component
 import ContentTeam from "./pages/ContentTeam"; // Import ContentTeam component
-import ContentYcm from "./pages/ContentYcm"; // Import ContentYcm component
+import ContentYcm from "./pages/contentYcm"; // Import ContentYcm component
 import ContentShb from "./pages/contentShb"; // Import ContentShb component
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
