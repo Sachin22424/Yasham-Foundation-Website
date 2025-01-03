@@ -5,8 +5,8 @@ import "../assets/Login.css";
 import cross from "../assets/cross.png";
 
 const Login = () => {
-    const [email, setEmail] = useState("yashamfoundation@gmail.com");
-    const [password, setPassword] = useState("yashamcontent@8170");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
     const navigate = useNavigate();
