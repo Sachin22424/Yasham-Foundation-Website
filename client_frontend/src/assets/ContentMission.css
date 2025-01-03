@@ -1,26 +1,59 @@
 body.contentmission-background {
-    background-color: #E6E6FA; /* Light purple background color */
+    background-color: #E6E6FA; /* Use the specified color for background */
 }
 
-.headcontent {
-    color: #662d91;
-    font-size: 3rem; 
-    font-weight: bold; 
+.team-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.containercontent {
-    max-width: 800px;
+.team-member {
+    margin: 20px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    transition: transform 0.3s;
+    background-color: #fff; /* Ensure the team member card has a white background */
+}
+
+.team-member:hover {
+    transform: scale(1.05);
+}
+
+.member-image {
+    display: block;
     margin: 0 auto;
+    border-radius: 50%;
+    height: 200px; /* Ensure the height is larger */
+    width: auto; /* Maintain aspect ratio */
 }
 
-h1, h2 {
-    color: #333;
+.member-info h3 {
+    font-size: 1.5rem;
+    margin: 0;
 }
 
-.form-group {
-    margin-bottom: 1.5rem;
+.member-info p {
+    font-size: 1rem;
+    color: gray;
 }
 
-textarea.form-control {
-    height: 100px;
+.modal-image {
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+    height: 300px; /* Ensure the height is larger */
+    width: auto; /* Maintain aspect ratio */
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-link {
+    font-size: 1.2rem;
 }

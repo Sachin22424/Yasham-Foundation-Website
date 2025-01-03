@@ -19,6 +19,26 @@ exports.createMember = async (req, res) => {
     }
 };
 
+exports.updateMember = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedMember = await Team.findByIdAndUpdate(id, req.body, { new: true });
+        res.json(updatedMember);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
+
+exports.deleteMember = async (req, res) => {
+    try {
+        const { id } = req.params;
+        await Team.findByIdAndDelete(id);
+        res.json({ message: 'Member deleted successfully' });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
 exports.updateAllMembers = async (req, res) => {
     try {
         // Delete all existing members

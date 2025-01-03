@@ -6,9 +6,16 @@ import { Modal, Button } from 'react-bootstrap';
 
 const ContentAbout = () => {
   const [formData, setFormData] = useState({
+    title1: '',
+    title2: '',
     description1: '',
     description2: '',
     story: '',
+    image: {
+      url: '',
+      width: '',
+      height: ''
+    }
   });
 
   const [id, setId] = useState(''); // ID for updating
@@ -31,9 +38,12 @@ const ContentAbout = () => {
       }
       const fetchedData = response.data;
       setFormData({
+        title1: fetchedData.title1,
+        title2: fetchedData.title2,
         description1: fetchedData.description1,
         description2: fetchedData.description2,
         story: fetchedData.story,
+        image: fetchedData.image
       });
       setId(fetchedData._id); // Save the fetched document's ID
       setLoading(false);
@@ -56,13 +66,24 @@ const ContentAbout = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    if (name.startsWith('image.')) {
+      const imageField = name.split('.')[1];
+      setFormData((prev) => ({
+        ...prev,
+        image: {
+          ...prev.image,
+          [imageField]: value
+        }
+      }));
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.description1 || !formData.description2 || !formData.story) {
+    if (!formData.title1 || !formData.title2 || !formData.description1 || !formData.description2 || !formData.story || !formData.image.url || !formData.image.width || !formData.image.height) {
       setError('All fields are required.');
       setShowModal(true);
       return;
@@ -93,7 +114,56 @@ const ContentAbout = () => {
       {loading && <p>Loading...</p>}
       {error && <div className="alert alert-danger">{error}</div>}
       <form onSubmit={handleSubmit}>
-        <h2>About Description 1</h2>
+      <h2>About Image</h2>
+        <h4 style = {{marginTop: '20px'}}>Image Url</h4>
+        <div className="form-group">
+          <input
+            type="text"
+            className="form-control"
+            name="image.url"
+            value={formData.image.url}
+            onChange={handleChange}
+            placeholder="Image URL"
+          />
+        </div>
+        <h4>Image Width (use %)</h4>
+        <div className="form-group">
+          <input
+            type="text"
+            className="form-control"
+            name="image.width"
+            value={formData.image.width}
+            onChange={handleChange}
+            placeholder="Image Width"
+          />
+        </div>
+        <h4 >Image Height (use %)</h4>
+        <div className="form-group">
+          <input
+            type="text"
+            className="form-control"
+            name="image.height"
+            value={formData.image.height}
+            onChange={handleChange}
+            placeholder="Image Height"
+          />
+        </div>
+
+        <h2 style = {{marginBottom: '20px'}}>Text Content</h2>
+
+        <h4>Title 1</h4>
+        <div className="form-group">
+          <input
+            type="text"
+            className="form-control"
+            name="title1"
+            value={formData.title1}
+            onChange={handleChange}
+            placeholder="Title 1"
+          />
+        </div>
+
+        <h4>About Description 1</h4>
         <div className="form-group">
           <textarea
             className="form-control"
@@ -104,18 +174,19 @@ const ContentAbout = () => {
           />
         </div>
 
-        <h2>About Description 2</h2>
+        <h4>Title 2</h4>
         <div className="form-group">
-          <textarea
+          <input
+            type="text"
             className="form-control"
-            name="description2"
-            value={formData.description2}
+            name="title2"
+            value={formData.title2}
             onChange={handleChange}
-            placeholder="Description 2"
+            placeholder="Title 2"
           />
         </div>
 
-        <h2>Story</h2>
+        <h4>About Description 2</h4>
         <div className="form-group">
           <textarea
             className="form-control"
@@ -126,6 +197,7 @@ const ContentAbout = () => {
           />
         </div>
 
+        
         <button
           type="submit"
           className="btn btn-secondary btn-sm mb-5"

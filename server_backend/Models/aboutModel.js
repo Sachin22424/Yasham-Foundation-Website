@@ -79,6 +79,14 @@ const aboutSchema = new mongoose.Schema({
             required: true
         }
     },
+    titlemission1: {
+        type: String,
+        required: true
+    },
+    titlemission2: {
+        type: String,
+        required: true
+    },
     image: {
         url: {
             type: String,

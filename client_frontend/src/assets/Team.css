@@ -1,16 +1,17 @@
 .team-section {
-    /* text-align: center; */
     padding: 20px;
 }
 
 .team-section h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .team-section p {
     font-size: 1.2rem;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .filters {
@@ -36,6 +37,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
+    justify-content: center;
 }
 
 .team-member {
@@ -44,6 +46,7 @@
     padding: 20px;
     cursor: pointer;
     transition: transform 0.3s;
+    text-align: center;
 }
 
 .team-member:hover {
@@ -51,9 +54,11 @@
 }
 
 .member-image {
-    width: 100%;
+    display: block;
+    margin: 0 auto;
     border-radius: 50%;
-    margin-bottom: 15px;
+    height: 200px; /* Ensure the height is larger */
+    width: auto; /* Maintain aspect ratio */
 }
 
 .member-info h3 {
@@ -67,7 +72,9 @@
 }
 
 .modal-image {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 15px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+    height: 300px; /* Ensure the height is larger */
+    width: auto; /* Maintain aspect ratio */
 }

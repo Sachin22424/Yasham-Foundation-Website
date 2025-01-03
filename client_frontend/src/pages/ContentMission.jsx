@@ -6,6 +6,8 @@ import { Modal, Button, Form } from 'react-bootstrap'; // Import Bootstrap Modal
 
 const ContentMission = () => {
     const [formData, setFormData] = useState({
+        titlemission1: '',
+        titlemission2: '',
         missiondescription1: '',
         missiondescription2: '',
         missionurl: ''
@@ -31,6 +33,8 @@ const ContentMission = () => {
             const fetchedData = response.data;
 
             setFormData({
+                titlemission1: fetchedData.titlemission1,
+                titlemission2: fetchedData.titlemission2,
                 missiondescription1: fetchedData.mission.missiondescription1,
                 missiondescription2: fetchedData.mission.missiondescription2,
                 missionurl: fetchedData.mission.missionurl
@@ -44,6 +48,8 @@ const ContentMission = () => {
                 const fetchedData = response.data;
 
                 setFormData({
+                    titlemission1: fetchedData.titlemission1,
+                    titlemission2: fetchedData.titlemission2,
                     missiondescription1: fetchedData.mission.missiondescription1,
                     missiondescription2: fetchedData.mission.missiondescription2,
                     missionurl: fetchedData.mission.missionurl
@@ -84,6 +90,8 @@ const ContentMission = () => {
 
         // Validation logic
         if (
+            !formData.titlemission1 ||
+            !formData.titlemission2 ||
             !formData.missiondescription1 ||
             !formData.missiondescription2 ||
             !formData.missionurl
@@ -96,6 +104,8 @@ const ContentMission = () => {
         try {
             setLoading(true);
             const updatedData = {
+                titlemission1: formData.titlemission1,
+                titlemission2: formData.titlemission2,
                 mission: {
                     missiondescription1: formData.missiondescription1,
                     missiondescription2: formData.missiondescription2,
@@ -125,8 +135,32 @@ const ContentMission = () => {
             {loading && <p>Loading...</p>}
             {error && <div className="alert alert-danger">{error}</div>}
             <form onSubmit={handleSubmit}>
+                <h2>Text Content</h2>
+                <h4 style = {{marginTop: '20px'}}>Title Mission 1</h4>
+                <div className="form-group">
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="titlemission1"
+                        value={formData.titlemission1}
+                        onChange={handleChange}
+                        placeholder="Title Mission 1"
+                    />
+                </div>
 
-                <h2>Mission Description 1</h2>
+                <h4>Title Mission 2</h4>
+                <div className="form-group">
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="titlemission2"
+                        value={formData.titlemission2}
+                        onChange={handleChange}
+                        placeholder="Title Mission 2"
+                    />
+                </div>
+
+                <h4>Mission Description 1</h4>
                 <div className="form-group">
                     <textarea
                         className="form-control"
@@ -137,7 +171,7 @@ const ContentMission = () => {
                     />
                 </div>
 
-                <h2>Mission Description 2</h2>
+                <h4>Mission Description 2</h4>
                 <div className="form-group">
                     <textarea
                         className="form-control"
@@ -148,7 +182,8 @@ const ContentMission = () => {
                     />
                 </div>
 
-                <h2>Mission URL</h2>
+                <h2>Video Url</h2>
+                <h4 style = {{marginTop: '20px'}}>Mission Youtube URL</h4>
                 <div className="form-group">
                     <input
                         type="text"
@@ -161,19 +196,19 @@ const ContentMission = () => {
                 </div>
 
                 <button
-          type="submit"
-          className="btn btn-secondary btn-sm mb-5"
-          style={{
-            backgroundColor: '#662d91',
-            borderColor: '#662d91',
-            width: '15%',
-            padding: '10px',
-            fontSize: '16px'
-          }}
-          disabled={loading}
-        >
-          {loading ? 'Updating...' : 'Update'}
-        </button>
+                    type="submit"
+                    className="btn btn-secondary btn-sm mb-5"
+                    style={{
+                        backgroundColor: '#662d91',
+                        borderColor: '#662d91',
+                        width: '15%',
+                        padding: '10px',
+                        fontSize: '16px'
+                    }}
+                    disabled={loading}
+                >
+                    {loading ? 'Updating...' : 'Update'}
+                </button>
             </form>
 
             <Modal show={showModal} onHide={() => setShowModal(false)}>

@@ -151,7 +151,7 @@ const Home = () => {
             </div>
 
             <div className="col-md-5">
-              <h4 className="font-bold mb-4 text-center" style={{ fontWeight: '700' }}>Testimonials</h4>
+              <h4 className="font-bold mb-4 text-center" style={{ fontWeight: '700' }}>Student Testimonials</h4>
               <div id="testimonialCarousel" className="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
                 <div className="carousel-inner">
                   {homeData.testimonials?.map((testimonial, index) => (

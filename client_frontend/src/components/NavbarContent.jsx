@@ -39,20 +39,19 @@ const NavbarContent = () => {
                             <a className="nav-link active" aria-current="page" href="/contenthome">Home</a>
                         </li>
                         <li className="nav-item dropdown custom-dropdown">
-                            <a className="nav-link" href="#" role="button">Our Story</a>
+                            <a className="nav-link" href="#" role="button">Story</a>
                             <ul className="dropdown-menu full-width-dropdown">
-                                <li><a className="dropdown-item" href="/contentabout">About Us</a></li>
+                                <li><a className="dropdown-item" href="/contentabout">About</a></li>
                                 <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="/contentmission">Our Mission</a></li>
+                                <li><a className="dropdown-item" href="/contentmission">Mission</a></li>
                                 <li><hr className="dropdown-divider" /></li>
-                                <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="#">Our Team</a></li>
+                                <li><a className="dropdown-item" href="/contentteam">Team</a></li>
                             </ul>
                         </li>
                         <li className="nav-item dropdown custom-dropdown">
                             <a className="nav-link" href="#" role="button">Our Work</a>
                             <ul className="dropdown-menu full-width-dropdown">
-                                <li><a className="dropdown-item" href="#">Yasham Centre Model</a></li>
+                                <li><a className="dropdown-item" href="/contentycm">Yasham Centre Model</a></li>
                                 <li><hr className="dropdown-divider" /></li>
                                 <li><a className="dropdown-item" href="#">Saathi Haath Badhana</a></li>
                                 <li><hr className="dropdown-divider" /></li>
@@ -86,21 +85,28 @@ const NavbarContent = () => {
                             </ul>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="/contentcontact">Contact Url</a>
+                            <a className="nav-link active" aria-current="page" href="/contentcontact">Contact Us</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="/contentfeedback">Feedback Message</a>
+                            <a className="nav-link active" aria-current="page" href="/contentfeedback">Feedback</a>
                         </li>
                     </ul>
                 </div>
+                <button
+                    className="btn btn-outline-light get-image-btn mb-2 mx-2"
+                    onClick={() => window.open('https://www.imghippo.com/', '_blank')}
+                    style={{ fontWeight: 'bold' }}
+                >
+                    Get Image Url
+                </button>
+                <button
+                    className="btn btn-outline-light logout-btn mb-2 mx-4"
+                    onClick={handleLogout}
+                    style={{ fontWeight: 'bold' }}
+                >
+                    Logout
+                </button>
             </div>
-            <button
-                className="btn btn-outline-light logout-btn mb-2 mx-4"
-                onClick={handleLogout}
-                style={{ fontWeight: 'bold' }}
-            >
-                Logout
-            </button>
         </nav>
     );
 };

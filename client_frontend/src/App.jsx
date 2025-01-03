@@ -10,6 +10,9 @@ import ContentAbout from "./pages/ContentAbout"; // Import ContentAbout componen
 import ContentSupport from "./pages/ContentSupport"; // Import ContentSupport component
 import ContentMission from "./pages/ContentMission"; // Import ContentMission component
 import ContentFeedback from "./pages/ContentFeedback"; // Import ContentFeedback component
+import ContentTeam from "./pages/ContentTeam"; // Import ContentTeam component
+import ContentYcm from "./pages/ContentYcm"; // Import ContentYcm component
+import ContentShb from "./pages/contentShb"; // Import ContentShb component
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Navbar from "./components/Navbar";
@@ -37,11 +40,14 @@ function App() {
   const isContentSupport = location.pathname === "/contentsupport";
   const isContentMission = location.pathname === "/contentmission";
   const isContentFeedback = location.pathname === "/contentfeedback";
+  const isContentTeam = location.pathname === "/contentteam";
+  const isContentYcm = location.pathname === "/contentycm";
+  const isContentShb = location.pathname === "/contentshb";
 
   return (
     <>
-      {!isLoginPage && !isContentHome && !isContentContact && !isContentAbout && !isContentSupport && !isContentMission && !isContentFeedback && <Navbar />}
-      {(isContentHome || isContentContact || isContentAbout || isContentSupport || isContentMission || isContentFeedback) && <NavbarContent />}
+      {!isLoginPage && !isContentHome && !isContentContact && !isContentAbout && !isContentSupport && !isContentMission && !isContentFeedback && !isContentTeam && !isContentYcm && !isContentShb && <Navbar />}
+      {(isContentHome || isContentContact || isContentAbout || isContentSupport || isContentMission || isContentFeedback || isContentTeam || isContentYcm || isContentShb) && <NavbarContent />}
       <Routes>
         <Route path="/" element={<Chat />} />
         <Route path="/about" element={<About />} /> {/* Add About route */}
@@ -56,6 +62,9 @@ function App() {
         <Route path="/contentsupport" element={<ContentSupport />} /> {/* Add ContentSupport route */}
         <Route path="/contentmission" element={<ContentMission />} /> {/* Add ContentMission route */}
         <Route path="/contentfeedback" element={<ContentFeedback />} /> {/* Add ContentFeedback route */}
+        <Route path="/contentteam" element={<ContentTeam />} /> {/* Add ContentTeam route */}
+        <Route path="/contentycm" element={<ContentYcm />} /> {/* Add ContentYcm route */}
+        <Route path="/contentshb" element={<ContentShb />} /> {/* Add ContentShb route */}
         <Route path="/team" element={<Team />} /> {/* Add Team route */}
         <Route path="/studentTestimonial" element={<StudentTestimonial />} /> {/* Add StudentTestimonial route */}
         <Route path="/mentorTestimonial" element={<MentorTestimonial />} /> {/* Add MentorTestimonial route */}
@@ -67,7 +76,7 @@ function App() {
         <Route path="/mentorform" element={<MentorForm />} /> {/* Add MentorForm route */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-      {!isLoginPage && !isContentHome && !isContentContact && !isContentAbout && !isContentSupport && !isContentMission && !isContentFeedback && <Footer />}
+      {!isLoginPage && !isContentHome && !isContentContact && !isContentAbout && !isContentSupport && !isContentMission && !isContentFeedback && !isContentTeam && !isContentYcm && !isContentShb && <Footer />}
     </>
   );
 }
