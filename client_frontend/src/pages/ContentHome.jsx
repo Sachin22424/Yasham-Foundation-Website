@@ -108,6 +108,11 @@ const ContentHome = () => {
 
   // Handle adding a new slider image
   const handleAddSliderImage = () => {
+    if (!formData.newSliderImage.image) {
+      setError('Slider image URL is required.');
+      setShowModal(true);
+      return;
+    }
     setFormData((prev) => ({
       ...prev,
       sliderImages: [...prev.sliderImages, formData.newSliderImage.image],
@@ -181,24 +186,6 @@ const ContentHome = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validation logic
-    if (
-      !formData.newSliderImage.image ||
-      !formData.story.button ||
-      !formData.story.title.length ||
-      !formData.story.description ||
-      !formData.mainevent.some(event => event.image && event.name && event.description) ||
-      formData.events.some(event => !event.name) ||
-      !formData.upcomingEvent.name ||
-      !formData.upcomingEvent.description ||
-      !formData.video.url ||
-      !formData.video.description
-    ) {
-      setError('All fields are required.');
-      setShowModal(true); // Show the modal
-      return;
-    }
 
     try {
       setLoading(true);
@@ -501,9 +488,8 @@ const ContentHome = () => {
         value={event.imageUrl}
         onChange={(e) => handleChange(e, 'events', index)}
         placeholder="Image URL"
-        disabled={event.videoUrl} // Disable if video URL is present
       />
-    </div>
+       </div>
     <h5>Image Width (use %)</h5>
     <div className="form-group">
       <input
@@ -513,7 +499,6 @@ const ContentHome = () => {
         value={event.imageWidth}
         onChange={(e) => handleChange(e, 'events', index)}
         placeholder="Image Width"
-        disabled={event.videoUrl} // Disable if video URL is present
       />
     </div>
     <h5>Image Height (use %)</h5>
@@ -525,7 +510,6 @@ const ContentHome = () => {
         value={event.imageHeight}
         onChange={(e) => handleChange(e, 'events', index)}
         placeholder="Image Height"
-        disabled={event.videoUrl} // Disable if video URL is present
       />
     </div>
     <h5>Video URL</h5>
@@ -537,7 +521,6 @@ const ContentHome = () => {
         value={event.videoUrl}
         onChange={(e) => handleChange(e, 'events', index)}
         placeholder="Video URL"
-        disabled={event.imageUrl} // Disable if image URL is present
       />
     </div>
     <h5>Video Width (use %)</h5>
@@ -549,7 +532,6 @@ const ContentHome = () => {
         value={event.videoWidth}
         onChange={(e) => handleChange(e, 'events', index)}
         placeholder="Video Width"
-        disabled={event.imageUrl} // Disable if image URL is present
       />
     </div>
     <h5>Video Height (use %)</h5>
@@ -561,7 +543,6 @@ const ContentHome = () => {
         value={event.videoHeight}
         onChange={(e) => handleChange(e, 'events', index)}
         placeholder="Video Height"
-        disabled={event.imageUrl} // Disable if image URL is present
       />
     </div>
     <Button variant="danger" onClick={() => handleRemoveEvent(index)} style={{marginBottom: '20px'}}>
@@ -670,7 +651,7 @@ const ContentHome = () => {
         <Modal.Header closeButton>
           <Modal.Title>Error</Modal.Title>
         </Modal.Header>
-        <Modal.Body>All fields are required.</Modal.Body>
+        <Modal.Body>{error}</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowModal(false)}>
             Close
