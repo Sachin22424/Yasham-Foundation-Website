@@ -16,7 +16,7 @@ const ContentNews = () => {
     const fetchNews = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('https://yasham-foundation-website.onrender.com/api/news');
+            const response = await axios.get('https://yasham-foundation-website-production.up.railway.app/api/news');
             setFormData({ news: response.data, newNews: { image: { url: '', width: '', height: '' }, heading: '', description: '', buttonText: '', articleUrl: '' } });
             setLoading(false);
         } catch (error) {

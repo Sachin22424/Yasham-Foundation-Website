@@ -19,7 +19,7 @@ const ContentHhk = () => {
     const fetchHhkData = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('https://yasham-foundation-website.onrender.com/api/hhk');
+            const response = await axios.get('https://yasham-foundation-website-production.up.railway.app/api/hhk');
             const data = response.data[0]; // Assuming the API returns an array and we need the first item
             setFormData({
                 title: data.title || '',
@@ -74,7 +74,7 @@ const ContentHhk = () => {
             setLoading(true);
             if (id) {
                 // Update existing HHK entry
-                await axios.put(`https://yasham-foundation-website.onrender.com/api/hhk/${id}`, formData);
+                await axios.put(`https://yasham-foundation-website-production.up.railway.app/api/hhk/${id}`, formData);
             } else {
                 // Add new HHK entry
                 await axios.post('https://yasham-foundation-website.onrender.com/api/hhk', formData);

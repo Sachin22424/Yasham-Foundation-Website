@@ -15,7 +15,7 @@ const ContentFeedback = () => {
     useEffect(() => {
         const fetchFeedbacks = async () => {
             try {
-                const response = await axios.get('https://yasham-foundation-website.onrender.com/api/feedback');
+                const response = await axios.get('https://yasham-foundation-website-production.up.railway.app/api/feedback');
                 setFeedbacks(response.data.slice(0, 5)); // Show only the top 5 newest feedbacks
             } catch (error) {
                 console.error('Error fetching feedbacks:', error);

@@ -14,7 +14,13 @@ const getHomeContent = async (req, res) => {
 
 const updateHomeContent = async (req, res) => {
     try {
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({ error: true, message: "Invalid ID format" });
+        }
         const updatedContent = await Home.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!updatedContent) {
+            return res.status(404).json({ error: true, message: "Content not found" });
+        }
         res.status(200).json(updatedContent);
     } catch (error) {
         res.status(500).json({ error: true, message: "Internal Server Error" });

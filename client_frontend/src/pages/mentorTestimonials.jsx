@@ -11,7 +11,7 @@ const MentorTestimonials = () => {
     useEffect(() => {
         const fetchTestimonials = async () => {
             try {
-                const response = await axios.get('https://yasham-foundation-website.onrender.com/api/mentor-testimonials');
+                const response = await axios.get('https://yasham-foundation-website-production.up.railway.app/api/mentor-testimonials');
                 setTestimonials(response.data);
             } catch (error) {
                 console.error('Error fetching mentor testimonials:', error);

@@ -15,7 +15,7 @@ const ContentMentorForm = () => {
     useEffect(() => {
         const fetchMentors = async () => {
             try {
-                const response = await axios.get('https://yasham-foundation-website.onrender.com/api/mentors');
+                const response = await axios.get('https://yasham-foundation-website-production.up.railway.app/api/mentors');
                 setMentors(response.data.slice(0, 5)); // Get the most recent 5 mentor applications
             } catch (error) {
                 console.error('Error fetching mentors:', error);

@@ -16,7 +16,7 @@ const ContentStudentTestimonial = () => {
     const fetchTestimonials = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('https://yasham-foundation-website.onrender.com/api/student-testimonials');
+            const response = await axios.get('https://yasham-foundation-website-production.up.railway.app/api/student-testimonials');
             setFormData({ testimonials: response.data, newTestimonial: { name: '', position: '', image: '', feedback: '' } });
             setLoading(false);
         } catch (error) {

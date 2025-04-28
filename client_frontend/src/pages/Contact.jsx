@@ -30,7 +30,7 @@ const Contact = () => {
     useEffect(() => {
         const fetchContactInfo = async () => {
             try {
-                const deployedUrl = 'https://yasham-foundation-website.onrender.com/api/contact';
+                const deployedUrl = 'https://yasham-foundation-website-production.up.railway.app/api/contact';
                 const response = await axios.get(deployedUrl);
                 setContactInfo(response.data);
             } catch (error) {

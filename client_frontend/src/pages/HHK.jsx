@@ -10,7 +10,7 @@ const HHK = () => {
     useEffect(() => {
         const fetchHhkData = async () => {
             try {
-                const response = await axios.get('https://yasham-foundation-website.onrender.com/api/hhk');
+                const response = await axios.get('https://yasham-foundation-website-production.up.railway.app/api/hhk');
                 setHhkData(response.data[0]); // Assuming the API returns an array and we need the first item
             } catch (error) {
                 console.error('Error fetching HHK data:', error);

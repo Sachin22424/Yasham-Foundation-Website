@@ -55,7 +55,7 @@ const ContentHome = () => {
   // Fetch existing data
   useEffect(() => {
     const localUrl = 'http://localhost:5000/api/home';
-    const deployedUrl = 'https://yasham-foundation-website.onrender.com/api/home';
+    const deployedUrl = 'https://yasham-foundation-website-production.up.railway.app/api/home';
 
     // Try fetching from the deployed URL first, then fallback to local URL
     fetchHomeContent(deployedUrl).catch(() => fetchHomeContent(localUrl));
@@ -74,18 +74,38 @@ const ContentHome = () => {
   // Handle input change
   const handleChange = (e, key, index) => {
     const { name, value } = e.target;
+  
     if (key) {
-      // For nested objects or arrays
-      setFormData((prev) => ({
-        ...prev,
-        [key]: Array.isArray(prev[key])
-          ? prev[key].map((item, i) =>
-            i === index ? { ...item, [name]: value } : item
-          )
-          : { ...prev[key], [name]: value },
-      }));
+      setFormData((prev) => {
+        if (Array.isArray(prev[key])) {
+          // Handle arrays (e.g., events, testimonials, mainevent)
+          const updatedArray = [...prev[key]];
+          updatedArray[index] = { ...updatedArray[index], [name]: value };
+          return { ...prev, [key]: updatedArray };
+        } else if (key === 'story' && name.includes('pointer')) {
+          // Handle story pointer fields
+          const updatedStory = { ...prev.story };
+          if (name.includes('image.')) {
+            // Handle pointer image fields (e.g., pointer1image.url)
+            const [pointerKey, subKey] = name.split('.'); // e.g., pointer1image.url -> ['pointer1image', 'url']
+            const pointerNum = pointerKey.match(/\d+/)[0]; // Extract number (e.g., '1' from pointer1image)
+            updatedStory[`pointer${pointerNum}image`] = {
+              ...updatedStory[`pointer${pointerNum}image`],
+              [subKey]: value,
+            };
+          } else {
+            // Handle pointer title and description (e.g., pointer1title, pointer1description)
+            updatedStory[name] = value;
+          }
+          return { ...prev, story: updatedStory };
+        } else {
+          // Handle other nested objects (e.g., newSliderImage, newTitleWord, ourImpact)
+          const updatedKey = { ...prev[key], [name]: value };
+          return { ...prev, [key]: updatedKey };
+        }
+      });
     } else {
-      // For top-level fields
+      // Handle top-level fields
       setFormData({ ...formData, [name]: value });
     }
   };
@@ -189,7 +209,7 @@ const ContentHome = () => {
 
     try {
       setLoading(true);
-      const url = `https://yasham-foundation-website.onrender.com/api/home/${id}` || `http://localhost:5000/api/home/${id}`;
+      const url = `https://yasham-foundation-website-production.up.railway.app/api/home/${id}` || `http://localhost:5000/api/home/${id}`;
       await axios.put(url, formData);
       alert('Content updated successfully!');
       setLoading(false);
@@ -285,7 +305,6 @@ const ContentHome = () => {
           />
         </div>
 
-        <h2 style={{ marginBottom: '20px' }}>Pointers</h2>
         {[1, 2, 3, 4].map((num) => (
           <div key={num}>
             <h4 style={{ marginBottom: '20px' }}>Pointer {num}</h4>
@@ -296,7 +315,7 @@ const ContentHome = () => {
                 className="form-control"
                 name={`pointer${num}image.url`}
                 value={formData.story[`pointer${num}image`]?.url || ''}
-                onChange={(e) => handleChange(e, `story.pointer${num}image`)}
+                onChange={(e) => handleChange(e, 'story')}
                 placeholder={`Pointer ${num} Image URL`}
               />
               <h5>Image Width (use %)</h5>
@@ -305,7 +324,7 @@ const ContentHome = () => {
                 className="form-control"
                 name={`pointer${num}image.width`}
                 value={formData.story[`pointer${num}image`]?.width || ''}
-                onChange={(e) => handleChange(e, `story.pointer${num}image`)}
+                onChange={(e) => handleChange(e, 'story')}
                 placeholder={`Pointer ${num} Image Width`}
               />
               <h5>Image Height (use %)</h5>
@@ -314,7 +333,7 @@ const ContentHome = () => {
                 className="form-control"
                 name={`pointer${num}image.height`}
                 value={formData.story[`pointer${num}image`]?.height || ''}
-                onChange={(e) => handleChange(e, `story.pointer${num}image`)}
+                onChange={(e) => handleChange(e, 'story')}
                 placeholder={`Pointer ${num} Image Height`}
               />
             </div>
@@ -325,7 +344,7 @@ const ContentHome = () => {
                 className="form-control"
                 name={`pointer${num}title`}
                 value={formData.story[`pointer${num}title`] || ''}
-                onChange={(e) => handleChange(e, `story`)}
+                onChange={(e) => handleChange(e, 'story')}
                 placeholder={`Pointer ${num} Title`}
               />
             </div>
@@ -335,7 +354,7 @@ const ContentHome = () => {
                 className="form-control"
                 name={`pointer${num}description`}
                 value={formData.story[`pointer${num}description`] || ''}
-                onChange={(e) => handleChange(e, `story`)}
+                onChange={(e) => handleChange(e, 'story')}
                 placeholder={`Pointer ${num} Description`}
               />
             </div>

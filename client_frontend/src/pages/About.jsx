@@ -31,7 +31,7 @@ const About = () => {
     useEffect(() => {
         const fetchAboutData = async () => {
             try {
-                const deployedUrl = 'https://yasham-foundation-website.onrender.com/api/about';
+                const deployedUrl = 'https://yasham-foundation-website-production.up.railway.app/api/about';
                 const response = await axios.get(deployedUrl);
                 setAboutData(response.data);
             } catch (error) {

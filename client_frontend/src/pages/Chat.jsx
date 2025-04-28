@@ -14,7 +14,7 @@ const Home = () => {
   useEffect(() => {
     const fetchHomeData = async () => {
       try {
-        const response = await axios.get('https://yasham-foundation-website.onrender.com/api/home');
+        const response = await axios.get('https://yasham-foundation-website-production.up.railway.app/api/home');
         setHomeData(response.data);
       } catch (error) {
         console.error("Error fetching home data", error);
