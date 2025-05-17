@@ -20,7 +20,7 @@ const ContentTeam = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [showModal, setShowModal] = useState(false);
-    const [showEditModal, setShowEditModal] = useState(false); // New state for edit modal
+    const [showEditModal, setShowEditModal] = useState(false);
 
     const apiBaseUrl = 'https://yasham-foundation-website-production.up.railway.app/api/team';
 
@@ -77,7 +77,7 @@ const ContentTeam = () => {
             await fetchTeamData();
             setFormData({ name: '', position: '', image: '', imageWidth: '', imageHeight: '', description: '', type: 'founder' });
             setId('');
-            setShowEditModal(false); // Close edit modal
+            setShowEditModal(false);
             setLoading(false);
             setError('');
             window.location.reload();
@@ -116,13 +116,13 @@ const ContentTeam = () => {
             type: member.type || 'founder'
         });
         setId(member._id);
-        setShowEditModal(true); // Open edit modal
+        setShowEditModal(true);
     };
 
     const handleAddNew = () => {
         setFormData({ name: '', position: '', image: '', imageWidth: '', imageHeight: '', description: '', type: 'founder' });
         setId('');
-        setShowEditModal(true); // Open modal for adding new member
+        setShowEditModal(true);
     };
 
     return (
@@ -137,7 +137,12 @@ const ContentTeam = () => {
             <h2>Founders</h2>
             <div className="team-list">
                 {teamData.filter(member => member.type === 'founder').map(member => (
-                    <div key={member._id} className="team-member">
+                    <div
+                        key={member._id}
+                        className="team-member"
+                        onDoubleClick={() => handleEdit(member)}
+                        style={{ cursor: 'pointer' }}
+                    >
                         <h3>{member.name}</h3>
                         <p>{member.position}</p>
                         <img src={member.image} alt={member.name} style={{ width: member.imageWidth, height: member.imageHeight, display: 'block', margin: '0 auto' }} />
@@ -153,7 +158,12 @@ const ContentTeam = () => {
             <h2>Supporting Members</h2>
             <div className="team-list">
                 {teamData.filter(member => member.type === 'support').map(member => (
-                    <div key={member._id} className="team-member">
+                    <div
+                        key={member._id}
+                        className="team-member"
+                        onDoubleClick={() => handleEdit(member)}
+                        style={{ cursor: 'pointer' }}
+                    >
                         <h3>{member.name}</h3>
                         <p>{member.position}</p>
                         <img src={member.image} alt={member.name} style={{ width: member.imageWidth, height: member.imageHeight, display: 'block', margin: '0 auto' }} />

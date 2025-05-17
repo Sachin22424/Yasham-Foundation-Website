@@ -32,18 +32,17 @@ const Team = () => {
 
     return (
         <div className="team-section">
-            <div className="team-section" style={{ textAlign: 'center' }}>
-                <h1 style={{ fontWeight: '700' }}>Our Team</h1>
+            <div className="team-header">
+                <h1>Our Team</h1>
             </div>
 
-            <Card className="p-3" style={{ border: 'none', backgroundColor: '#ffffff' }}>
-                <Card.Body >
-                    <Card.Text style={{ color: "#333333", fontSize: "1.2em", lineHeight: "1.6" }}>
-                        <h2 style={{ fontWeight: '700', marginLeft: '10px', color: '#ffc107' }}>Founding Team</h2>
+            <Card className="p-3 team-card">
+                <Card.Body>
+                    <Card.Text>
+                        <h2 className="section-title">Founding Team</h2>
                     </Card.Text>
-                    
-                    <Card.Text style={{ color: "#333333", fontSize: "1.2em", lineHeight: "1.6" }}>
-                        <div className="team-grid mt-4" style={{ textAlign: 'center' }}>
+                    <Card.Text>
+                        <div className="team-grid mt-4">
                             {founderMembers.map((member, index) => (
                                 <div key={index} className="team-member" onClick={() => handleShow(member)}>
                                     <img src={member.image} alt={member.name} className="member-image" />
@@ -58,15 +57,15 @@ const Team = () => {
                 </Card.Body>
             </Card>
 
-            <div className="team-section" style={{ textAlign: 'center' }}></div>
+            <div className="team-header"></div>
 
-            <Card className="p-3" style={{ border: 'none', backgroundColor: '#ffffff' }}>
+            <Card className="p-3 team-card">
                 <Card.Body>
-                    <Card.Text style={{ color: "#333333", fontSize: "1.2em", lineHeight: "1.6" }}>
-                        <h2 style={{ fontWeight: '700', marginLeft: '10px', color: '#ffc107' }}>Supporting Team</h2>
+                    <Card.Text>
+                        <h2 className="section-title">Supporting Team</h2>
                     </Card.Text>
-                    <Card.Text style={{ color: "#333333", fontSize: "1.2em", lineHeight: "1.6" }}>
-                        <div className="team-grid mt-4" style={{ textAlign: 'center' }}>
+                    <Card.Text>
+                        <div className="team-grid mt-4">
                             {supportMembers.map((member, index) => (
                                 <div key={index} className="team-member" onClick={() => handleShow(member)}>
                                     <img src={member.image} alt={member.name} className="member-image" />
@@ -81,7 +80,7 @@ const Team = () => {
                 </Card.Body>
             </Card>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>{selectedMember?.name}</Modal.Title>
                 </Modal.Header>

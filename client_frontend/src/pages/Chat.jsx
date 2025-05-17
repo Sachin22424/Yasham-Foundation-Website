@@ -33,12 +33,31 @@ const Home = () => {
   };
 
   const getEmbeddedUrl = (url) => {
-    if (url.includes('embed')) {
+    // Check if the URL is already an embed URL
+    if (url.includes('embed') || url.includes('player.vimeo.com')) {
       return url;
     }
-    const videoId = url.split('v=')[1];
-    return `https://www.youtube.com/embed/${videoId}`;
+
+    // Handle YouTube URLs
+    if (url.includes('youtube.com') || url.includes('youtu.be')) {
+      const videoIdMatch = url.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]+)/);
+      const videoId = videoIdMatch ? videoIdMatch[1] : null;
+      return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
+    }
+
+    // Handle Vimeo URLs
+    if (url.includes('vimeo.com')) {
+      const videoIdMatch = url.match(/vimeo\.com\/(\d+)/);
+      const videoId = videoIdMatch ? videoIdMatch[1] : null;
+      return videoId ? `https://player.vimeo.com/video/${videoId}` : url;
+    }
+    
+
+    // Fallback: Return the original URL for other video platforms
+    return url;
   };
+
+  
 
   const handleInitiativeClick = (initiative) => {
     setSelectedInitiative(initiative);
@@ -234,7 +253,7 @@ const Home = () => {
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowFullScreen
-                        style={{ width: selectedInitiative.videoWidth, height: selectedInitiative.videoHeight }} // Adjust the height as needed
+                        style={{ width: selectedInitiative.videoWidth, height: selectedInitiative.videoHeight }}
                       ></iframe>
                     )}
                   </>
@@ -253,7 +272,7 @@ const Home = () => {
                           frameBorder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                           allowFullScreen
-                          style={{ width: homeData.events[0].videoWidth, height: homeData.events[0].videoHeight }} // Adjust the height as needed
+                          style={{ width: homeData.events[0].videoWidth, height: homeData.events[0].videoHeight }}
                         ></iframe>
                       )}
                     </>
@@ -275,7 +294,6 @@ const Home = () => {
                   className="mb-0"
                   alt={event.name}
                   style={{ width: event.width, height: event.height }}
-                 
                 />
                 <div className="card-body">
                   <h3 className="font-bold" style={{ fontWeight: '700' }}>{event.name}</h3>

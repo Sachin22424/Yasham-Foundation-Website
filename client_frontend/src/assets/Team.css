@@ -2,35 +2,27 @@
     padding: 20px;
 }
 
-.team-section h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
+.team-header {
     text-align: center;
-}
-
-.team-section p {
-    font-size: 1.2rem;
     margin-bottom: 20px;
-    text-align: center;
 }
 
-.filters {
-    margin-bottom: 30px;
+.team-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
 }
 
-.filter-btn {
-    background-color: #ffc107;
-    color: black;
+.team-card {
     border: none;
-    padding: 10px 20px;
-    margin: 5px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 1rem;
+    background-color: #ffffff;
 }
 
-.filter-btn:hover {
-    background-color: #e0a800;
+.section-title {
+    font-weight: 700;
+    margin-left: 10px;
+    color: #ffc107;
+    font-size: 1.8rem;
 }
 
 .team-grid {
@@ -57,24 +49,141 @@
     display: block;
     margin: 0 auto;
     border-radius: 50%;
-    height: 200px; /* Ensure the height is larger */
-    width: auto; /* Maintain aspect ratio */
+    max-width: 100%;
+    height: 200px;
+    width: auto;
 }
 
 .member-info h3 {
     font-size: 1.5rem;
-    margin: 0;
+    margin: 10px 0 5px;
 }
 
 .member-info p {
     font-size: 1rem;
     color: gray;
+    margin: 0;
 }
 
 .modal-image {
     display: block;
     margin: 0 auto;
     border-radius: 50%;
-    height: 300px; /* Ensure the height is larger */
-    width: auto; /* Maintain aspect ratio */
+    max-width: 100%;
+    height: 300px;
+    width: auto;
+}
+
+/* Responsive Design */
+
+/* Tablets and smaller laptops (up to 1024px) */
+@media (max-width: 1024px) {
+    .team-header h1 {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .team-member {
+        padding: 15px;
+    }
+
+    .member-image {
+        height: 150px;
+    }
+
+    .member-info h3 {
+        font-size: 1.3rem;
+    }
+
+    .member-info p {
+        font-size: 0.9rem;
+    }
+
+    .modal-image {
+        height: 250px;
+    }
+}
+
+/* Smartphones (up to 768px) */
+@media (max-width: 768px) {
+    .team-section {
+        padding: 10px;
+    }
+
+    .team-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+        margin-left: 5px;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .team-member {
+        padding: 10px;
+    }
+
+    .member-image {
+        height: 120px;
+    }
+
+    .member-info h3 {
+        font-size: 1.2rem;
+    }
+
+    .member-info p {
+        font-size: 0.85rem;
+    }
+
+    .modal-image {
+        height: 200px;
+    }
+}
+
+/* Smaller smartphones (up to 576px) */
+@media (max-width: 576px) {
+    .team-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 1.1rem;
+    }
+
+    .team-grid {
+        gap: 10px;
+    }
+
+    .team-member {
+        padding: 8px;
+    }
+
+    .member-image {
+        height: 100px;
+    }
+
+    .member-info h3 {
+        font-size: 1rem;
+    }
+
+    .member-info p {
+        font-size: 0.8rem;
+    }
+
+    .modal-image {
+        height: 150px;
+    }
 }

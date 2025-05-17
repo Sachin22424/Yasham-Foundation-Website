@@ -8,7 +8,6 @@
 .footer h4 {
     font-size: 1.5rem;
     margin-bottom: 20px;
-    /* text-align: center; */
 }
 
 .footer .footer-icon {
@@ -37,7 +36,7 @@
     position: relative;
     display: inline-block;
     text-decoration: none;
-    color: #ffffff; /* Ensure the text color is white */
+    color: #ffffff;
 }
 
 .footer .nav-link::after,
@@ -58,7 +57,7 @@
 .footer ul li a:hover::after {
     width: 100%;
     right: 0;
-    background:#ffc107;
+    background: #ffc107;
 }
 
 @media (max-width: 768px) {
@@ -68,7 +67,7 @@
 }
 
 .custom-margin {
-    margin-bottom: 10px; /* Adjust the value as needed */
+    margin-bottom: 10px;
 }
 
 .icon-circle {
@@ -84,13 +83,16 @@
 .icon-circle img {
     width: 24px;
     height: 24px;
-}
-.icon-circle img {
-    width: 24px;
-    height: 24px;
-    transition: opacity 0.4s ease; /* Add transition for hover effect */
+    transition: opacity 0.4s ease;
 }
 
 .icon-circle img:hover {
-    opacity: 0.8; /* Add hover effect */
+    opacity: 0.8;
+}
+
+.designer-text {
+    font-size: 0.9rem;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 15px;
 }

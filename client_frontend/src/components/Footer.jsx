@@ -15,6 +15,7 @@ function Footer() {
         facebook: '',
         instagram: ''
     });
+    const [showDesigner, setShowDesigner] = useState(false);
 
     useEffect(() => {
         const fetchContactInfo = async () => {
@@ -37,22 +38,23 @@ function Footer() {
         fetchContactInfo();
     }, []);
 
+    const handleDoubleClick = () => {
+        setShowDesigner(!showDesigner);
+    };
+
     return (
-        <footer className="footer mt-auto py-3 bg-custom text-white">
+        <footer className="footer mt-auto py-3 bg-custom text-white" onDoubleClick={handleDoubleClick}>
             <div className="container">
                 <div className="row">
                     <div className="col-md-4">
-
                         <div className="d-flex justify-content-center mt-3">
-
                         </div>
                     </div>
                     <div className="col-md-4 text-center">
-
                         <div className="d-flex justify-content-center">
-                            <a href={contactInfo.instagram} target="_blank" className="mr-3 mx-4">
+                            <a href={`mailto:${contactInfo.mail}`} target="_blank" className="mr-3 mx-4">
                                 <div className="icon-circle">
-                                    <img src={mail} alt="email icon" className="mr-2" />
+                                    <img src={mail} alt="email icon" className="footer-icon" />
                                 </div>
                             </a>
                             <a href={contactInfo.instagram} target="_blank" className="mr-3 mx-4">
@@ -71,6 +73,14 @@ function Footer() {
                                 </div>
                             </a>
                         </div>
+                        {showDesigner && (
+                            <div className="designer-text mt-3">
+        Designed by Sachin Maurya<br />
+        <a href="mailto:sachin22424@iiitd.ac.in" style={{ fontSize: '0.95em', color: 'inherit', textDecoration: 'underline' }}>
+            sachin22424@iiitd.ac.in
+        </a>
+    </div>
+                        )}
                     </div>
                 </div>
             </div>

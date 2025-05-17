@@ -94,7 +94,7 @@ const NavbarContent = () => {
                 </div>
                 <button
                     className="btn btn-outline-light get-image-btn mb-2 mx-2"
-                    onClick={() => window.open('https://www.imghippo.com/', '_blank')}
+                    onClick={() => window.open('https://postimages.org/', '_blank')}
                     style={{ fontWeight: 'bold' }}
                 >
                     Get Image Url
