@@ -16,7 +16,7 @@ const studentTestimonialRoute = require('./Routes/studentTestimonialRoute');
 const mentorTestimonialRoute = require('./Routes/mentorTestimonialRoute');
 const newsRoute = require('./Routes/newsRoute');
 const mentorRoute = require('./Routes/mentorRoute');
-const navRoute = require('./Routes/navRoute'); // Add this line
+const navRoute = require('./Routes/navRoute');
 const app = express();
 require('dotenv').config();
 
@@ -38,14 +38,14 @@ app.use('/api/student-testimonials', studentTestimonialRoute);
 app.use('/api/mentor-testimonials', mentorTestimonialRoute);
 app.use('/api/news', newsRoute);
 app.use('/api/mentors', mentorRoute);
-app.use('/api/nav', navRoute); // Add this line for nav routes
+app.use('/api/nav', navRoute);
 
 app.get('/', (req, res) => {
     res.send('Hello World');
 });
 
 const port = process.env.PORT || 5000;
-const uri = process.env.ATLAS_URI; // MongoDB URI
+const uri = process.env.ATLAS_URI;
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

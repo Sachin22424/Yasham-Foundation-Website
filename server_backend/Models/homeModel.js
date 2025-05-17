@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const homeSchema = new mongoose.Schema({
     sliderImages: [String],
+    sliderImagesUpload: [Buffer], // Store actual images for slider
     story: {
         title: [
             {
@@ -11,16 +12,16 @@ const homeSchema = new mongoose.Schema({
         ],
         description: String,
         button: String,
-        pointer1image: { url: String, width: String, height: String },
+        pointer1image: { url: String, width: String, height: String, imageUpload: Buffer },
         pointer1title: String,
         pointer1description: String,
-        pointer2image: { url: String, width: String, height: String },
+        pointer2image: { url: String, width: String, height: String, imageUpload: Buffer },
         pointer2title: String,
         pointer2description: String,
-        pointer3image: { url: String, width: String, height: String },
+        pointer3image: { url: String, width: String, height: String, imageUpload: Buffer },
         pointer3title: String,
         pointer3description: String,
-        pointer4image: { url: String, width: String, height: String },
+        pointer4image: { url: String, width: String, height: String, imageUpload: Buffer },
         pointer4title: String,
         pointer4description: String,
     },
@@ -29,6 +30,7 @@ const homeSchema = new mongoose.Schema({
             name: String,
             description: String,
             imageUrl: String,
+            imageUpload: Buffer, // Store actual image for event
             imageWidth: String,
             imageHeight: String,
             videoUrl: String,
@@ -46,6 +48,7 @@ const homeSchema = new mongoose.Schema({
     mainevent: [
         {
             image: String,
+            imageUpload: Buffer, // Store actual image for main event
             height: String,
             width: String,
             name: String,
@@ -59,6 +62,7 @@ const homeSchema = new mongoose.Schema({
     },
     newSliderImage: {
         image: String,
+        imageUpload: Buffer // Store actual image for new slider
     },
     testimonials: [
         {
@@ -69,6 +73,7 @@ const homeSchema = new mongoose.Schema({
     ],
     ourImpact: {
         image: String,
+        imageUpload: Buffer, // Store actual image for our impact
         height: String,
         width: String,
         title1: String,

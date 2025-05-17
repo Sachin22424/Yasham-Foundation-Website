@@ -274,8 +274,8 @@ const Home = () => {
                   src={event.image}
                   className="mb-0"
                   alt={event.name}
-                  style={{ width: event.width, height: event.height, cursor: 'pointer' }}
-                  onClick={() => navigate('/news')}
+                  style={{ width: event.width, height: event.height }}
+                 
                 />
                 <div className="card-body">
                   <h3 className="font-bold" style={{ fontWeight: '700' }}>{event.name}</h3>

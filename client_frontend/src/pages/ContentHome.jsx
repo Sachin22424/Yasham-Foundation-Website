@@ -12,10 +12,10 @@ const ContentHome = () => {
     video: { url: '', title: '', description: '' },
     mainevent: [{ image: '', height: '', width: '', name: '', form: '', description: '' }],
     upcomingEvent: { name: '', description: '' },
-    newSliderImage: { image: '' }, // Initialize newSliderImage
-    newTitleWord: { word: '', color: '' }, // Initialize newTitleWord
-    ourImpact: { image: '', height: '', width: '', title1: '', title2: '', description: '' }, // Initialize ourImpact
-    testimonials: [{ name: '', role: '', quote: '' }], // Initialize testimonials
+    newSliderImage: { image: '' },
+    newTitleWord: { word: '', color: '' },
+    ourImpact: { image: '', height: '', width: '', title1: '', title2: '', description: '' },
+    testimonials: [{ name: '', role: '', quote: '' }],
   });
 
   const [id, setId] = useState(''); // ID for updating
@@ -29,25 +29,19 @@ const ContentHome = () => {
       const response = await axios.get(url);
       const fetchedData = response.data;
 
-      // Ensure `newSliderImage`, `newTitleWord`, `ourImpact`, and `testimonials` are initialized if missing
-      if (!fetchedData.newSliderImage) {
-        fetchedData.newSliderImage = { image: '' };
-      }
-      if (!fetchedData.newTitleWord) {
-        fetchedData.newTitleWord = { word: '', color: '' };
-      }
-      if (!fetchedData.ourImpact) {
-        fetchedData.ourImpact = { image: '', height: '', width: '', title1: '', title2: '', description: '' };
-      }
-      if (!fetchedData.testimonials) {
-        fetchedData.testimonials = [{ name: '', role: '', quote: '' }];
-      }
+      // Ensure fields are initialized if missing
+      if (!fetchedData.newSliderImage) fetchedData.newSliderImage = { image: '' };
+      if (!fetchedData.newTitleWord) fetchedData.newTitleWord = { word: '', color: '' };
+      if (!fetchedData.ourImpact) fetchedData.ourImpact = { image: '', height: '', width: '', title1: '', title2: '', description: '' };
+      if (!fetchedData.testimonials) fetchedData.testimonials = [{ name: '', role: '', quote: '' }];
 
       setFormData(fetchedData);
-      setId(fetchedData._id); // Save the fetched document's ID
+      setId(fetchedData._id || ''); // Ensure ID is set
       setLoading(false);
     } catch (error) {
       console.error('Error fetching data:', error);
+      setError('Failed to fetch content. Please try again.');
+      setShowModal(true);
       setLoading(false);
     }
   };
@@ -57,55 +51,43 @@ const ContentHome = () => {
     const localUrl = 'http://localhost:5000/api/home';
     const deployedUrl = 'https://yasham-foundation-website-production.up.railway.app/api/home';
 
-    // Try fetching from the deployed URL first, then fallback to local URL
     fetchHomeContent(deployedUrl).catch(() => fetchHomeContent(localUrl));
   }, []);
 
   useEffect(() => {
-    // Add the class to the body element
     document.body.classList.add('contenthome-background');
-
-    // Remove the class when the component is unmounted
-    return () => {
-      document.body.classList.remove('contenthome-background');
-    };
+    return () => document.body.classList.remove('contenthome-background');
   }, []);
 
   // Handle input change
   const handleChange = (e, key, index) => {
     const { name, value } = e.target;
-  
+
     if (key) {
       setFormData((prev) => {
         if (Array.isArray(prev[key])) {
-          // Handle arrays (e.g., events, testimonials, mainevent)
           const updatedArray = [...prev[key]];
           updatedArray[index] = { ...updatedArray[index], [name]: value };
           return { ...prev, [key]: updatedArray };
         } else if (key === 'story' && name.includes('pointer')) {
-          // Handle story pointer fields
           const updatedStory = { ...prev.story };
           if (name.includes('image.')) {
-            // Handle pointer image fields (e.g., pointer1image.url)
-            const [pointerKey, subKey] = name.split('.'); // e.g., pointer1image.url -> ['pointer1image', 'url']
-            const pointerNum = pointerKey.match(/\d+/)[0]; // Extract number (e.g., '1' from pointer1image)
+            const [pointerKey, subKey] = name.split('.');
+            const pointerNum = pointerKey.match(/\d+/)[0];
             updatedStory[`pointer${pointerNum}image`] = {
               ...updatedStory[`pointer${pointerNum}image`],
               [subKey]: value,
             };
           } else {
-            // Handle pointer title and description (e.g., pointer1title, pointer1description)
             updatedStory[name] = value;
           }
           return { ...prev, story: updatedStory };
         } else {
-          // Handle other nested objects (e.g., newSliderImage, newTitleWord, ourImpact)
           const updatedKey = { ...prev[key], [name]: value };
           return { ...prev, [key]: updatedKey };
         }
       });
     } else {
-      // Handle top-level fields
       setFormData({ ...formData, [name]: value });
     }
   };
@@ -136,7 +118,7 @@ const ContentHome = () => {
     setFormData((prev) => ({
       ...prev,
       sliderImages: [...prev.sliderImages, formData.newSliderImage.image],
-      newSliderImage: { image: '' }, // Reset newSliderImage input
+      newSliderImage: { image: '' },
     }));
   };
 
@@ -156,7 +138,7 @@ const ContentHome = () => {
         ...prev.story,
         title: [...prev.story.title, formData.newTitleWord],
       },
-      newTitleWord: { word: '', color: '' }, // Reset newTitleWord input
+      newTitleWord: { word: '', color: '' },
     }));
   };
 
@@ -179,6 +161,7 @@ const ContentHome = () => {
     }));
   };
 
+  // Handle removing a testimonial
   // Handle removing a testimonial
   const handleRemoveTestimonial = (index) => {
     setFormData((prev) => ({
@@ -207,15 +190,43 @@ const ContentHome = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!id) {
+      setError('No content ID found. Please ensure content is loaded correctly.');
+      setShowModal(true);
+      return;
+    }
+
+    // Clean up formData to match backend expectations
+    const cleanedFormData = { ...formData };
+    // Remove temporary fields that shouldn't be sent to the backend
+    delete cleanedFormData.newSliderImage;
+    delete cleanedFormData.newTitleWord;
+
     try {
       setLoading(true);
-      const url = `https://yasham-foundation-website-production.up.railway.app/api/home/${id}` || `http://localhost:5000/api/home/${id}`;
-      await axios.put(url, formData);
-      alert('Content updated successfully!');
-      setLoading(false);
-      setError(''); // Clear error message on successful submission
+      const baseUrl = process.env.NODE_ENV === 'production'
+        ? 'https://yasham-foundation-website-production.up.railway.app'
+        : 'http://localhost:5000';
+      const url = `${baseUrl}/api/home/${id}`;
+
+      console.log('Submitting to:', url);
+      console.log('Payload:', cleanedFormData);
+
+      const response = await axios.put(url, cleanedFormData, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (response.status === 200) {
+        alert('Content updated successfully!');
+        setError('');
+      } else {
+        throw new Error('Unexpected response status: ' + response.status);
+      }
     } catch (error) {
       console.error('Error updating content:', error);
+      setError(error.response?.data?.message || 'Failed to update content. Please try again.');
+      setShowModal(true);
+    } finally {
       setLoading(false);
     }
   };
@@ -224,8 +235,8 @@ const ContentHome = () => {
     <div className="containercontent mt-5">
       <h1 className="headcontent mb-5 text-center">Home Content</h1>
       {loading && <p>Loading...</p>}
-      {error && <div className="alert alert-danger">{error}</div>}
       <form onSubmit={handleSubmit}>
+        {/* Rest of the form remains unchanged */}
         <h2>Slider Images</h2>
         <ul>
           {formData.sliderImages.map((image, index) => (
@@ -246,7 +257,7 @@ const ContentHome = () => {
             onChange={(e) => handleChange(e, 'newSliderImage')}
             placeholder="New Slider Image URL"
           />
-          <Button variant="primary" onClick={handleAddSliderImage} style={{marginTop: '20px'}}>
+          <Button variant="primary" onClick={handleAddSliderImage} style={{ marginTop: '20px' }}>
             Add Slider Image
           </Button>
         </div>
@@ -271,16 +282,16 @@ const ContentHome = () => {
             onChange={(e) => handleChange(e, 'newTitleWord')}
             placeholder="New Title Word"
           />
-          <h5 style = {{marginTop: '10px'}}>Colour</h5>
+          <h5 style={{ marginTop: '10px' }}>Colour</h5>
           <input
             type="color"
             className="form-control"
             name="color"
             value={formData.newTitleWord.color}
             onChange={(e) => handleChange(e, 'newTitleWord')}
-            placeholder="New Title Color" 
+            placeholder="New Title Color"
           />
-          <Button variant="primary" onClick={handleAddTitleWord} style={{marginTop: '20px'}}>
+          <Button variant="primary" onClick={handleAddTitleWord} style={{ marginTop: '20px' }}>
             Add Title Word
           </Button>
         </div>
@@ -358,10 +369,12 @@ const ContentHome = () => {
                 placeholder={`Pointer ${num} Description`}
               />
             </div>
-          </div>
+         
+
+ </div>
         ))}
 
-        <h2 style={{marginBottom: '20px'}}>Impact</h2>
+        <h2 style={{ marginBottom: '20px' }}>Impact</h2>
         <h4>Image Url</h4>
         <div className="form-group">
           <input
@@ -428,11 +441,11 @@ const ContentHome = () => {
           />
         </div>
 
-        <h2 style={{marginBottom: '20px'}}>Student Testimonials</h2>
+        <h2 style={{ marginBottom: '20px' }}>Student Testimonials</h2>
         {formData.testimonials.map((testimonial, index) => (
           <div key={index} className="testimonial-item">
             <h4>Testimonial {index + 1}</h4>
-            <h5 style={{marginTop: '20px'}}>Name</h5>
+            <h5 style={{ marginTop: '20px' }}>Name</h5>
             <div className="form-group">
               <input
                 type="text"
@@ -464,7 +477,7 @@ const ContentHome = () => {
                 placeholder="Quote"
               />
             </div>
-            <Button variant="danger" onClick={() => handleRemoveTestimonial(index)} style={{marginBottom: '20px'}}>
+            <Button variant="danger" onClick={() => handleRemoveTestimonial(index)} style={{ marginBottom: '20px' }}>
               <i className="fas fa-trash-alt"></i>
             </Button>
           </div>
@@ -473,110 +486,111 @@ const ContentHome = () => {
           Add Testimonial
         </Button>
 
-        <h2 style={{marginBottom: '20px', marginTop: '20px'}}>Initiatives List</h2>
-{formData.events.map((event, index) => (
-  <div key={index} className="initiative-item">
-    <h4>Initiative {index + 1}</h4>
-    <h5 style={{marginTop: '20px'}}>Name</h5>
-    <div className="form-group">
-      <input
-        type="text"
-        className="form-control"
-        name="name"
-        value={event.name}
-        onChange={(e) => handleChange(e, 'events', index)}
-        placeholder="Name"
-      />
-    </div>
-    <h5>Description</h5>
-    <div className="form-group">
-      <textarea
-        className="form-control"
-        name="description"
-        value={event.description}
-        onChange={(e) => handleChange(e, 'events', index)}
-        placeholder="Description"
-      />
-    </div>
-    <h5>Image URL</h5>
-    <div className="form-group">
-      <input
-        type="text"
-        className="form-control"
-        name="imageUrl"
-        value={event.imageUrl}
-        onChange={(e) => handleChange(e, 'events', index)}
-        placeholder="Image URL"
-      />
-       </div>
-    <h5>Image Width (use %)</h5>
-    <div className="form-group">
-      <input
-        type="text"
-        className="form-control"
-        name="imageWidth"
-        value={event.imageWidth}
-        onChange={(e) => handleChange(e, 'events', index)}
-        placeholder="Image Width"
-      />
-    </div>
-    <h5>Image Height (use %)</h5>
-    <div className="form-group">
-      <input
-        type="text"
-        className="form-control"
-        name="imageHeight"
-        value={event.imageHeight}
-        onChange={(e) => handleChange(e, 'events', index)}
-        placeholder="Image Height"
-      />
-    </div>
-    <h5>Video URL</h5>
-    <div className="form-group">
-      <input
-        type="text"
-        className="form-control"
-        name="videoUrl"
-        value={event.videoUrl}
-        onChange={(e) => handleChange(e, 'events', index)}
-        placeholder="Video URL"
-      />
-    </div>
-    <h5>Video Width (use %)</h5>
-    <div className="form-group">
-      <input
-        type="text"
-        className="form-control"
-        name="videoWidth"
-        value={event.videoWidth}
-        onChange={(e) => handleChange(e, 'events', index)}
-        placeholder="Video Width"
-      />
-    </div>
-    <h5>Video Height (use %)</h5>
-    <div className="form-group">
-      <input
-        type="text"
-        className="form-control"
-        name="videoHeight"
-        value={event.videoHeight}
-        onChange={(e) => handleChange(e, 'events', index)}
-        placeholder="Video Height"
-      />
-    </div>
-    <Button variant="danger" onClick={() => handleRemoveEvent(index)} style={{marginBottom: '20px'}}>
-      <i className="fas fa-trash-alt"></i>
-    </Button>
-  </div>
-))}
-<Button variant="primary" onClick={handleAddEvent}>
-  Add Initiative
-</Button>
-        <h2 style={{marginBottom: '20px', marginTop: '20px'}}>Main Events</h2>
+        <h2 style={{ marginBottom: '20px', marginTop: '20px' }}>Initiatives List</h2>
+        {formData.events.map((event, index) => (
+          <div key={index} className="initiative-item">
+            <h4>Initiative {index + 1}</h4>
+            <h5 style={{ marginTop: '20px' }}>Name</h5>
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control"
+                name="name"
+                value={event.name}
+                onChange={(e) => handleChange(e, 'events', index)}
+                placeholder="Name"
+              />
+            </div>
+            <h5>Description</h5>
+            <div className="form-group">
+              <textarea
+                className="form-control"
+                name="description"
+                value={event.description}
+                onChange={(e) => handleChange(e, 'events', index)}
+                placeholder="Description"
+              />
+            </div>
+            <h5>Image URL</h5>
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control"
+                name="imageUrl"
+                value={event.imageUrl}
+                onChange={(e) => handleChange(e, 'events', index)}
+                placeholder="Image URL"
+              />
+            </div>
+            <h5>Image Width (use %)</h5>
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control"
+                name="imageWidth"
+                value={event.imageWidth}
+                onChange={(e) => handleChange(e, 'events', index)}
+                placeholder="Image Width"
+              />
+            </div>
+            <h5>Image Height (use %)</h5>
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control"
+                name="imageHeight"
+                value={event.imageHeight}
+                onChange={(e) => handleChange(e, 'events', index)}
+                placeholder="Image Height"
+              />
+            </div>
+            <h5>Video URL</h5>
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control"
+                name="videoUrl"
+                value={event.videoUrl}
+                onChange={(e) => handleChange(e, 'events', index)}
+                placeholder="Video URL"
+              />
+            </div>
+            <h5>Video Width (use %)</h5>
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control"
+                name="videoWidth"
+                value={event.videoWidth}
+                onChange={(e) => handleChange(e, 'events', index)}
+                placeholder="Video Width"
+              />
+            </div>
+            <h5>Video Height (use %)</h5>
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control"
+                name="videoHeight"
+                value={event.videoHeight}
+                onChange={(e) => handleChange(e, 'events', index)}
+                placeholder="Video Height"
+              />
+            </div>
+            <Button variant="danger" onClick={() => handleRemoveEvent(index)} style={{ marginBottom: '20px' }}>
+              <i className="fas fa-trash-alt"></i>
+            </Button>
+          </div>
+        ))}
+        <Button variant="primary" onClick={handleAddEvent}>
+          Add Initiative
+        </Button>
+
+        <h2 style={{ marginBottom: '20px', marginTop: '20px' }}>Main Events</h2>
         {formData.mainevent.map((event, index) => (
           <div key={index} className="mainevent-item">
             <h4>Main Event {index + 1}</h4>
-            <h5 style={{marginTop: '20px'}}>Image URL</h5>
+            <h5 style={{ marginTop: '20px' }}>Image URL</h5>
             <div className="form-group">
               <input
                 type="text"
@@ -641,12 +655,12 @@ const ContentHome = () => {
                 placeholder="Description"
               />
             </div>
-            <Button variant="danger" onClick={() => handleRemoveMainEvent(index)} style={{marginBottom: '20px'}}>
+            <Button variant="danger" onClick={() => handleRemoveMainEvent(index)} style={{ marginBottom: '20px' }}>
               <i className="fas fa-trash-alt"></i>
             </Button>
           </div>
         ))}
-        <Button variant="primary" onClick={handleAddMainEvent} style={{marginBottom: '20px'}}>
+        <Button variant="primary" onClick={handleAddMainEvent} style={{ marginBottom: '20px' }}>
           Add Main Event
         </Button>
 
@@ -658,14 +672,13 @@ const ContentHome = () => {
             borderColor: '#662d91',
             width: '15%',
             padding: '10px',
-            fontSize: '16px'
+            fontSize: '16px',
           }}
           disabled={loading}
         >
           {loading ? 'Updating...' : 'Update'}
         </button>
       </form>
-      {/* Modal for error message */}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Error</Modal.Title>
