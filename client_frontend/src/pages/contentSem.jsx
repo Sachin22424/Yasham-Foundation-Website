@@ -19,7 +19,7 @@ const ContentSem = () => {
     const fetchSemData = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('https://yasham-foundation-website-production.up.railway.app/api/sem');
+            const response = await axios.get('https://yasham-foundation-website.onrender.com/api/sem');
             const data = response.data[0]; // Assuming the API returns an array and we need the first item
             setFormData({
                 title: data.title || '',

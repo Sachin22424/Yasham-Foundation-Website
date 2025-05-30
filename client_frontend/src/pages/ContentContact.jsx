@@ -20,10 +20,11 @@ const ContentContact = () => {
   const [error, setError] = useState(''); // Error state for validation
   const [showModal, setShowModal] = useState(false); // State for modal visibility
 
+  // ...existing code...
   const fetchContactContent = async () => {
     try {
       setLoading(true);
-      const deployedUrl = 'https://yasham-foundation-website-production.up.railway.app/api/contact';
+      const deployedUrl = 'https://yasham-foundation-website.onrender.com/api/contact';
       const localUrl = 'http://localhost:5000/api/contact';
       const response = await axios.get(deployedUrl);
       const fetchedData = response.data;
@@ -46,6 +47,7 @@ const ContentContact = () => {
       }
     }
   };
+// ...existing code...
 
   // Fetch existing data
   useEffect(() => {

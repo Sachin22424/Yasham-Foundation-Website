@@ -13,28 +13,28 @@ const ContentMentorForm = () => {
     const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
-        const fetchMentors = async () => {
-            try {
-                const response = await axios.get('https://yasham-foundation-website-production.up.railway.app/api/mentors');
-                setMentors(response.data.slice(0, 5)); // Get the most recent 5 mentor applications
-            } catch (error) {
-                console.error('Error fetching mentors:', error);
-            }
-        };
+    const fetchMentors = async () => {
+        try {
+            const response = await axios.get('https://yasham-foundation-website.onrender.com/api/mentors');
+            setMentors(response.data.slice(0, 5)); // Get the most recent 5 mentor applications
+        } catch (error) {
+            console.error('Error fetching mentors:', error);
+        }
+    };
 
-        const fetchContactInfo = async () => {
-            try {
-                const response = await axios.get('https://yasham-foundation-website.onrender.com/api/contact');
-                setGreetingTitle(response.data.mentorFormModalTitle);
-                setGreetingDescription(response.data.mentorFormModalBody);
-            } catch (error) {
-                console.error('Error fetching contact info:', error);
-            }
-        };
+    const fetchContactInfo = async () => {
+        try {
+            const response = await axios.get('https://yasham-foundation-website.onrender.com/api/contact');
+            setGreetingTitle(response.data.mentorFormModalTitle);
+            setGreetingDescription(response.data.mentorFormModalBody);
+        } catch (error) {
+            console.error('Error fetching contact info:', error);
+        }
+    };
 
-        fetchMentors();
-        fetchContactInfo();
-    }, []);
+    fetchMentors();
+    fetchContactInfo();
+}, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

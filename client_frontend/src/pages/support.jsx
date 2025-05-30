@@ -26,7 +26,7 @@ const Support = () => {
     useEffect(() => {
         const fetchSupportData = async () => {
             try {
-                const deployedUrl = 'https://yasham-foundation-website-production.up.railway.app/api/about';
+                const deployedUrl = 'https://yasham-foundation-website.onrender.com/api/about';
                 const localUrl = 'http://localhost:5000/api/about';
                 let response;
                 try {

@@ -27,15 +27,17 @@ const Contact = () => {
     const [showThankYou, setShowThankYou] = useState(false);
     const [error, setError] = useState('');
 
+    // ...existing code...
     useEffect(() => {
         const fetchContactInfo = async () => {
             try {
-                const deployedUrl = 'https://yasham-foundation-website-production.up.railway.app/api/contact';
+                const deployedUrl = 'https://yasham-foundation-website.onrender.com/api/contact';
                 const response = await axios.get(deployedUrl);
                 setContactInfo(response.data);
             } catch (error) {
                 console.error('Error fetching contact info from deployed URL, trying local URL:', error);
                 try {
+                    const localUrl = 'http://localhost:5000/api/contact';
                     const response = await axios.get(localUrl);
                     setContactInfo(response.data);
                 } catch (localError) {
@@ -46,6 +48,7 @@ const Contact = () => {
 
         fetchContactInfo();
     }, []);
+// ...existing code...
 
     const validateEmailOrPhone = (input) => {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

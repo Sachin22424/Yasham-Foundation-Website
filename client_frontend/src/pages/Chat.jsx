@@ -11,10 +11,11 @@ const Home = () => {
   const [selectedInitiative, setSelectedInitiative] = useState(null);
   const navigate = useNavigate();
 
+  // ...existing code...
   useEffect(() => {
     const fetchHomeData = async () => {
       try {
-        const response = await axios.get('https://yasham-foundation-website-production.up.railway.app/api/home');
+        const response = await axios.get('https://yasham-foundation-website.onrender.com/api/home');
         setHomeData(response.data);
       } catch (error) {
         console.error("Error fetching home data", error);
@@ -23,6 +24,7 @@ const Home = () => {
 
     fetchHomeData();
   }, []);
+// ...existing code...
 
   const handleKnowMoreClick = () => {
     navigate('/about'); // Example: Navigate to the About page

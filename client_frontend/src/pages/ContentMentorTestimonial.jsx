@@ -16,7 +16,7 @@ const ContentMentorTestimonial = () => {
     const fetchTestimonials = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('https://yasham-foundation-website-production.up.railway.app/api/mentor-testimonials');
+            const response = await axios.get('https://yasham-foundation-website.onrender.com/api/mentor-testimonials');
             setFormData({ testimonials: response.data, newTestimonial: { name: '', position: '', image: '', feedback: '' } });
             setLoading(false);
         } catch (error) {

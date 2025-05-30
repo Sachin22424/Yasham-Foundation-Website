@@ -10,7 +10,7 @@ const SHB = () => {
     useEffect(() => {
         const fetchShbData = async () => {
             try {
-                const response = await axios.get('https://yasham-foundation-website-production.up.railway.app/api/shb');
+                const response = await axios.get('https://yasham-foundation-website.onrender.com/api/shb');
                 setShbData(response.data[0]); // Assuming the API returns an array and we need the first item
             } catch (error) {
                 console.error('Error fetching SHB data:', error);

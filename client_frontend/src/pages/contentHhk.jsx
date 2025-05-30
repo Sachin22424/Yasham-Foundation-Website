@@ -16,10 +16,11 @@ const ContentHhk = () => {
     const [error, setError] = useState(''); // Error state for validation
     const [showModal, setShowModal] = useState(false); // State for modal visibility
 
+    // ...existing code...
     const fetchHhkData = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('https://yasham-foundation-website-production.up.railway.app/api/hhk');
+            const response = await axios.get('https://yasham-foundation-website.onrender.com/api/hhk');
             const data = response.data[0]; // Assuming the API returns an array and we need the first item
             setFormData({
                 title: data.title || '',
@@ -34,32 +35,8 @@ const ContentHhk = () => {
             setLoading(false);
         }
     };
+// ...existing code...
 
-    useEffect(() => {
-        fetchHhkData();
-    }, []);
-
-    useEffect(() => {
-        // Add the class to the body element
-        document.body.classList.add('contenthome-background');
-
-        // Remove the class when the component is unmounted
-        return () => {
-            document.body.classList.remove('contenthome-background');
-        };
-    }, []);
-
-    // Handle input change
-    const handleChange = (e, field) => {
-        const { name, value } = e.target;
-        if (field) {
-            setFormData({ ...formData, [field]: { ...formData[field], [name]: value } });
-        } else {
-            setFormData({ ...formData, [name]: value });
-        }
-    };
-
-    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -74,7 +51,7 @@ const ContentHhk = () => {
             setLoading(true);
             if (id) {
                 // Update existing HHK entry
-                await axios.put(`https://yasham-foundation-website-production.up.railway.app/api/hhk/${id}`, formData);
+                await axios.put(`https://yasham-foundation-website.onrender.com/api/hhk/${id}`, formData);
             } else {
                 // Add new HHK entry
                 await axios.post('https://yasham-foundation-website.onrender.com/api/hhk', formData);
@@ -89,6 +66,7 @@ const ContentHhk = () => {
             setLoading(false);
         }
     };
+// ...existing code...
 
     // Handle add new image
     const handleAddImage = () => {

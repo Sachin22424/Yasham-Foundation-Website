@@ -36,7 +36,7 @@ const MentorForm = () => {
     useEffect(() => {
         const fetchContactInfo = async () => {
             try {
-                const response = await axios.get('https://yasham-foundation-website-production.up.railway.app/api/contact');
+                const response = await axios.get('https://yasham-foundation-website.onrender.com/api/contact');
                 const contactInfo = response.data;
                 setModalTitle(contactInfo.mentorFormModalTitle);
                 setModalBody(contactInfo.mentorFormModalBody);

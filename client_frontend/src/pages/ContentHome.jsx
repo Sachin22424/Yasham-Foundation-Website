@@ -47,9 +47,9 @@ const ContentHome = () => {
   };
 
   // Fetch existing data
-  useEffect(() => {
+    useEffect(() => {
     const localUrl = 'http://localhost:5000/api/home';
-    const deployedUrl = 'https://yasham-foundation-website-production.up.railway.app/api/home';
+    const deployedUrl = 'https://yasham-foundation-website.onrender.com/api/home';
 
     fetchHomeContent(deployedUrl).catch(() => fetchHomeContent(localUrl));
   }, []);
@@ -205,7 +205,7 @@ const ContentHome = () => {
     try {
       setLoading(true);
       const baseUrl = process.env.NODE_ENV === 'production'
-        ? 'https://yasham-foundation-website-production.up.railway.app'
+        ? 'https://yasham-foundation-website.onrender.com'
         : 'http://localhost:5000';
       const url = `${baseUrl}/api/home/${id}`;
 

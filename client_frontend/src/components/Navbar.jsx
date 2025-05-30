@@ -12,7 +12,7 @@ const Navbar = () => {
     useEffect(() => {
         const fetchNavInfo = async () => {
             try {
-                const response = await axios.get('https://yasham-foundation-website-production.up.railway.app/api/nav');
+                const response = await axios.get('https://yasham-foundation-website.onrender.com/api/nav');
                 setNavInfo(response.data);
             } catch (error) {
                 console.error('Error fetching nav info:', error);

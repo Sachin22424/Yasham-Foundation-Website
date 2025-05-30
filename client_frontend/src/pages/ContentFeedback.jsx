@@ -12,10 +12,11 @@ const ContentFeedback = () => {
     const [success, setSuccess] = useState('');
     const [showModal, setShowModal] = useState(false);
 
+    // ...existing code...
     useEffect(() => {
         const fetchFeedbacks = async () => {
             try {
-                const response = await axios.get('https://yasham-foundation-website-production.up.railway.app/api/feedback');
+                const response = await axios.get('https://yasham-foundation-website.onrender.com/api/feedback');
                 setFeedbacks(response.data.slice(0, 5)); // Show only the top 5 newest feedbacks
             } catch (error) {
                 console.error('Error fetching feedbacks:', error);
@@ -35,6 +36,7 @@ const ContentFeedback = () => {
         fetchFeedbacks();
         fetchContactInfo();
     }, []);
+// ...existing code...
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -76,6 +78,7 @@ const ContentFeedback = () => {
             console.error('Error exporting feedbacks:', error);
         }
     };
+// ...existing code...
 
     return (
         <div className="contentfeedback-wrapper">

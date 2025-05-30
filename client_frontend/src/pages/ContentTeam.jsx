@@ -22,7 +22,7 @@ const ContentTeam = () => {
     const [showModal, setShowModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
 
-    const apiBaseUrl = 'https://yasham-foundation-website-production.up.railway.app/api/team';
+    const apiBaseUrl = 'https://yasham-foundation-website.onrender.com/api/team';
 
     const fetchTeamData = async () => {
         try {

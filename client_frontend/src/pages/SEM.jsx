@@ -10,7 +10,7 @@ const SEM = () => {
     useEffect(() => {
         const fetchSemData = async () => {
             try {
-                const response = await axios.get('https://yasham-foundation-website-production.up.railway.app/api/sem');
+                const response = await axios.get('https://yasham-foundation-website.onrender.com/api/sem');
                 setSemData(response.data[0]); // Assuming the API returns an array and we need the first item
             } catch (error) {
                 console.error('Error fetching SEM data:', error);
