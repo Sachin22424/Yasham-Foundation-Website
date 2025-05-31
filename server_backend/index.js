@@ -46,8 +46,8 @@ app.get('/', (req, res) => {
 
 const allowedOrigins = [
     'http://localhost:5173',
-    'http://www.yashamfoundation.org',
-    'https://www.yashamfoundation.org'
+    'http://www.yashamfoundaon.org',
+    'https://www.yashamfoundaon.org'
 ];
 
 app.use(cors({
