@@ -21,8 +21,31 @@ const app = express();
 require('dotenv').config();
 
 app.use(express.json());
-app.use(cors());
 
+// Define allowed origins (fix typo in domain)
+const allowedOrigins = [
+    'http://localhost:5173', // Development
+    'http://www.yashamfou', // Production (HTTP)
+    'https://www.yashamfoun' // Production (HTTPS)
+];
+
+// Apply CORS middleware with custom origin check
+app.use(cors({
+    origin: function (origin, callback) {
+        // Allow requests with no origin (e.g., mobile apps, curl)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        } else {
+            return callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-api-key'], // Allowed headers
+    credentials: false // Set to true if using cookies or auth headers
+}));
+
+// Define routes after CORS middleware
 app.use('/api/home', homeRoute);
 app.use('/api/contact', contactRoute);
 app.use('/api/about', aboutRoute);
@@ -43,24 +66,6 @@ app.use('/api/nav', navRoute);
 app.get('/', (req, res) => {
     res.send('Hello World');
 });
-
-const allowedOrigins = [
-    'http://localhost:5173',
-    'http://www.yashamfoundaon.org',
-    'https://www.yashamfoundaon.org'
-];
-
-app.use(cors({
-    origin: function (origin, callback) {
-        // allow requests with no origin (like mobile apps, curl, etc.)
-        if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) !== -1) {
-            return callback(null, true);
-        } else {
-            return callback(new Error('Not allowed by CORS'));
-        }
-    }
-}));
 
 const port = process.env.PORT || 5000;
 const uri = process.env.ATLAS_URI;
