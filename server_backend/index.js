@@ -25,8 +25,8 @@ app.use(express.json());
 // Define allowed origins (fix typo in domain)
 const allowedOrigins = [
     'http://localhost:5173', // Development
-    'http://www.yashamfou', // Production (HTTP)
-    'https://www.yashamfoun' // Production (HTTPS)
+    'http://www.yashamfoundation.org', // Production (HTTP)
+    'https://www.yashamfoundation.org' // Production (HTTPS)
 ];
 
 // Apply CORS middleware with custom origin check
