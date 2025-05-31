@@ -12,7 +12,7 @@ const Navbar = () => {
     useEffect(() => {
         const fetchNavInfo = async () => {
             try {
-                const response = await axios.get('https://yasham-foundation-website.onrender.com/api/nav');
+                const response = await axios.get(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/nav`);
                 setNavInfo(response.data);
             } catch (error) {
                 console.error('Error fetching nav info:', error);
