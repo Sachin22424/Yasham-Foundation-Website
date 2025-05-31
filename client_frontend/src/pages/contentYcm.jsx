@@ -19,7 +19,7 @@ const ContentYcm = () => {
     const fetchYcmData = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('https://yasham-foundation-website.onrender.com/api/ycm');
+            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/ycm`);
             const data = response.data[0]; // Assuming the API returns an array and we need the first item
             setFormData({
                 title: data.title || '',
@@ -74,10 +74,10 @@ const ContentYcm = () => {
             setLoading(true);
             if (id) {
                 // Update existing YCM entry
-                await axios.put(`https://yasham-foundation-website.onrender.com/api/ycm/${id}`, formData);
+                await axios.put(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/ycm/${id}`, formData);
             } else {
                 // Add new YCM entry
-                await axios.post('https://yasham-foundation-website.onrender.com/api/ycm', formData);
+                await axios.post(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/ycm`, formData);
             }
             fetchYcmData();
             setFormData({ title: '', description: '', images: [], newImage: { url: '', caption: '' } });

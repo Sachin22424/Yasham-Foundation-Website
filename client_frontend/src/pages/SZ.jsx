@@ -10,7 +10,7 @@ const SZ = () => {
     useEffect(() => {
         const fetchSzData = async () => {
             try {
-                const response = await axios.get('https://yasham-foundation-website.onrender.com/api/sz');
+                const response = await axios.get(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/sz`);
                 setSzData(response.data[0]); // Assuming the API returns an array and we need the first item
             } catch (error) {
                 console.error('Error fetching SZ data:', error);

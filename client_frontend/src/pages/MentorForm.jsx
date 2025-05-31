@@ -36,7 +36,7 @@ const MentorForm = () => {
     useEffect(() => {
         const fetchContactInfo = async () => {
             try {
-                const response = await axios.get('https://yasham-foundation-website.onrender.com/api/contact');
+                const response = await axios.get(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/contact`);
                 const contactInfo = response.data;
                 setModalTitle(contactInfo.mentorFormModalTitle);
                 setModalBody(contactInfo.mentorFormModalBody);
@@ -88,7 +88,7 @@ const MentorForm = () => {
         }
 
         try {
-            const response = await axios.post('https://yasham-foundation-website.onrender.com/api/mentors', formData);
+            const response = await axios.post(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/mentors`, formData);
             if (response.status === 201) {
                 setShowThankYou(true);
                 setFormData({

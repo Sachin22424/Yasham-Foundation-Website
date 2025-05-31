@@ -31,7 +31,7 @@ const Contact = () => {
     useEffect(() => {
         const fetchContactInfo = async () => {
             try {
-                const deployedUrl = 'https://yasham-foundation-website.onrender.com/api/contact';
+                const deployedUrl = `${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/contact`;
                 const response = await axios.get(deployedUrl);
                 setContactInfo(response.data);
             } catch (error) {
@@ -66,7 +66,7 @@ const Contact = () => {
         }
 
         try {
-            const deployedFeedbackUrl = 'https://yasham-foundation-website.onrender.com/api/feedback';
+            const deployedFeedbackUrl = `${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/feedback`;
             const response = await axios.post(deployedFeedbackUrl, {
                 name,
                 emailOrPhone,

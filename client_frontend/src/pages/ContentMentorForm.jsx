@@ -15,7 +15,7 @@ const ContentMentorForm = () => {
     useEffect(() => {
     const fetchMentors = async () => {
         try {
-            const response = await axios.get('https://yasham-foundation-website.onrender.com/api/mentors');
+            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/mentors`);
             setMentors(response.data.slice(0, 5)); // Get the most recent 5 mentor applications
         } catch (error) {
             console.error('Error fetching mentors:', error);
@@ -24,7 +24,7 @@ const ContentMentorForm = () => {
 
     const fetchContactInfo = async () => {
         try {
-            const response = await axios.get('https://yasham-foundation-website.onrender.com/api/contact');
+            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/contact`);
             setGreetingTitle(response.data.mentorFormModalTitle);
             setGreetingDescription(response.data.mentorFormModalBody);
         } catch (error) {
@@ -47,7 +47,7 @@ const ContentMentorForm = () => {
         }
 
         try {
-            const response = await axios.put('https://yasham-foundation-website.onrender.com/api/contact', {
+            const response = await axios.put(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/contact`, {
                 mentorFormModalTitle: greetingTitle,
                 mentorFormModalBody: greetingDescription
             });
@@ -63,7 +63,7 @@ const ContentMentorForm = () => {
 
     const handleExport = async () => {
         try {
-            const response = await axios.get('https://yasham-foundation-website.onrender.com/api/mentors/export', {
+            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/mentors/export`, {
                 responseType: 'blob'
             });
             const url = window.URL.createObjectURL(new Blob([response.data]));

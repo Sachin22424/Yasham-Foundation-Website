@@ -12,7 +12,7 @@ const Team = () => {
     useEffect(() => {
         const fetchTeamData = async () => {
             try {
-                const response = await axios.get('https://yasham-foundation-website.onrender.com/api/team');
+                const response = await axios.get(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/team`);
                 const data = response.data;
                 setFounderMembers(data.filter(member => member.type === 'founder'));
                 setSupportMembers(data.filter(member => member.type === 'support'));

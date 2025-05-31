@@ -16,7 +16,7 @@ const ContentFeedback = () => {
     useEffect(() => {
         const fetchFeedbacks = async () => {
             try {
-                const response = await axios.get('https://yasham-foundation-website.onrender.com/api/feedback');
+                const response = await axios.get(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/feedback`);
                 setFeedbacks(response.data.slice(0, 5)); // Show only the top 5 newest feedbacks
             } catch (error) {
                 console.error('Error fetching feedbacks:', error);
@@ -25,7 +25,7 @@ const ContentFeedback = () => {
 
         const fetchContactInfo = async () => {
             try {
-                const response = await axios.get('https://yasham-foundation-website.onrender.com/api/contact');
+                const response = await axios.get(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/contact`);
                 setFeedbackTitle(response.data.feedbacktitle);
                 setFeedbackMessage(response.data.feedbackmessage);
             } catch (error) {
@@ -49,7 +49,7 @@ const ContentFeedback = () => {
         }
 
         try {
-            const response = await axios.put('https://yasham-foundation-website.onrender.com/api/contact', {
+            const response = await axios.put(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/contact`, {
                 feedbacktitle: feedbackTitle,
                 feedbackmessage: feedbackMessage
             });
@@ -65,7 +65,7 @@ const ContentFeedback = () => {
 
     const handleExport = async () => {
         try {
-            const response = await axios.get('https://yasham-foundation-website.onrender.com/api/feedback/export', {
+            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/feedback/export`, {
                 responseType: 'blob'
             });
             const url = window.URL.createObjectURL(new Blob([response.data]));

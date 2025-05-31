@@ -16,7 +16,7 @@ const Mission = () => {
     useEffect(() => {
         const fetchMissionData = async () => {
             const localUrl = 'http://localhost:5000/api/about';
-            const deployedUrl = 'https://yasham-foundation-website.onrender.com/api/about';
+            const deployedUrl = `${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/about`;
 
             try {
                 const response = await axios.get(deployedUrl);

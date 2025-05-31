@@ -16,7 +16,7 @@ const ContentMentorTestimonial = () => {
     const fetchTestimonials = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('https://yasham-foundation-website.onrender.com/api/mentor-testimonials');
+            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/mentor-testimonials`);
             setFormData({ testimonials: response.data, newTestimonial: { name: '', position: '', image: '', feedback: '' } });
             setLoading(false);
         } catch (error) {
@@ -64,7 +64,7 @@ const ContentMentorTestimonial = () => {
 
         try {
             setLoading(true);
-            await axios.post('https://yasham-foundation-website.onrender.com/api/mentor-testimonials', formData.newTestimonial);
+            await axios.post(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/mentor-testimonials`, formData.newTestimonial);
             fetchTestimonials();
             setLoading(false);
             setError(''); // Clear error message on successful submission
@@ -88,7 +88,7 @@ const ContentMentorTestimonial = () => {
         try {
             setLoading(true);
             const testimonialId = formData.testimonials[index]._id;
-            await axios.delete(`https://yasham-foundation-website.onrender.com/api/mentor-testimonials/${testimonialId}`);
+            await axios.delete(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/mentor-testimonials/${testimonialId}`);
             fetchTestimonials();
             setLoading(false);
         } catch (error) {

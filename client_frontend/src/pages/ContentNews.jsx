@@ -16,7 +16,7 @@ const ContentNews = () => {
     const fetchNews = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('https://yasham-foundation-website.onrender.com/api/news');
+            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/news`);
             setFormData({ news: response.data, newNews: { image: { url: '', width: '', height: '' }, heading: '', description: '', buttonText: '', articleUrl: '' } });
             setLoading(false);
         } catch (error) {
@@ -66,7 +66,7 @@ const ContentNews = () => {
 
         try {
             setLoading(true);
-            await axios.put(`https://yasham-foundation-website.onrender.com/api/news/${formData.news[0]._id}`, formData.news[0]);
+            await axios.put(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/news/${formData.news[0]._id}`, formData.news[0]);
             fetchNews();
             setLoading(false);
             setError(''); // Clear error message on successful submission

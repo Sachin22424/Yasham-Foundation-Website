@@ -19,7 +19,7 @@ const ContentSz = () => {
     const fetchSzData = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('https://yasham-foundation-website.onrender.com/api/sz');
+            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/sz`);
             const data = response.data[0]; // Assuming the API returns an array and we need the first item
             setFormData({
                 title: data.title || '',
@@ -74,10 +74,10 @@ const ContentSz = () => {
             setLoading(true);
             if (id) {
                 // Update existing SZ entry
-                await axios.put(`https://yasham-foundation-website.onrender.com/api/sz/${id}`, formData);
+                await axios.put(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/sz/${id}`, formData);
             } else {
                 // Add new SZ entry
-                await axios.post('https://yasham-foundation-website.onrender.com/api/sz', formData);
+                await axios.post(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/sz`, formData);
             }
             fetchSzData();
             setFormData({ title: '', description: '', images: [], newImage: { url: '', caption: '' } });

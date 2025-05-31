@@ -22,7 +22,7 @@ const ContentTeam = () => {
     const [showModal, setShowModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
 
-    const apiBaseUrl = 'https://yasham-foundation-website.onrender.com/api/team';
+    const apiBaseUrl = `${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/team`;
 
     const fetchTeamData = async () => {
         try {

@@ -19,7 +19,7 @@ const ContentStudentTestimonial = () => {
     const [showModal, setShowModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
 
-    const apiBaseUrl = 'https://yasham-foundation-website.onrender.com/api/student-testimonials';
+    const apiBaseUrl = `${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/student-testimonials`;
 
     const fetchTestimonials = async () => {
         try {

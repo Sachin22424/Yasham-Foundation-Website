@@ -24,7 +24,7 @@ const ContentContact = () => {
   const fetchContactContent = async () => {
     try {
       setLoading(true);
-      const deployedUrl = 'https://yasham-foundation-website.onrender.com/api/contact';
+      const deployedUrl = `${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/contact`;
       const localUrl = 'http://localhost:5000/api/contact';
       const response = await axios.get(deployedUrl);
       const fetchedData = response.data;
@@ -91,7 +91,7 @@ const ContentContact = () => {
 
     try {
       setLoading(true);
-      const url = `https://yasham-foundation-website.onrender.com/api/contact/${id}` || `http://localhost:5000/api/contact/${id}`;
+      const url = `${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/contact/${id}`;
       await axios.put(url, formData);
       alert('Contact content updated successfully!');
       setLoading(false);

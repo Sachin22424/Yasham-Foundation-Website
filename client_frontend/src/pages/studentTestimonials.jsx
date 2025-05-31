@@ -11,7 +11,7 @@ const StudentTestimonials = () => {
     useEffect(() => {
         const fetchTestimonials = async () => {
             try {
-                const response = await axios.get('https://yasham-foundation-website.onrender.com/api/student-testimonials');
+                const response = await axios.get(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/student-testimonials`);
                 setTestimonials(response.data);
             } catch (error) {
                 console.error('Error fetching student testimonials:', error);

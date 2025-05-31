@@ -30,7 +30,7 @@ const Login = () => {
         }
 
         try {
-            const response = await fetch('https://yasham-foundation-website.onrender.com/api/users/login', {
+            const response = await fetch(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/users/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

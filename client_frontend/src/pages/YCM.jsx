@@ -10,7 +10,7 @@ const YCM = () => {
     useEffect(() => {
         const fetchYcmData = async () => {
             try {
-                const response = await axios.get('https://yasham-foundation-website.onrender.com/api/ycm');
+                const response = await axios.get(`${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/ycm`);
                 setYcmData(response.data[0]); // Assuming the API returns an array and we need the first item
             } catch (error) {
                 console.error('Error fetching YCM data:', error);

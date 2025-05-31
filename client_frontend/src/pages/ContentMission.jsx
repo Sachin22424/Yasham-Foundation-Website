@@ -21,7 +21,7 @@ const ContentMission = () => {
     const fetchMissionContent = async () => {
         try {
             setLoading(true);
-            const deployedUrl = 'https://yasham-foundation-website.onrender.com/api/about';
+            const deployedUrl = `${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/about`;
             const localUrl = 'http://localhost:5000/api/about';
             let response;
             try {
@@ -112,7 +112,7 @@ const ContentMission = () => {
                     missionurl: formData.missionurl
                 }
             };
-            const deployedUrl = `https://yasham-foundation-website.onrender.com/api/about/${id}`;
+            const deployedUrl = `${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/about/${id}`;
             const localUrl = `http://localhost:5000/api/about/${id}`;
             try {
                 await axios.put(deployedUrl, updatedData);

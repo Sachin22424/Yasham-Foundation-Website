@@ -49,7 +49,7 @@ const ContentHome = () => {
   // Fetch existing data
     useEffect(() => {
     const localUrl = 'http://localhost:5000/api/home';
-    const deployedUrl = 'https://yasham-foundation-website.onrender.com/api/home';
+    const deployedUrl = `${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/home`;
 
     fetchHomeContent(deployedUrl).catch(() => fetchHomeContent(localUrl));
   }, []);
@@ -205,7 +205,7 @@ const ContentHome = () => {
     try {
       setLoading(true);
       const baseUrl = process.env.NODE_ENV === 'production'
-        ? 'https://yasham-foundation-website.onrender.com'
+        ? `${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/home`
         : 'http://localhost:5000';
       const url = `${baseUrl}/api/home/${id}`;
 
