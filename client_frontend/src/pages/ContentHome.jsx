@@ -205,7 +205,7 @@ const ContentHome = () => {
     try {
       setLoading(true);
       const baseUrl = process.env.NODE_ENV === 'production'
-        ? `${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/home`
+        ? `${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}`
         : 'http://localhost:5000';
       const url = `${baseUrl}/home/${id}`;
 
