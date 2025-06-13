@@ -207,7 +207,7 @@ const ContentHome = () => {
       const baseUrl = process.env.NODE_ENV === 'production'
         ? `${import.meta.env.VITE_REACT_APP_DEPLOYED_URL}/home`
         : 'http://localhost:5000';
-      const url = `${baseUrl}/api/home/${id}`;
+      const url = `${baseUrl}/home/${id}`;
 
       console.log('Submitting to:', url);
       console.log('Payload:', cleanedFormData);
