@@ -187,3 +187,95 @@
         height: 150px;
     }
 }
+
+/* Grid member images */
+.member-image {
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+    width: 150px;     /* fixed square width */
+    height: 150px;    /* same as width */
+    object-fit: cover; /* crop if needed, keep aspect ratio */
+}
+
+/* Modal images */
+.modal-image {
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+    width: 250px;     /* fixed square */
+    height: 250px;    /* same as width */
+    object-fit: cover;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .member-image {
+        width: 120px;
+        height: 120px;
+    }
+
+    .modal-image {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .member-image {
+        width: 100px;
+        height: 100px;
+    border-radius: 50%;
+
+    }
+
+    .modal-image {
+        width: 180px;
+        height: 180px;
+    }
+}
+
+@media (max-width: 576px) {
+    .member-image {
+        width: 80px;
+        height: 80px;
+    border-radius: 50%;
+
+    }
+
+    .modal-image {
+        width: 150px;
+        height: 150px;
+    }
+}
+.member-image {
+    display: block;
+    margin: 0 auto 10px;   /* horizontal center, top-aligned in container */
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    object-position: top;  /* aligns top of image to top of circle */
+}
+
+.modal-image {
+    display: block;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    object-position: top;
+}
+/* Force perfect circles everywhere (overrides previous rules) */
+.member-image,
+.modal-image {
+  aspect-ratio: 1 / 1;     /* always square */
+  height: auto;            /* auto height with aspect-ratio */
+  border-radius: 50% !important; /* ensure circle */
+}
+
+/* Modal images slightly bigger */
+.modal-image {
+  max-width: 250px;
+}

@@ -38,6 +38,7 @@ import SHB from './pages/SHB'; // Import SHB component
 import SEM from './pages/SEM'; // Import SEM component
 import HHK from './pages/HHK'; // Import HHK component
 import MentorForm from './pages/MentorForm'; // Import MentorForm component
+import International from "./pages/International";
 
 const ProtectedRoute = ({ children }) => {
   const { token } = useAuth();
@@ -86,6 +87,7 @@ function App() {
         <Route path="/sem" element={<SEM />} /> {/* Add SEM route */}
         <Route path="/hhk" element={<HHK />} /> {/* Add HHK route */}
         <Route path="/mentorform" element={<MentorForm />} /> {/* Add MentorForm route */}
+        <Route path="/international" element={<International />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       {!isLoginPage && !isContentPage && <Footer />}

@@ -29,7 +29,9 @@ const seedNavData = async () => {
                         { name: 'Saathi Haath Badhana', url: '/shb' },
                         { name: 'Sunn Zara', url: '/sz' },
                         { name: 'Hum Honge Kaamyab', url: '/hhk' },
-                        { name: 'Swacch English Mission', url: '/sem' }
+                        { name: 'Swacch English Mission', url: '/sem' },
+                        { name: 'Yasham International Program', url: '/international' }
+
                     ]
                 },
                 {

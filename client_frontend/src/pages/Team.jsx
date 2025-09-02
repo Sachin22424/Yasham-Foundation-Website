@@ -8,6 +8,8 @@ const Team = () => {
     const [selectedMember, setSelectedMember] = useState(null);
     const [founderMembers, setFounderMembers] = useState([]);
     const [supportMembers, setSupportMembers] = useState([]);
+    const [supportIntlMembers, setSupportIntlMembers] = useState([]);
+    const [socialMembers, setSocialMembers] = useState([]); // New social media team
 
     useEffect(() => {
         const fetchTeamData = async () => {
@@ -16,6 +18,8 @@ const Team = () => {
                 const data = response.data;
                 setFounderMembers(data.filter(member => member.type === 'founder'));
                 setSupportMembers(data.filter(member => member.type === 'support'));
+                setSupportIntlMembers(data.filter(member => member.type === 'internatial'));
+                setSocialMembers(data.filter(member => member.type === 'social')); // New team filter
             } catch (error) {
                 console.error('Error fetching team data:', error);
             }
@@ -30,55 +34,40 @@ const Team = () => {
         setShow(true);
     };
 
+    const renderTeamSection = (title, members, id = null) => (
+        <Card className="p-3 team-card mt-4" id={id}>
+            <Card.Body>
+                {/* ✅ Use div instead of Card.Text for headings */}
+                <div>
+                    <h2 className="section-title">{title}</h2>
+                </div>
+
+                {/* ✅ Use div instead of Card.Text for grid */}
+                <div className="team-grid mt-4">
+                    {members.map((member, index) => (
+                        <div key={index} className="team-member" onClick={() => handleShow(member)}>
+                            <img src={member.image} alt={member.name} className="member-image" />
+                            <div className="member-info">
+                                <h3>{member.name}</h3>
+                                <p>{member.position}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </Card.Body>
+        </Card>
+    );
+
     return (
         <div className="team-section">
             <div className="team-header">
                 <h1>Our Team</h1>
             </div>
 
-            <Card className="p-3 team-card">
-                <Card.Body>
-                    <Card.Text>
-                        <h2 className="section-title">Founding Team</h2>
-                    </Card.Text>
-                    <Card.Text>
-                        <div className="team-grid mt-4">
-                            {founderMembers.map((member, index) => (
-                                <div key={index} className="team-member" onClick={() => handleShow(member)}>
-                                    <img src={member.image} alt={member.name} className="member-image" />
-                                    <div className="member-info">
-                                        <h3>{member.name}</h3>
-                                        <p>{member.position}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </Card.Text>
-                </Card.Body>
-            </Card>
-
-            <div className="team-header"></div>
-
-            <Card className="p-3 team-card">
-                <Card.Body>
-                    <Card.Text>
-                        <h2 className="section-title">Supporting Team</h2>
-                    </Card.Text>
-                    <Card.Text>
-                        <div className="team-grid mt-4">
-                            {supportMembers.map((member, index) => (
-                                <div key={index} className="team-member" onClick={() => handleShow(member)}>
-                                    <img src={member.image} alt={member.name} className="member-image" />
-                                    <div className="member-info">
-                                        <h3>{member.name}</h3>
-                                        <p>{member.position}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </Card.Text>
-                </Card.Body>
-            </Card>
+            {renderTeamSection('Founding Team', founderMembers)}
+            {renderTeamSection('Supporting Team', supportMembers)}
+            {renderTeamSection('Supporting International Team', supportIntlMembers)}
+            {renderTeamSection('Social Media Team', socialMembers, 'social')} {/* New Section with id */}
 
             <Modal show={show} onHide={handleClose} centered>
                 <Modal.Header closeButton>

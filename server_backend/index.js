@@ -18,6 +18,8 @@ const newsRoute = require('./Routes/newsRoute');
 const mentorRoute = require('./Routes/mentorRoute');
 const navRoute = require('./Routes/navRoute');
 const app = express();
+const internationalRoute = require('./Routes/internationalRoute');
+
 require('dotenv').config();
 
 app.use(express.json());
@@ -62,6 +64,8 @@ app.use('/api/mentor-testimonials', mentorTestimonialRoute);
 app.use('/api/news', newsRoute);
 app.use('/api/mentors', mentorRoute);
 app.use('/api/nav', navRoute);
+app.use('/api/international', internationalRoute);
+
 
 app.get('/', (req, res) => {
     res.send('Hello World');
