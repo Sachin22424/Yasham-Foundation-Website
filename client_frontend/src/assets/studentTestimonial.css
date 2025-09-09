@@ -105,3 +105,36 @@
         font-size: 0.85rem;
     }
 }
+.testimonial-img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;     /* perfect circle mask */
+    object-fit: cover;      /* fills the circle */
+    object-position: top;   /* keep head visible */
+    display: block;
+    margin: 0 auto 12px;
+}
+.testimonial-card {
+    background: var(--color-gradient);
+    border-right: 10px solid #ffc107;
+    border-radius: 7%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    transition: transform 0.3s ease-in-out;
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    /* remove align-items: center; so content can flow normally */
+    height: 100%;
+}
+
+.testimonial-img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;     
+    object-fit: cover;      
+    object-position: top;   
+    display: block;
+    margin: 0 auto 12px;  /* horizontally center, add bottom gap */
+}

@@ -33,7 +33,7 @@ const StudentTestimonials = () => {
                             <div className="card testimonial-card h-100">
                                 <div className="card-body text-center">
                                     <div className="mb-3">
-                                        <img src={testimonial.image} alt={testimonial.name} className="rounded-circle img-fluid" style={{ width: '50px', height: '52px' }} />
+                                        <img src={testimonial.image} alt={testimonial.name} className="testimonial-img" />
                                     </div>
                                     <i className="fas fa-quote-left testimonial-quote-icon" style={{ marginRight: '200px' }}></i>
                                     <p className="card-text" style={{ fontSize: '0.8rem', marginBottom: '0.5rem' }}>{testimonial.feedback}</p>
