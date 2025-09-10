@@ -39,6 +39,8 @@ import SEM from './pages/SEM'; // Import SEM component
 import HHK from './pages/HHK'; // Import HHK component
 import MentorForm from './pages/MentorForm'; // Import MentorForm component
 import International from "./pages/International";
+import contentInternational from "./pages/ContentInternational"; // Import ContentShb component
+import ContentInternational from './pages/ContentInternational';
 
 const ProtectedRoute = ({ children }) => {
   const { token } = useAuth();
@@ -72,6 +74,7 @@ function App() {
         <Route path="/contentycm" element={<ProtectedRoute><ContentYcm /></ProtectedRoute>} /> {/* Add ContentYcm route */}
         <Route path="/contentshb" element={<ProtectedRoute><ContentShb /></ProtectedRoute>} /> {/* Add ContentShb route */}
         <Route path="/contentsz" element={<ProtectedRoute><ContentSz /></ProtectedRoute>} /> {/* Add ContentSz route */}
+        <Route path="/contentInternational" element={<ProtectedRoute><ContentInternational /></ProtectedRoute>} /> {/* Add ContentInternational route */}
         <Route path="/contenthhk" element={<ProtectedRoute><ContentHhk /></ProtectedRoute>} /> {/* Add ContentHhk route */}
         <Route path="/contentsem" element={<ProtectedRoute><ContentSem /></ProtectedRoute>} /> {/* Add ContentSem route */}
         <Route path="/contentstudenttestimonial" element={<ProtectedRoute><ContentStudentTestimonial /></ProtectedRoute>} /> {/* Add ContentStudentTestimonial route */}

@@ -61,7 +61,7 @@ const NavbarContent = () => {
                                 <li><hr className="dropdown-divider" /></li>
                                 <li><a className="dropdown-item" href="/contentSem">Work Page 5</a></li>
                                 <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="/international">Work Page 6</a></li>
+                                <li><a className="dropdown-item" href="/ContentInternational">Yasham International Program</a></li>
                             </ul>
                         </li>
                         <li className="nav-item dropdown custom-dropdown">
